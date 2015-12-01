@@ -73,7 +73,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()&MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
-                System.out.println("ACTIONDOWS");
                 return true;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -81,7 +80,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 break;
             }
             case MotionEvent.ACTION_UP:{
-                joystick.resetPossition();
+                joystick.resetPosition();
                 return true;
             }
 

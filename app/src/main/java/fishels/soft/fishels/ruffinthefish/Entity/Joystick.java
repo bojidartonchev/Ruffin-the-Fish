@@ -2,14 +2,12 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.FloatMath;
 import android.view.MotionEvent;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 
 public class Joystick {
     // coordinates
-
     private int zeroX;
     private int zeroY;
     private float clickedX=0;
@@ -18,7 +16,7 @@ public class Joystick {
     private float dy=0;
     private float radius;
     private float angle;
-    private float c;
+    private float distance;
 
     // data
     private Bitmap outerCircle;
@@ -27,33 +25,31 @@ public class Joystick {
     public Joystick(Bitmap inner, Bitmap outer){
         this.outerCircle = outer;
         this.innerCircle = inner;
-        this.zeroX= GamePanel.WIDTH/2;
-        this.zeroY= GamePanel.HEIGHT/2;
+        this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
+        this.zeroY = GamePanel.HEIGHT-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
         this.radius =outerCircle.getWidth()/2;
     }
 
     public void draw(Canvas canvas){
-
-
         canvas.drawBitmap(outerCircle,zeroX-outerCircle.getWidth()/2,zeroY-outerCircle.getHeight()/2,null);
         if(dx==0&&dy==0){
             canvas.drawBitmap(innerCircle,
-                    canvas.getWidth()/2-innerCircle.getWidth()/2,
-                    canvas.getHeight()/2-innerCircle.getHeight()/2,null);
+                    zeroX-innerCircle.getWidth()/2,
+                    zeroY-innerCircle.getHeight()/2,null);
         }
         else{
             canvas.drawBitmap(innerCircle,
                     clickedX-innerCircle.getWidth()/2,
                     clickedY-innerCircle.getHeight()/2,null);
         }
-
     }
+
     public void update(){
         dx=clickedX-zeroX;
         dy=clickedY-zeroY;
         this.angle = (float)Math.atan(Math.abs(dy / dx));
-        this.c = (float)Math.sqrt(dx*dx+dy*dy);
-        if(c>radius){
+        this.distance = (float)Math.sqrt(dx*dx+dy*dy);
+        if(distance >radius){
             if(dx>0&&dy>0) {//bottom right
                 clickedX = zeroX + (radius * (float) Math.cos(angle));
                 clickedY = zeroY + (radius * (float) Math.sin(angle));
@@ -79,15 +75,12 @@ public class Joystick {
     }
 
     public void onTouch(MotionEvent event){
-
-        clickedX = event.getX();
-        clickedY = event.getY();
-
-        update();
-
-
+        this.clickedX = event.getX();
+        this.clickedY = event.getY();
+        this.update();
     }
-    public void resetPossition(){
+
+    public void resetPosition(){
         this.clickedX=0;
         this.clickedY=0;
         this.dx=0;
