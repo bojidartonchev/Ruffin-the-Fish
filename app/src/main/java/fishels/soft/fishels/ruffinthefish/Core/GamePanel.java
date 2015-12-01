@@ -71,18 +71,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-
-            case MotionEvent.ACTION_MOVE: {
-                if(joystick.clickOver(event)) {
-                    System.out.println("MOOOOOOVE");
-                }
-                return true;
-            }
+        switch (event.getAction()&MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
                 System.out.println("ACTIONDOWS");
                 return true;
             }
+            case MotionEvent.ACTION_MOVE: {
+                joystick.onTouch(event);
+                break;
+            }
+            case MotionEvent.ACTION_UP:{
+                joystick.resetPossition();
+                return true;
+            }
+
         }
         return super.onTouchEvent(event);
     }
