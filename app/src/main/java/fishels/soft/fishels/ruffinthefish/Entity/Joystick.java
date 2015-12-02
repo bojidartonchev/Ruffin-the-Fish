@@ -26,7 +26,7 @@ public class Joystick {
         this.outerCircle = outer;
         this.innerCircle = inner;
         this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
-        this.zeroY = GamePanel.HEIGHT-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
+        this.zeroY = GamePanel.getHEIGHT()-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
         this.radius =outerCircle.getWidth()/2;
     }
 

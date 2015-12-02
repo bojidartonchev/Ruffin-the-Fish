@@ -83,7 +83,7 @@ public class Fish extends GameObject {
 
     private int getRandomY() {
         Random rand = new Random();
-        return rand.nextInt((int) (GamePanel.HEIGHT-GamePanel.HEIGHT/2.7)) + GamePanel.HEIGHT/108;
+        return rand.nextInt((int) (GamePanel.getHEIGHT()-GamePanel.getHEIGHT()/2.7)) + GamePanel.getHEIGHT()/108;
     }
 
 }

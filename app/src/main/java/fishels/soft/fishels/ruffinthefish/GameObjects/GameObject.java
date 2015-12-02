@@ -1,7 +1,5 @@
 package fishels.soft.fishels.ruffinthefish.GameObjects;
 
-import android.view.MotionEvent;
-
 public abstract class GameObject {
 
     protected int x;

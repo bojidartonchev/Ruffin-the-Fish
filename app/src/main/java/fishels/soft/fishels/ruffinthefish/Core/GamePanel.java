@@ -4,6 +4,7 @@ package fishels.soft.fishels.ruffinthefish.Core;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -16,8 +17,8 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    public static final int WIDTH = 1920;
-    public static final int HEIGHT = 1080;
+    private static int WIDTH;
+    private static int HEIGHT;
 
     private MainThread thread;
     private Background bg;
@@ -27,7 +28,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public GamePanel(Context context)
     {
         super(context);
-
+        setProportions(context);
 
         //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
@@ -36,6 +37,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         //make gamePanel focusable so it can handle events
         setFocusable(true);
+    }
+
+    public static int getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public static int getWIDTH() {
+        return WIDTH;
     }
 
     @Override
@@ -110,6 +119,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             joystick.draw(canvas);
             canvas.restoreToCount(savedState);
         }
+    }
+
+    private void setProportions(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        this.WIDTH = metrics.widthPixels;
+        this.HEIGHT = metrics.heightPixels;
     }
 
 }
