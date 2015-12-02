@@ -24,7 +24,6 @@ public class Joystick {
 
     public Joystick(Bitmap inner, Bitmap outer){
         this.outerCircle = outer;
-        System.out.println(outerCircle.getDensity());
         this.innerCircle = inner;
         this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
         this.zeroY = GamePanel.HEIGHT-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;

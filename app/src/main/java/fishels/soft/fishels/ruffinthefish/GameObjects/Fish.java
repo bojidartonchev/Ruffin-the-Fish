@@ -9,15 +9,18 @@ import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import java.util.Random;
 
 public class Fish extends GameObject {
+    //animation
     private final int numRows = 1;
     private final int numFrames = 6;
     private Bitmap spritesheet;
-    private double dya;
+    private Animation animation = new Animation();
+
+    //stats
     private boolean dead;
     private int speedX=0;
     private int speedY=0;
     private boolean playing;
-    private Animation animation = new Animation();
+
     private long startTime;
 
     public Fish(Bitmap res) {
@@ -43,13 +46,8 @@ public class Fish extends GameObject {
 
     }
 
-    private int getRandomY() {
-        Random rand = new Random();
-        return rand.nextInt((int) (GamePanel.HEIGHT-GamePanel.HEIGHT/2.7)) + GamePanel.HEIGHT/108;
-    }
-
-
     public boolean isDead() {
+
         return dead;
     }
 
@@ -59,10 +57,6 @@ public class Fish extends GameObject {
 
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
-    }
-
-    public void setDead(boolean b){
-        dead = b;
     }
 
     public void update()
@@ -83,8 +77,13 @@ public class Fish extends GameObject {
         canvas.drawBitmap(animation.getImage(),x,y,null);
     }
 
-    public boolean getPlaying(){return playing;}
-    public void setPlaying(boolean b){playing = b;}
-    public void resetDYA(){dya = 0;}
+    public void setPlaying(boolean b){
+        playing = b;
+    }
+
+    private int getRandomY() {
+        Random rand = new Random();
+        return rand.nextInt((int) (GamePanel.HEIGHT-GamePanel.HEIGHT/2.7)) + GamePanel.HEIGHT/108;
+    }
 
 }
