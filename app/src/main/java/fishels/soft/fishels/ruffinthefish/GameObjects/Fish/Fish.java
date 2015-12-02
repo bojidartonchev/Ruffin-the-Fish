@@ -1,17 +1,19 @@
-package fishels.soft.fishels.ruffinthefish.GameObjects;
+package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import fishels.soft.fishels.ruffinthefish.Core.Game;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.GameObjects.GameObject;
 
 import java.util.Random;
 
-public class Fish extends GameObject {
+public abstract class Fish extends GameObject {
     //animation
-    private final int numRows = 1;
-    private final int numFrames = 6;
+    private final int numRows;
+    private final int numFrames;
     private Bitmap spritesheet;
     private Animation animation = new Animation();
 
@@ -23,11 +25,12 @@ public class Fish extends GameObject {
 
     private long startTime;
 
-    public Fish(Bitmap res) {
+    public Fish(Bitmap res,int numRows,int numFrames) {
+        this.numRows = numRows;
+        this.numFrames = numFrames;
+        this.setX(this.getRandomX());
+        this.setY(this.getRandomY());
 
-        x = 300;
-        y = getRandomY();
-        dy = 0;
         this.height = res.getHeight()/this.numRows;
         this.width = res.getWidth()/this.numFrames;
         this.setPlaying(true);
@@ -84,6 +87,15 @@ public class Fish extends GameObject {
     private int getRandomY() {
         Random rand = new Random();
         return rand.nextInt((int) (GamePanel.getHEIGHT()-GamePanel.getHEIGHT()/2.7)) + GamePanel.getHEIGHT()/108;
+    }
+
+    private int getRandomX() {
+        Random rand = new Random();
+        int generater = rand.nextInt(2);
+        if(generater!=0){
+            return GamePanel.getWIDTH();
+        }
+        return generater;
     }
 
 }

@@ -13,7 +13,8 @@ import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
-import fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Fish;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -22,7 +23,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private MainThread thread;
     private Background bg;
-    private Fish ruffin;
+    private Fish player;
     private Joystick joystick;
 
     public GamePanel(Context context)
@@ -72,7 +73,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
 
-        this.ruffin = new Fish(BitmapFactory.decodeResource(getResources(), R.drawable.fish5));
+        this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.fish5));
         //we can safely start the game loop
         thread.setRunning(true);
         thread.start();
@@ -86,13 +87,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             case MotionEvent.ACTION_MOVE: {
                 joystick.onTouch(event);
-                this.ruffin.setSpeedX(joystick.generateFishPositionX());
-                this.ruffin.setSpeedY(joystick.generateFishPositionY());
+                this.player.setSpeedX(joystick.generateFishPositionX());
+                this.player.setSpeedY(joystick.generateFishPositionY());
                 break;
             }
             case MotionEvent.ACTION_UP:{
-                this.ruffin.setSpeedX(0);
-                this.ruffin.setSpeedY(0);
+                this.player.setSpeedX(0);
+                this.player.setSpeedY(0);
                 joystick.resetPosition();
                 return true;
             }
@@ -104,7 +105,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void update()
     {
         bg.update();
-        ruffin.update();
+        player.update();
     }
     @Override
     public void draw(Canvas canvas)
@@ -115,7 +116,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             bg.draw(canvas);
-            ruffin.draw(canvas);
+            player.draw(canvas);
             joystick.draw(canvas);
             canvas.restoreToCount(savedState);
         }
