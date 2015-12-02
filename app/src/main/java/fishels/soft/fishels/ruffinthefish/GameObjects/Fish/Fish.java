@@ -2,6 +2,9 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.util.DisplayMetrics;
 
 import fishels.soft.fishels.ruffinthefish.Core.Game;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
@@ -22,6 +25,7 @@ public abstract class Fish extends GameObject {
     private int speedX=0;
     private int speedY=0;
     private boolean playing;
+    private boolean turnedRight=true;
 
     private long startTime;
 
@@ -55,6 +59,12 @@ public abstract class Fish extends GameObject {
     }
 
     public void setSpeedX(int speedX) {
+        if(speedX<0){
+            turnedRight=false;
+        }
+        else if(speedX>0){
+            turnedRight=true;
+        }
         this.speedX = speedX;
     }
 
@@ -77,7 +87,11 @@ public abstract class Fish extends GameObject {
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(animation.getImage(),x,y,null);
+        Bitmap currentFrame = animation.getImage();
+        if(!turnedRight){
+            currentFrame=flipHorizontal(currentFrame);
+        }
+        canvas.drawBitmap(currentFrame,x,y,null);
     }
 
     public void setPlaying(boolean b){
@@ -96,6 +110,14 @@ public abstract class Fish extends GameObject {
             return GamePanel.getWIDTH();
         }
         return generater;
+    }
+
+    private Bitmap flipHorizontal(Bitmap d)
+    {
+        Matrix m = new Matrix();
+        m.preScale(-1, 1);
+        Bitmap dst = Bitmap.createBitmap(d, 0, 0, d.getWidth(), d.getHeight(), m, false);
+        return dst;
     }
 
 }
