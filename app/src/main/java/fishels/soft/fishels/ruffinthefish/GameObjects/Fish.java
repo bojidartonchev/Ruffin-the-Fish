@@ -14,20 +14,19 @@ public class Fish extends GameObject {
     private Bitmap spritesheet;
     private double dya;
     private boolean dead;
-    private int speed;
+    private int speedX=0;
+    private int speedY=0;
     private boolean playing;
     private Animation animation = new Animation();
     private long startTime;
 
-    public Fish(Bitmap res,int speed) {
+    public Fish(Bitmap res) {
 
         x = 300;
         y = getRandomY();
         dy = 0;
-
         this.height = res.getHeight()/this.numRows;
         this.width = res.getWidth()/this.numFrames;
-        this.setSpeed(speed);
         this.setPlaying(true);
 
         Bitmap[][] image = new Bitmap[numRows][numFrames];
@@ -48,16 +47,18 @@ public class Fish extends GameObject {
         Random rand = new Random();
         return rand.nextInt((int) (GamePanel.HEIGHT-GamePanel.HEIGHT/2.7)) + GamePanel.HEIGHT/108;
     }
-    public int getSpeed() {
-        return speed;
-    }
+
 
     public boolean isDead() {
         return dead;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setSpeedX(int speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(int speedY) {
+        this.speedY = speedY;
     }
 
     public void setDead(boolean b){
@@ -73,17 +74,8 @@ public class Fish extends GameObject {
         }
         animation.update();
 
-        if(dead){
-            dy = (int)(dya+=5);
-
-        }
-        else{
-            dy = (int)(dya+=0);
-        }
-
-        y += dy*2;
-        dy = 0;
-        //x+=this.getSpeed();
+        x+=this.speedX;
+        y+=this.speedY;
     }
 
     public void draw(Canvas canvas)

@@ -24,6 +24,7 @@ public class Joystick {
 
     public Joystick(Bitmap inner, Bitmap outer){
         this.outerCircle = outer;
+        System.out.println(outerCircle.getDensity());
         this.innerCircle = inner;
         this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
         this.zeroY = GamePanel.HEIGHT-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
@@ -45,33 +46,32 @@ public class Joystick {
     }
 
     public void update(){
-        dx=clickedX-zeroX;
-        dy=clickedY-zeroY;
+        this.dx=this.clickedX-this.zeroX;
+        this.dy=this.clickedY-this.zeroY;
         this.angle = (float)Math.atan(Math.abs(dy / dx));
         this.distance = (float)Math.sqrt(dx*dx+dy*dy);
-        if(distance >radius){
+        if(this.distance >this.radius){
             if(dx>0&&dy>0) {//bottom right
-                clickedX = zeroX + (radius * (float) Math.cos(angle));
-                clickedY = zeroY + (radius * (float) Math.sin(angle));
+                this.clickedX = this.zeroX + (this.radius * (float) Math.cos(this.angle));
+                this.clickedY = this.zeroY + (this.radius * (float) Math.sin(this.angle));
             }
             else if(dx>0&&dy<0){//top right
-                clickedX = zeroX + (radius * (float) Math.cos(angle));
-                clickedY = zeroY - (radius * (float) Math.sin(angle));
+                this.clickedX = this.zeroX + (this.radius * (float) Math.cos(this.angle));
+                this.clickedY = this.zeroY - (this.radius * (float) Math.sin(this.angle));
             }
             else if(dx<0&&dy<0){//top left
-                clickedX = zeroX - (radius * (float) Math.cos(angle));
-                clickedY = zeroY - (radius * (float) Math.sin(angle));
+                this.clickedX = this.zeroX - (this.radius * (float) Math.cos(this.angle));
+                this.clickedY = this.zeroY - (this.radius * (float) Math.sin(this.angle));
             }
             else{//bottom left
-                clickedX = zeroX - (radius * (float) Math.cos(angle));
-                clickedY = zeroY + (radius * (float) Math.sin(angle));
+                this.clickedX = this.zeroX - (this.radius * (float) Math.cos(this.angle));
+                this.clickedY = this.zeroY + (this.radius * (float) Math.sin(this.angle));
             }
         }
         else{
-            clickedX = zeroX+dx;
-            clickedY = zeroY+dy;
+            this.clickedX = zeroX+dx;
+            this.clickedY = zeroY+dy;
         }
-
     }
 
     public void onTouch(MotionEvent event){
@@ -85,6 +85,14 @@ public class Joystick {
         this.clickedY=0;
         this.dx=0;
         this.dy=0;
+    }
+
+    public int generateFishPositionX(){
+        return (int)(clickedX-zeroX)/10;
+    }
+
+    public int generateFishPositionY(){
+        return (int)(clickedY-zeroY)/10;
     }
 
 }

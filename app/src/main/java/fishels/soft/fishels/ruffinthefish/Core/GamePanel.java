@@ -63,7 +63,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
 
-        this.ruffin = new Fish(BitmapFactory.decodeResource(getResources(), R.drawable.fish5),6);
+        this.ruffin = new Fish(BitmapFactory.decodeResource(getResources(), R.drawable.fish5));
         //we can safely start the game loop
         thread.setRunning(true);
         thread.start();
@@ -77,9 +77,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             case MotionEvent.ACTION_MOVE: {
                 joystick.onTouch(event);
+                this.ruffin.setSpeedX(joystick.generateFishPositionX());
+                this.ruffin.setSpeedY(joystick.generateFishPositionY());
                 break;
             }
             case MotionEvent.ACTION_UP:{
+                this.ruffin.setSpeedX(0);
+                this.ruffin.setSpeedY(0);
                 joystick.resetPosition();
                 return true;
             }
