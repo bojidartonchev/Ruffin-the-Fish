@@ -86,11 +86,11 @@ public class Joystick {
         this.dy=0;
     }
 
-    public int generateFishPositionX(){
+    public int calculateFishSpeedX(){
         return (int)(clickedX-zeroX)/10;
     }
 
-    public int generateFishPositionY(){
+    public int calculateFishSpeedY(){
         return (int)(clickedY-zeroY)/10;
     }
 

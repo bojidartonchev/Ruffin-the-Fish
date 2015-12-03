@@ -9,7 +9,7 @@ public class Player extends Fish {
     private static final int PLAYER_NUMFRAMES = 6;
     private static final long STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
-    private boolean dead;
+
     private long score;
 
     public Player(Bitmap res) {
@@ -17,21 +17,27 @@ public class Player extends Fish {
         this.setX(GamePanel.getWIDTH() / 2);
         this.setY(GamePanel.getHEIGHT() / 2);
         this.setScore(STARTING_PLAYER_SCORE);
-        this.setDead(false);
     }
-    public boolean isDead() {
-        return dead;
-    }
+
 
     public long getScore() {
         return score;
     }
 
-    public void setDead(boolean dead) {
-        this.dead = dead;
-    }
-
     public void setScore(Long score) {
         this.score = score;
+    }
+
+    // Checks if the player's level is bigger or equals to enemy's level.
+    // And if is true the enemy is removed and player's points are increased.
+    // Otherwise the hero dies and the game ends.
+    public boolean tryEat(Fish enemy){
+        if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel()))
+        {
+            enemy.setDead(true);
+            return true;
+        }
+        this.setDead(true);
+        return false;
     }
 }

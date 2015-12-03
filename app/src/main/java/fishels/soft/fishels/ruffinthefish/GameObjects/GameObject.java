@@ -40,6 +40,8 @@ public abstract class GameObject {
         return new Rect(x, y, x + width, y + height);
     }
 
-
+    public boolean intersects(GameObject obj2){
+        return Rect.intersects(this.getRectangle(), obj2.getRectangle());
+    }
 
 }

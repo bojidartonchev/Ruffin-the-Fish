@@ -19,14 +19,15 @@ public abstract class Fish extends GameObject {
     private final int numRows;
     private final int numFrames;
     private Bitmap spritesheet;
-    private Level currentLevel;
     private Animation animation = new Animation();
 
     //stats
-    private int speedX = 0;
+    private Level currentLevel;
+    public int speedX = 0;
     private int speedY = 0;
     private boolean playing;
     private boolean turnedRight=true;
+    private boolean dead;
 
     private long startTime;
 
@@ -34,12 +35,14 @@ public abstract class Fish extends GameObject {
         this.numRows = numRows;
         this.numFrames = numFrames;
         this.setCurrentLevel(level);
-        this.setX(this.getRandomX());
-        this.setY(this.getRandomY());
 
         this.height = res.getHeight()/this.numRows;
         this.width = res.getWidth()/this.numFrames;
+        this.setX(this.getRandomX());
+        this.setY(this.getRandomY());
+
         this.setPlaying(true);
+        this.setDead(false);
 
         Bitmap[][] image = new Bitmap[numRows][numFrames];
         spritesheet = res;
@@ -50,9 +53,17 @@ public abstract class Fish extends GameObject {
         }
 
         animation.setFrames(image);
-        animation.setDelay(1);
+        animation.setDelay(30);
         startTime = System.nanoTime();
 
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public boolean isDead() {
+        return this.dead;
     }
 
     public Level getCurrentLevel() {
@@ -66,10 +77,10 @@ public abstract class Fish extends GameObject {
 
     public void setSpeedX(int speedX) {
         if(speedX<0){
-            turnedRight=false;
+            this.turnedRight=false;
         }
         else if(speedX>0){
-            turnedRight=true;
+            this.turnedRight=true;
         }
         this.speedX = speedX;
     }
@@ -87,8 +98,8 @@ public abstract class Fish extends GameObject {
         }
         animation.update();
 
-        x += this.speedX;
-        y += this.speedY;
+        this.setX(x + this.speedX);
+        this.setY(y + this.speedY);
     }
 
     public void draw(Canvas canvas)
@@ -101,7 +112,7 @@ public abstract class Fish extends GameObject {
     }
 
     public void setPlaying(boolean b){
-        playing = b;
+        this.playing = b;
     }
 
     private int getRandomY() {
@@ -111,11 +122,14 @@ public abstract class Fish extends GameObject {
 
     private int getRandomX() {
         Random rand = new Random();
-        int generater = rand.nextInt(2);
-        if(generater!=0){
-            return GamePanel.getWIDTH();
+        int minNumber = 0;
+        int maxNumber = 10000;
+        int generated = rand.nextInt((maxNumber-minNumber)+minNumber)+minNumber;
+
+        if(generated%2==0){
+            return (GamePanel.getWIDTH()+this.getWidth());
         }
-        return generater;
+        return -(this.getWidth());
     }
 
 

@@ -4,7 +4,6 @@ package fishels.soft.fishels.ruffinthefish.Core;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -19,7 +18,6 @@ import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Factories.LevelZeroFishFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
-import fishels.soft.fishels.ruffinthefish.GameObjects.GameObject;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -29,9 +27,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread thread;
     private Background bg;
     private Player player;
-    private ArrayList<Enemy> enemys;
+    private ArrayList<Enemy> enemies;
     private Joystick joystick;
-    private long enemyStartTime;
 
     public GamePanel(Context context)
     {
@@ -78,8 +75,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         bg.setVector(-5);
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
-        this.enemys = new ArrayList<>();
-        this.enemyStartTime = System.nanoTime();
+        this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.fish5));
 
         //we can safely start the game loop
@@ -94,8 +90,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             case MotionEvent.ACTION_MOVE: {
                 joystick.onTouch(event);
-                this.player.setSpeedX(joystick.generateFishPositionX());
-                this.player.setSpeedY(joystick.generateFishPositionY());
+                this.player.setSpeedX(joystick.calculateFishSpeedX());
+                this.player.setSpeedY(joystick.calculateFishSpeedY());
                 break;
             }
             case MotionEvent.ACTION_UP:{
@@ -111,44 +107,27 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update() {
 
-        // TODO : Add "GAME OVER" inscription if hero is dead
-
         this.bg.update();
         this.player.update();
 
-        long enemyElapsed = (System.nanoTime() - this.enemyStartTime) / 1000000;
-        //TODO : check if the spawn time is good
-        //add enemy fish on time if the fishs are not too many
-        if(this.enemys.size() < 2) {
-            this.enemys.add(LevelZeroFishFactory.Create(getContext()));
-        }
-
-        //loop through every missile and check collision
-        for (int i = 0; i < this.enemys.size(); i++) {
-            if (collision(this.player, this.enemys.get(i)))
-            {
-                // Update every enemy
-                this.enemys.get(i).update();
-
-                // Checks if the player's level is bigger or equals to enemy's level.
-                // And if is true the enemy is removed and player's points are increased.
-                // Otherwise the hero dies and the game ends.
-                if (this.player.getCurrentLevel().isBiggerThanOrEqual(this.enemys.get(i).getCurrentLevel()))
-                {
-                    System.out.println("EAT THAT FISH");
-                    this.enemys.remove(i);
-                    this.player.setScore(this.player.getScore() + 10);
-                }
-                else
-                {
-                    this.player.setDead(true);
-                    this.thread.setRunning(false);
-                    System.out.println("GAME OVER");
-                }
+        for (int i = 0; i < this.enemies.size(); i++) {
+            Enemy currentEnemy = this.enemies.get(i);
+            if(currentEnemy.isDead()){
+                this.enemies.remove(i);
+                continue;
             }
+            currentEnemy.update();
+            if (this.player.intersects(currentEnemy))
+            {
+                this.player.tryEat(currentEnemy);
+            }
+
         }
-        //reset the timer
-        this.enemyStartTime = System.nanoTime();
+
+        //add enemy fish if needed
+        if(this.enemies.size() < 2) {
+            this.enemies.add(LevelZeroFishFactory.Create(getContext()));
+        }
 
     }
     @Override
@@ -161,23 +140,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
             this.player.draw(canvas);
-            this.joystick.draw(canvas);
-            canvas.restoreToCount(savedState);
 
-            //draw enemys
-            for(Enemy e: this.enemys)
+            //draw enemies
+            for(Enemy e: this.enemies)
             {
                e.draw(canvas);
             }
+            System.out.println(this.enemies.size());
+            this.joystick.draw(canvas);
+            canvas.restoreToCount(savedState);
         }
     }
 
-    private boolean collision(GameObject obj1, GameObject obj2){
-        if(Rect.intersects(obj1.getRectangle(), obj2.getRectangle())){
-            return true;
-        }
-        return false;
-    }
     private void setProportions(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         this.WIDTH = metrics.widthPixels;
