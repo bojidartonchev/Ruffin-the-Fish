@@ -1,5 +1,7 @@
 package fishels.soft.fishels.ruffinthefish.GameObjects;
 
+import android.graphics.Rect;
+
 public abstract class GameObject {
 
     protected int x;
@@ -32,6 +34,10 @@ public abstract class GameObject {
     public int getWidth()
     {
         return width;
+    }
+    public Rect getRectangle()
+    {
+        return new Rect(x, y, x + width, y + height);
     }
 
 

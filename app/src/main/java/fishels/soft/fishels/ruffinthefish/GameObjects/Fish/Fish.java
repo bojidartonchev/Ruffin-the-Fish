@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import fishels.soft.fishels.ruffinthefish.Core.Game;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.GameObjects.GameObject;
 
 import java.util.Random;
@@ -18,20 +19,21 @@ public abstract class Fish extends GameObject {
     private final int numRows;
     private final int numFrames;
     private Bitmap spritesheet;
+    private Level currentLevel;
     private Animation animation = new Animation();
 
     //stats
-    private boolean dead;
-    private int speedX=0;
-    private int speedY=0;
+    private int speedX = 0;
+    private int speedY = 0;
     private boolean playing;
     private boolean turnedRight=true;
 
     private long startTime;
 
-    public Fish(Bitmap res,int numRows,int numFrames) {
+    public Fish(Bitmap res, Level level, int numRows, int numFrames) {
         this.numRows = numRows;
         this.numFrames = numFrames;
+        this.setCurrentLevel(level);
         this.setX(this.getRandomX());
         this.setY(this.getRandomY());
 
@@ -53,10 +55,14 @@ public abstract class Fish extends GameObject {
 
     }
 
-    public boolean isDead() {
-
-        return dead;
+    public Level getCurrentLevel() {
+        return currentLevel;
     }
+
+    public void setCurrentLevel(Level currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
 
     public void setSpeedX(int speedX) {
         if(speedX<0){
@@ -81,8 +87,8 @@ public abstract class Fish extends GameObject {
         }
         animation.update();
 
-        x+=this.speedX;
-        y+=this.speedY;
+        x += this.speedX;
+        y += this.speedY;
     }
 
     public void draw(Canvas canvas)
@@ -111,6 +117,7 @@ public abstract class Fish extends GameObject {
         }
         return generater;
     }
+
 
     private Bitmap flipHorizontal(Bitmap d)
     {
