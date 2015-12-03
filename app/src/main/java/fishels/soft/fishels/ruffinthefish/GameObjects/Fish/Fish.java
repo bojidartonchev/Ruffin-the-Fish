@@ -53,7 +53,7 @@ public abstract class Fish extends GameObject {
         }
 
         animation.setFrames(image);
-        animation.setDelay(30);
+        animation.setDelay(10);
         startTime = System.nanoTime();
 
     }

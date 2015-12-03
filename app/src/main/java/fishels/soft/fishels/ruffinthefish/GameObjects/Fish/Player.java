@@ -19,7 +19,6 @@ public class Player extends Fish {
         this.setScore(STARTING_PLAYER_SCORE);
     }
 
-
     public long getScore() {
         return score;
     }

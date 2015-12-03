@@ -3,7 +3,7 @@ package fishels.soft.fishels.ruffinthefish.Core;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class MainThread extends Thread
+public class MainThread extends Thread implements Runnable
 {
     private int FPS = 30;
     private double averageFPS;
@@ -50,9 +50,6 @@ public class MainThread extends Thread
                     catch(Exception e){e.printStackTrace();}
                 }
             }
-
-
-
 
             timeMillis = (System.nanoTime() - startTime) / 1000000;
             waitTime = targetTime-timeMillis;

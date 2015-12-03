@@ -125,7 +125,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         //add enemy fish if needed
-        if(this.enemies.size() < 2) {
+        if(this.enemies.size() < 8) {
             this.enemies.add(LevelZeroFishFactory.Create(getContext()));
         }
 
@@ -146,7 +146,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                e.draw(canvas);
             }
-            System.out.println(this.enemies.size());
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
         }
