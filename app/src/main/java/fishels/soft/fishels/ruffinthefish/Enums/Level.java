@@ -1,15 +1,19 @@
 package fishels.soft.fishels.ruffinthefish.Enums;
 
 public enum  Level {
-    ZERO(0),
     ONE(1),
     TWO(2),
-    THREE(3);
+    THREE(3),
+    FOUR(4);
 
     private Integer value;
 
     Level(int value) {
         this.value = value;
+    }
+
+    public Integer getValue() {
+        return value;
     }
 
     public boolean isBiggerThanOrEqual(Level otherLevel){

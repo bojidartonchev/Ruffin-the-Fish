@@ -7,10 +7,10 @@ import fishels.soft.fishels.ruffinthefish.Enums.Level;
 public class Player extends Fish {
     private static final int PLAYER_NUMROWS = 1;
     private static final int PLAYER_NUMFRAMES = 6;
-    private static final long STARTING_PLAYER_SCORE = 0;
+    private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
 
-    private long score;
+    private int score;
 
     public Player(Bitmap res) {
         super(res, STARTING_PLAYER_LEVEL, PLAYER_NUMROWS, PLAYER_NUMFRAMES);
@@ -19,11 +19,11 @@ public class Player extends Fish {
         this.setScore(STARTING_PLAYER_SCORE);
     }
 
-    public long getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(Long score) {
+    public void setScore(int score) {
         this.score = score;
     }
 
@@ -34,6 +34,7 @@ public class Player extends Fish {
         if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel()))
         {
             enemy.setDead(true);
+            this.setScore(this.getScore()+enemy.getCurrentLevel().getValue());
             return true;
         }
         this.setDead(true);

@@ -1,6 +1,5 @@
 package fishels.soft.fishels.ruffinthefish.Entity;
 
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,15 +13,13 @@ public class HUD {
 
     public HUD(Bitmap res)
     {
-
-        image = res;
-        x = res.getWidth() - 10*res.getWidth()/15;
-        y = res.getHeight() - 3* res.getHeight()/7;
-
+        this.image = res;
+        this.x = res.getWidth() - 10*res.getWidth()/15;
+        this.y = res.getHeight() - 3* res.getHeight()/7;
     }
-    public void update(int scr)
+    public void update(int score)
     {
-        score+=scr;
+        this.score=score;
     }
     public void draw(Canvas canvas)
     {

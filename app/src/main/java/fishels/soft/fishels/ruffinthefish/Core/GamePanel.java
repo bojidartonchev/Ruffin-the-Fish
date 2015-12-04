@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.HUD;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
-import fishels.soft.fishels.ruffinthefish.Factories.LevelZeroFishFactory;
+import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
@@ -112,7 +112,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this.bg.update();
         this.player.update();
-        this.hud.update(10);
+        this.hud.update(this.player.getScore());
 
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
@@ -130,7 +130,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         //add enemy fish if needed
         if(this.enemies.size() < 4) {
-            this.enemies.add(LevelZeroFishFactory.Create(getContext()));
+            this.enemies.add(EnemyFishFactory.Create(getContext()));
         }
 
     }
