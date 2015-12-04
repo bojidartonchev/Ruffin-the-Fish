@@ -14,6 +14,7 @@ import com.example.fishels.ruffinthefish.R;
 import java.util.ArrayList;
 
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
+import fishels.soft.fishels.ruffinthefish.Entity.HUD;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Factories.LevelZeroFishFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
@@ -26,6 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private MainThread thread;
     private Background bg;
+    private HUD hud;
     private Player player;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
@@ -71,8 +73,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
-        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background22));
         bg.setVector(-5);
+        hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
         this.enemies = new ArrayList<>();
@@ -109,6 +112,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this.bg.update();
         this.player.update();
+        this.hud.update(10);
 
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
@@ -140,6 +144,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
             this.player.draw(canvas);
+            this.hud.draw(canvas);
 
             //draw enemies
             for(Enemy e: this.enemies)
