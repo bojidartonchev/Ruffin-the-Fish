@@ -37,7 +37,7 @@ public abstract class GameObject {
     }
     public Rect getRectangle()
     {
-        return new Rect(x, y, x + width, y + height);
+        return new Rect(x, y, x + (int)(width * 0.75), y + (int)(height * 0.75));
     }
 
     public boolean intersects(GameObject obj2){
