@@ -44,17 +44,11 @@ public abstract class Fish extends GameObject {
         this.setPlaying(true);
         this.setDead(false);
 
-        Bitmap[][] image = new Bitmap[numRows][numFrames];
-        spritesheet = res;
-        for (int j = 0; j < numRows; j++) {
-            for (int i = 0; i < numFrames; i++) {
-                image[j][i] = Bitmap.createBitmap(spritesheet, i * width, j*height, width, height);
-            }
-        }
+        Bitmap[][] image = this.createBitmap(res);
 
-        animation.setFrames(image);
-        animation.setDelay(10);
-        startTime = System.nanoTime();
+        this.animation.setFrames(image);
+        this.animation.setDelay(10);
+        this.startTime = System.nanoTime();
 
     }
 
@@ -80,10 +74,10 @@ public abstract class Fish extends GameObject {
 
     public void setSpeedX(int speedX) {
         if(speedX<0){
-            this.turnedRight=false;
+            this.turnedRight = false;
         }
         else if(speedX>0){
-            this.turnedRight=true;
+            this.turnedRight = true;
         }
         this.speedX = speedX;
     }
@@ -135,6 +129,16 @@ public abstract class Fish extends GameObject {
         return -(this.getWidth());
     }
 
+    private Bitmap[][] createBitmap(Bitmap res){
+        Bitmap[][] image = new Bitmap[this.numRows][this.numFrames];
+        this.spritesheet = res;
+        for (int j = 0; j < this.numRows; j++) {
+            for (int i = 0; i < this.numFrames; i++) {
+                image[j][i] = Bitmap.createBitmap(this.spritesheet, i * this.width, j * this.height, this.width, this.height);
+            }
+        }
+        return image;
+    }
 
     private Bitmap flipHorizontal(Bitmap d)
     {
