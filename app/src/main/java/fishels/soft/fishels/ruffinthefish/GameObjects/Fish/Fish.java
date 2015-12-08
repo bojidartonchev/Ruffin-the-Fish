@@ -66,6 +66,9 @@ public abstract class Fish extends GameObject {
         return this.dead;
     }
 
+    public boolean isTurnedRight() {
+        return turnedRight;
+    }
     public Level getCurrentLevel() {
         return currentLevel;
     }
