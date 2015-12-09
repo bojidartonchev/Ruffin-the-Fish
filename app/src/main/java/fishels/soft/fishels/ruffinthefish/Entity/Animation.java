@@ -33,11 +33,7 @@ public class Animation {
         }
         if(currentFrame >= numOfFrames){
             currentFrame = 0;
-            //currentAction++;
             playedOnce = true;
-        }
-        if(currentAction==-1){
-            currentAction=0;
         }
     }
     public Bitmap getImage(){

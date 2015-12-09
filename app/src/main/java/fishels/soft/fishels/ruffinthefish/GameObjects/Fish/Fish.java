@@ -47,7 +47,7 @@ public abstract class Fish extends GameObject {
         Bitmap[][] image = this.createBitmap(res);
 
         this.animation.setFrames(image);
-        this.animation.setDelay(10);
+        this.animation.setDelay(40);
         this.startTime = System.nanoTime();
 
     }
