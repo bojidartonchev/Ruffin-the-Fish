@@ -2,9 +2,11 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 
 import android.graphics.Bitmap;
 
-import java.util.Random;
-
 public class Animation {
+    //Animation actions
+    public static final int SWIMMING = 0;
+    public static final int EATING = 1;
+
     private Bitmap[][] frames;
     private int currentFrame;
     private int currentAction;
@@ -23,7 +25,6 @@ public class Animation {
     }
     public void setDelay(long d){delay = d;}
     public void setFrame(int i){currentFrame= i;}
-    public void setCurrentAction(int j) {currentAction=j;}
 
     public void update()
     {
@@ -36,11 +37,10 @@ public class Animation {
         }
         if(currentFrame >= numOfFrames){
             currentFrame = 0;
-            //currentAction++;
             playedOnce = true;
         }
-        if(currentAction>=frames.length){
-            currentAction=0;
+        if(playedOnce()&&currentAction==Animation.EATING){
+            this.setCurrentAction(Animation.SWIMMING);
         }
     }
     public Bitmap getImage(){
@@ -48,4 +48,9 @@ public class Animation {
     }
     public int getFrame(){return currentFrame;}
     public boolean playedOnce(){return playedOnce;}
+
+    public void setCurrentAction(int currentAction) {
+        this.playedOnce=false;
+        this.currentAction = currentAction;
+    }
 }

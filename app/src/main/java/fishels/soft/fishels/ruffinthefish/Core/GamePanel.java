@@ -1,6 +1,5 @@
 package fishels.soft.fishels.ruffinthefish.Core;
 
-
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -75,7 +74,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder){
         bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background22));
         bg.setVector(0);
-        hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
+        //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
         this.enemies = new ArrayList<>();
@@ -85,6 +84,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         thread.setRunning(true);
         thread.start();
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()&MotionEvent.ACTION_MASK) {
@@ -112,7 +112,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this.bg.update();
         this.player.update();
-        this.hud.update(this.player.getScore());
+        //this.hud.update(this.player.getScore());
 
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
@@ -125,7 +125,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 this.player.tryEat(currentEnemy);
             }
-
         }
 
         //add enemy fish if needed
@@ -143,14 +142,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
-            this.player.draw(canvas);
-            this.hud.draw(canvas);
 
             //draw enemies
             for(Enemy e: this.enemies)
             {
                e.draw(canvas);
             }
+            this.player.draw(canvas);
+            //this.hud.draw(canvas);
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
         }
