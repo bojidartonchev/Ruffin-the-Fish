@@ -51,7 +51,6 @@ public class Enemy extends Fish {
         }
         return -1;
     }
-
-
+    
 
 }

@@ -3,10 +3,6 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.DisplayMetrics;
-
-import fishels.soft.fishels.ruffinthefish.Core.Game;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
@@ -16,8 +12,8 @@ import java.util.Random;
 
 public abstract class Fish extends GameObject {
     //animation
-    private final int numRows;
-    private final int numFrames;
+    private int numRows;
+    private int numFrames;
     private Bitmap spritesheet;
     private Animation animation = new Animation();
 
@@ -45,9 +41,8 @@ public abstract class Fish extends GameObject {
         this.setDead(false);
 
         Bitmap[][] image = this.createBitmap(res);
-
         this.animation.setFrames(image);
-        this.animation.setDelay(40);
+        this.animation.setDelay(50);
         this.startTime = System.nanoTime();
 
     }
@@ -65,6 +60,10 @@ public abstract class Fish extends GameObject {
     }
     public Level getCurrentLevel() {
         return currentLevel;
+    }
+
+    public Animation getAnimation() {
+        return animation;
     }
 
     public void setCurrentLevel(Level currentLevel) {

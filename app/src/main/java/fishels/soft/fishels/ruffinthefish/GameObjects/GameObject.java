@@ -34,15 +34,17 @@ public abstract class GameObject {
         return width;
     }
 
+
     public boolean intersects(GameObject obj2){
         int playerCenterX = x+getWidth()/2;
         int playerCenterY = y+getHeight()/2;
         int enemyCenterX = obj2.x+obj2.getHeight()/2;
         int enemyCenterY = obj2.y+obj2.getHeight()/2;
-        if(Math.abs(playerCenterX-enemyCenterX)<=40*getWidth()/100 && Math.abs(playerCenterY-enemyCenterY)<=50*getHeight()/100){
+        if((Math.abs(playerCenterX-enemyCenterX)<=40*getWidth()/100 && Math.abs(playerCenterY-enemyCenterY)<=50*getHeight()/100)){
             return true;
         }
         return false;
     }
 
 }
+
