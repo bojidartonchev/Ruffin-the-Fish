@@ -11,7 +11,7 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 public class EnemyFishFactory {
     public static Enemy Create(Context context){
         return new Enemy(BitmapFactory.decodeResource(context
-        .getResources(), R.drawable.fishenemy1), Level.ONE);
+        .getResources(), R.drawable.enemyresized), Level.ONE);
     }
 
     //TODO auto generate fish level

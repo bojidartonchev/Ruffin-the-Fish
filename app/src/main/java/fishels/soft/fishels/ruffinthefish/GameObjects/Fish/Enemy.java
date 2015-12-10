@@ -9,13 +9,16 @@ import fishels.soft.fishels.ruffinthefish.Entity.EnemySpeedGenerator;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 
 public class Enemy extends Fish {
-    private static final int ENEMY_NUMROWS = 1;
-    private static final int ENEMY_NUMFRAMES = 6;
+    private static final int ENEMY_NUMROWS = 4;
+    private static final int ENEMY_NUMFRAMES = 5;
     private int directionMultiplier;
     private EnemySpeedGenerator speedGen = new EnemySpeedGenerator();
 
     public Enemy(Bitmap res, Level level) {
         super(res, level, ENEMY_NUMROWS, ENEMY_NUMFRAMES);
+        Random rnd = new Random();
+        int randomFishRow = rnd.nextInt(4);
+        this.getAnimation().setCurrentAction(randomFishRow);
         this.directionMultiplier = generateDirection();
         this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
         this.setSpeedY(speedGen.generateYspeed());
@@ -48,6 +51,7 @@ public class Enemy extends Fish {
         }
         return -1;
     }
+
 
 
 }

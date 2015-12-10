@@ -6,7 +6,7 @@ import fishels.soft.fishels.ruffinthefish.Enums.Level;
 
 public class Player extends Fish {
     private static final int PLAYER_NUMROWS = 1;
-    private static final int PLAYER_NUMFRAMES = 6;
+    private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
 
