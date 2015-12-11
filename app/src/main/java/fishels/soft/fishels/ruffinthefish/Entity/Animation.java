@@ -50,6 +50,9 @@ public class Animation {
     public boolean playedOnce(){return playedOnce;}
 
     public void setCurrentAction(int currentAction) {
+        if(currentAction==this.currentAction){
+            return;
+        }
         this.playedOnce=false;
         this.currentAction = currentAction;
     }

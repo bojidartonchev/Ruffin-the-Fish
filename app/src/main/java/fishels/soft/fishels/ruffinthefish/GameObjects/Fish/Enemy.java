@@ -24,8 +24,6 @@ public class Enemy extends Fish {
 
     @Override
     public void update() {
-        this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
-        this.setSpeedY(speedGen.generateYspeed());
         super.update();
     }
 

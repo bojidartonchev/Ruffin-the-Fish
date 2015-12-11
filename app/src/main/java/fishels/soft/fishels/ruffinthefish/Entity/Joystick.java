@@ -87,11 +87,11 @@ public class Joystick {
     }
 
     public int calculateFishSpeedX(){
-        return (int)(clickedX-zeroX)/10;
+        return (int)(clickedX-zeroX)/5;
     }
 
     public int calculateFishSpeedY(){
-        return (int)(clickedY-zeroY)/10;
+        return (int)(clickedY-zeroY)/5;
     }
 
 }
