@@ -3,9 +3,6 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 import android.graphics.Bitmap;
 
 public class Animation {
-    //Animation actions
-    public static final int SWIMMING = 0;
-    public static final int EATING = 1;
 
     private Bitmap[][] frames;
     private int currentFrame;
@@ -39,21 +36,16 @@ public class Animation {
             currentFrame = 0;
             playedOnce = true;
         }
-        if(playedOnce()&&currentAction==Animation.EATING){
-            this.setCurrentAction(Animation.SWIMMING);
-        }
     }
     public Bitmap getImage(){
         return frames[currentAction][currentFrame];
     }
-    public int getFrame(){return currentFrame;}
+
     public boolean playedOnce(){return playedOnce;}
 
     public void setCurrentAction(int currentAction) {
-        if(currentAction==this.currentAction){
-            return;
-        }
-        this.playedOnce=false;
+        this.currentFrame = 0;
+        this.playedOnce = false;
         this.currentAction = currentAction;
     }
 }

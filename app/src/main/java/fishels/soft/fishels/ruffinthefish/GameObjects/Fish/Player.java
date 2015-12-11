@@ -28,17 +28,14 @@ public class Player extends Fish {
         this.score = score;
     }
 
-    // Checks if the player's level is bigger or equals to enemy's level.
-    // And if is true the enemy is removed and player's points are increased.
-    // Otherwise the hero dies and the game ends.
     public void tryEat(Fish enemy) {
         if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())) {
-            this.getAnimation().setCurrentAction(Animation.EATING);
+            this.setIsEating(true);
             enemy.setDead(true);
             this.setScore(this.getScore() + enemy.getCurrentLevel().getValue());
         }
         else {
-            enemy.getAnimation().setCurrentAction(Animation.EATING);
+            enemy.setIsEating(true);
             this.setDead(true);
         }
     }

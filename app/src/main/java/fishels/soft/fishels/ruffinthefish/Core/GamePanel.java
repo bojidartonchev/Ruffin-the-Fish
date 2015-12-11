@@ -73,7 +73,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder){
         bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background22));
-        bg.setVector(0);
+        bg.setVector(-2);
         //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));

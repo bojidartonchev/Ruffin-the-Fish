@@ -18,8 +18,15 @@ public abstract class Fish extends GameObject {
     //animation
     private final int numRows;
     private final int numFrames;
+    private int currentAction;
+    private boolean isEating;
+
     private Bitmap spritesheet;
     private Animation animation = new Animation();
+
+    // Animation actions
+    private static final int SWIMMING = 0;
+    private static final int EATING = 1;
 
     //stats
     private Level currentLevel;
@@ -63,6 +70,7 @@ public abstract class Fish extends GameObject {
     public boolean isTurnedRight() {
         return turnedRight;
     }
+
     public Level getCurrentLevel() {
         return currentLevel;
     }
@@ -89,6 +97,22 @@ public abstract class Fish extends GameObject {
         this.speedY = speedY;
     }
 
+    public boolean isEating() {
+        return this.isEating;
+    }
+
+    public void setIsEating(boolean isEating) {
+        this.isEating = isEating;
+    }
+
+    public int getCurrentAction() {
+        return this.currentAction;
+    }
+
+    public void setCurrentAction(int currentAction) {
+        this.currentAction = currentAction;
+    }
+
     public void update()
     {
         long elapsed = (System.nanoTime()-startTime)/1000000;
@@ -100,12 +124,33 @@ public abstract class Fish extends GameObject {
 
         this.setX(x + this.speedX);
         this.setY(y + this.speedY);
+
+        // check attack has stopped
+        if(this.getCurrentAction() == this.EATING) {
+            if (this.getAnimation().playedOnce()) {
+                this.setIsEating(false);
+            }
+        }
+
+        if(this.isEating()){
+            if(this.getCurrentAction() != this.EATING){
+                this.setCurrentAction(this.EATING);
+                this.getAnimation().setCurrentAction(this.EATING);
+            }
+        }
+
+        else {
+            if(this.getCurrentAction() != this.SWIMMING) {
+                this.setCurrentAction(this.SWIMMING);
+                this.getAnimation().setCurrentAction(this.SWIMMING);
+            }
+        }
     }
 
     public void draw(Canvas canvas)
     {
         Bitmap currentFrame = animation.getImage();
-        if(!turnedRight){
+        if(!this.isTurnedRight()){
             currentFrame=flipHorizontal(currentFrame);
         }
         canvas.drawBitmap(currentFrame,x,y,null);
