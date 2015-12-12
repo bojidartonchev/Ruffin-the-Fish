@@ -117,7 +117,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
             if(currentEnemy.isDead()){
-                this.enemies.remove(i);
+                currentEnemy.reset();
                 continue;
             }
             currentEnemy.update();
@@ -128,7 +128,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         //add enemy fish if needed
-        if(this.enemies.size() < 4) {
+        if(this.enemies.size() < 14) {
             this.enemies.add(EnemyFishFactory.Create(getContext()));
         }
 

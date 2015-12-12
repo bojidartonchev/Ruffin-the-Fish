@@ -162,7 +162,7 @@ public abstract class Fish extends GameObject {
 
     private int getRandomY() {
         Random rand = new Random();
-        return rand.nextInt((int) (GamePanel.getHEIGHT()-GamePanel.getHEIGHT()/2.7)) + GamePanel.getHEIGHT()/108;
+        return rand.nextInt(GamePanel.getHEIGHT()-this.getHeight()*2) + this.getHeight()*2;
     }
 
     private int getRandomX() {
@@ -194,6 +194,14 @@ public abstract class Fish extends GameObject {
         m.preScale(-1, 1);
         Bitmap dst = Bitmap.createBitmap(d, 0, 0, d.getWidth(), d.getHeight(), m, false);
         return dst;
+    }
+
+    public void reset(){
+        this.setX(this.getRandomX());
+        this.setY(this.getRandomY());
+
+        this.setPlaying(true);
+        this.setDead(false);
     }
 
 }
