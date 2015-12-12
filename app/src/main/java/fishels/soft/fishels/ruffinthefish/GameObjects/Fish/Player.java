@@ -20,6 +20,28 @@ public class Player extends Fish {
         this.setScore(STARTING_PLAYER_SCORE);
     }
 
+    @Override
+    public void setX(int xCurrent) {
+        if(xCurrent<0){
+            xCurrent=0;
+        }
+        else if(xCurrent+this.getWidth()>GamePanel.getWIDTH()){
+            xCurrent=GamePanel.getWIDTH()-this.getWidth();
+        }
+        super.setX(xCurrent);
+    }
+
+    @Override
+    public void setY(int yCurrent) {
+        if(yCurrent<0){
+            yCurrent=0;
+        }
+        else if(yCurrent+this.getHeight()>GamePanel.getHEIGHT()){
+            yCurrent=GamePanel.getHEIGHT()-this.getHeight();
+        }
+        super.setY(yCurrent);
+    }
+
     public int getScore() {
         return score;
     }
