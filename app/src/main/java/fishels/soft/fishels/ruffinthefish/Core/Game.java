@@ -9,7 +9,6 @@ import android.view.WindowManager;
 
 import com.example.fishels.ruffinthefish.R;
 
-
 public class Game extends Activity {
 
     @Override
