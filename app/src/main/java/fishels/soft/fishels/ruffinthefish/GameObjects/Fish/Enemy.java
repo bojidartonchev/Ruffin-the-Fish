@@ -46,11 +46,4 @@ public class Enemy extends Fish {
         }
         return -1;
     }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
-        this.setSpeedY(speedGen.generateYspeed());
-    }
 }

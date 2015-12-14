@@ -29,6 +29,10 @@ public class EnemyFishFactory {
                 current=BitmapFactory.decodeResource(context
                         .getResources(), R.drawable.level1_enemy);
                 break;
+            default:
+                current=BitmapFactory.decodeResource(context
+                        .getResources(), R.drawable.level1_enemy);
+                break;
             //TODO impement
         }
         current = getRandomStyle(current);

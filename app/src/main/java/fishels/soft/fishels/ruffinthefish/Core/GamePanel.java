@@ -24,6 +24,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private static int WIDTH;
     private static int HEIGHT;
 
+
     private MainThread thread;
     private Background bg;
     private HUD hud;
@@ -38,8 +39,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
-
-        thread = new MainThread(getHolder(), this);
 
         //make gamePanel focusable so it can handle events
         setFocusable(true);
@@ -79,8 +78,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
         this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
-
+        this.initFish();
         //we can safely start the game loop
+        thread = new MainThread(getHolder(), this);
         thread.setRunning(true);
         thread.start();
     }
@@ -117,7 +117,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
             if(currentEnemy.isDead()){
-                currentEnemy.reset();
+                this.enemies.remove(i);
                 continue;
             }
             currentEnemy.update();
@@ -125,21 +125,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 this.player.tryEat(currentEnemy);
             }
-        }
-
-        //add enemy fish if needed
-        if(this.enemies.size() < 14) {
-            this.enemies.add(EnemyFishFactory.Create(getContext()));
+            if(this.enemies.size() <= 10){
+                this.enemies.add(EnemyFishFactory.Create(getContext()));
+            }
         }
 
     }
+
     @Override
     public void draw(Canvas canvas)
     {
         final float scaleFactorX = getWidth()/(WIDTH*1.f);
         final float scaleFactorY = getHeight()/(HEIGHT*1.f);
-        if(canvas!=null) {
-            final int savedState = canvas.save();
+        if(canvas!=null) {            final int savedState = canvas.save();
+
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
 
@@ -152,6 +151,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             //this.hud.draw(canvas);
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
+            System.out.println("SIZEEEEEE  "+this.enemies.size());
         }
     }
 
@@ -161,4 +161,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.HEIGHT = metrics.heightPixels;
     }
 
+    private void initFish() {
+        //add enemy fish if needed
+        while(this.enemies.size() <= 10){
+            this.enemies.add(EnemyFishFactory.Create(getContext()));
+        }
+
+    }
 }

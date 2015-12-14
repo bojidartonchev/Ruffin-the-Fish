@@ -196,12 +196,4 @@ public abstract class Fish extends GameObject {
         return dst;
     }
 
-    public void reset(){
-        this.setX(this.getRandomX());
-        this.setY(this.getRandomY());
-
-        this.setPlaying(true);
-        this.setDead(false);
-    }
-
 }
