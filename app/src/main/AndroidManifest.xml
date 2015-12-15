@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="fishels.soft.fishels.ruffinthefish.Core.Game"
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Game"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name="fishels.soft.fishels.ruffinthefish.Core.Splash"
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Splash"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,16 @@
         </activity>
 
         <activity
-            android:name="fishels.soft.fishels.ruffinthefish.Core.Menu"
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Menu"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHERS" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Settings"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

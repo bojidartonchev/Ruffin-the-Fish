@@ -3,10 +3,7 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.util.DisplayMetrics;
 
-import fishels.soft.fishels.ruffinthefish.Core.Game;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;

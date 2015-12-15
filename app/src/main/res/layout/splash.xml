@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fishels.soft.fishels.ruffinthefish.Core.Splash">
+    tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Splash">
 
     <ImageView
         android:layout_width="wrap_content"
