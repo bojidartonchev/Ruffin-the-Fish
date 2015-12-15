@@ -26,7 +26,7 @@ public class Background {
         canvas.drawBitmap(image, x, y,null);
         if(x<0)
         {
-            canvas.drawBitmap(image, x+GamePanel.getWIDTH(), y, null);
+            canvas.drawBitmap(image, x+this.image.getWidth(), y, null);
         }
     }
     public void setVector(int dx)
