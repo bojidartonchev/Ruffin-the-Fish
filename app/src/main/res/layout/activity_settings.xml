@@ -22,7 +22,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="100dp"
         android:layout_marginLeft="100dp"
-        android:clickable="false"
+        android:clickable="true"
         android:enabled="true" />
 
 </RelativeLayout>

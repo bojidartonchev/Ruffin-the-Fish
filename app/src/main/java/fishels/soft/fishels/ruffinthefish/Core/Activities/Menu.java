@@ -34,7 +34,7 @@ public class Menu extends Activity {
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
         this.layout = (RelativeLayout) findViewById(R.id.layout);
-        Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.background);
+        Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground);
         this.layout.setBackground(bg);
         Drawable setbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.settingicon);
         this.settingsBtn.setBackground(setbg);

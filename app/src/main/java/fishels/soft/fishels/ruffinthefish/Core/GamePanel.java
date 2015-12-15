@@ -26,7 +26,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
 
     private MainThread thread;
+    private SecondThread secThread;
     private Background bg;
+    private Background bgFront;
     private HUD hud;
     private Player player;
     private ArrayList<Enemy> enemies;
@@ -62,27 +64,39 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             try{thread.setRunning(false);
                 thread.join();
+                secThread.setRunning(false);
+                secThread.join();
 
-            }catch(InterruptedException e){e.printStackTrace();}
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
             retry = false;
         }
-
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
-        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
-        bg.setVector(-2);
+        this.bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+        this.bg.setVector(-1);
+        this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
+        this.bgFront.setVector(-5);
+
         //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer));
         this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
         this.initFish();
+
         //we can safely start the game loop
-        thread = new MainThread(getHolder(), this);
-        thread.setRunning(true);
-        thread.start();
+        this.thread = new MainThread(getHolder(), this);
+        this.thread.setRunning(true);
+        this.thread.setPriority(10);
+        this.thread.start();
+
+        this.secThread= new SecondThread(this);
+        this.secThread.setRunning(true);
+        this.secThread.start();
     }
 
     @Override
@@ -111,6 +125,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void update() {
 
         this.bg.update();
+        this.bgFront.update();
         this.player.update();
         //this.hud.update(this.player.getScore());
 
@@ -125,8 +140,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             {
                 this.player.tryEat(currentEnemy);
             }
-            if(this.enemies.size() <= 10){
-                this.enemies.add(EnemyFishFactory.Create(getContext()));
+            if(this.enemies.size()<=10){
+                initFish();
             }
         }
 
@@ -137,10 +152,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         final float scaleFactorX = getWidth()/(WIDTH*1.f);
         final float scaleFactorY = getHeight()/(HEIGHT*1.f);
-        if(canvas!=null) {            final int savedState = canvas.save();
-
+        if(canvas!=null) {
+            final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
+            this.bgFront.draw(canvas);
 
             //draw enemies
             for(Enemy e: this.enemies)
@@ -151,7 +167,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             //this.hud.draw(canvas);
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
-            System.out.println("SIZEEEEEE  "+this.enemies.size());
+
         }
     }
 
@@ -161,7 +177,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.HEIGHT = metrics.heightPixels;
     }
 
-    private void initFish() {
+    public void initFish() {
         //add enemy fish if needed
         while(this.enemies.size() <= 10){
             this.enemies.add(EnemyFishFactory.Create(getContext()));
