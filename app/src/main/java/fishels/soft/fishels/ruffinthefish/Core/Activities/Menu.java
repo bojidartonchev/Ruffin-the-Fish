@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 
 import com.example.fishels.ruffinthefish.R;
 
-
 public class Menu extends Activity {
     RelativeLayout layout;
     ImageButton startBtn;
@@ -38,7 +37,7 @@ public class Menu extends Activity {
         this.layout.setBackground(bg);
         Drawable setbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.settingicon);
         this.settingsBtn.setBackground(setbg);
-        Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.loadfish);
+        Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel);
         this.startBtn.setBackground(playbg);
 
         this.startBtn.setOnTouchListener(new View.OnTouchListener() {
