@@ -17,7 +17,7 @@ public class Background {
     public void update()
     {
         x+=dx;
-        if(x<-GamePanel.getWIDTH()){
+        if(x<-image.getWidth()){
             x=0;
         }
     }
