@@ -157,6 +157,14 @@ public abstract class Fish extends GameObject {
         this.playing = b;
     }
 
+    public void reset(){
+        this.setX(this.getRandomX());
+        this.setY(this.getRandomY());
+
+        this.setPlaying(true);
+        this.setDead(false);
+    }
+
     private int getRandomY() {
         Random rand = new Random();
         return rand.nextInt(GamePanel.getHEIGHT()-this.getHeight()*2) + this.getHeight()*2;

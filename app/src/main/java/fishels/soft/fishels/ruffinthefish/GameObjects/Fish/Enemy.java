@@ -30,7 +30,8 @@ public class Enemy extends Fish {
     @Override
     public void setX(int x) {
         if(x+this.getWidth()<-10||x-this.getWidth()>GamePanel.getWIDTH()+10){
-            this.setDead(true);
+            this.reset();
+            return;
         }
         super.setX(x);
     }
@@ -46,4 +47,13 @@ public class Enemy extends Fish {
         }
         return -1;
     }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
+        this.setSpeedY(speedGen.generateYspeed());
+    }
+
+
 }
