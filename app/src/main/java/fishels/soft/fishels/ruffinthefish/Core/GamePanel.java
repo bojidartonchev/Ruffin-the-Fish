@@ -1,6 +1,7 @@
 package fishels.soft.fishels.ruffinthefish.Core;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
@@ -33,6 +34,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Player player;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
+    private boolean joystickLeft;
 
     public GamePanel(Context context)
     {
@@ -82,8 +84,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bgFront.setVector(-5);
 
         //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
+        this.joystickLeft = this.readSettings("left");
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
-                BitmapFactory.decodeResource(getResources(), R.drawable.outer));
+                BitmapFactory.decodeResource(getResources(), R.drawable.outer),this.joystickLeft);
         this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
         this.initFish();
@@ -171,17 +174,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-    private void setProportions(Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        this.WIDTH = metrics.widthPixels;
-        this.HEIGHT = metrics.heightPixels;
-    }
-
     public void initFish() {
         //add enemy fish if needed
         while(this.enemies.size() <= 10){
             this.enemies.add(EnemyFishFactory.Create(getContext()));
         }
 
+    }
+
+    private void setProportions(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        this.WIDTH = metrics.widthPixels;
+        this.HEIGHT = metrics.heightPixels;
+    }
+
+    private boolean readSettings(String setting) {
+        SharedPreferences prefs = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        boolean current = prefs.getBoolean(setting, true); //true is the default value
+        return current;
     }
 }

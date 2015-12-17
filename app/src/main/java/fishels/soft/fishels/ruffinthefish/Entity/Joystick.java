@@ -18,14 +18,16 @@ public class Joystick {
     private float angle;
     private float distance;
 
+    private boolean isLeft;
+
     // data
     private Bitmap outerCircle;
     private Bitmap innerCircle;
 
-    public Joystick(Bitmap inner, Bitmap outer){
+    public Joystick(Bitmap inner, Bitmap outer,boolean isLeft){
         this.outerCircle = outer;
         this.innerCircle = inner;
-        this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
+        this.setIsLeft(isLeft);
         this.zeroY = GamePanel.getHEIGHT()-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
         this.radius =outerCircle.getWidth()/2;
     }
@@ -94,4 +96,12 @@ public class Joystick {
         return (int)(clickedY-zeroY)/5;
     }
 
+    private void setIsLeft(boolean isLeft) {
+        this.isLeft = isLeft;
+        if(isLeft==false){
+            this.zeroX = GamePanel.getWIDTH()-this.outerCircle.getWidth()+(this.outerCircle.getWidth()/3);
+            return;
+        }
+        this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
+    }
 }

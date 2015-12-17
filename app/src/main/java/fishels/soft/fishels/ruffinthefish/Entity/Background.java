@@ -3,8 +3,6 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-
 public class Background {
 
     private Bitmap image;

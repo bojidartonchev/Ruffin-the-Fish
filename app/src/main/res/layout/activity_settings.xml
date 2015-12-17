@@ -9,4 +9,90 @@
     tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Settings"
     android:background="@drawable/menubackground">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/scroll"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="-10dp">
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/music_tbtn"
+            android:textColor="#0a0101"
+            android:enabled="true"
+            android:checked="true"
+            android:layout_above="@+id/textView3"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_alignEnd="@+id/textView3"
+            android:layout_marginBottom="28dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="JOYSTICK POSSITION"
+            android:id="@+id/textView3"
+            android:textSize="30sp"
+            android:layout_above="@+id/radioGroup"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="MUSIC"
+            android:id="@+id/textView2"
+            android:textSize="30sp"
+            android:layout_alignBottom="@+id/music_tbtn"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_marginBottom="5dp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup"
+            android:layout_marginBottom="91dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_alignEnd="@+id/textView3"
+            android:weightSum="1">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LEFT"
+                android:id="@+id/left"
+                android:checked="true"
+                android:clickable="true"
+                android:enabled="true"
+                android:layout_alignTop="@+id/right"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RIGHT"
+                android:id="@+id/right"
+                android:clickable="true"
+                android:enabled="true"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="0.23"
+                android:checked="false" />
+        </RadioGroup>
+
+    </RelativeLayout>
 </RelativeLayout>
