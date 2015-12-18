@@ -10,7 +10,6 @@ public class Player extends Fish {
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
-
     private int score;
 
     public Player(Bitmap res) {
@@ -47,6 +46,10 @@ public class Player extends Fish {
     }
 
     public void setScore(int score) {
+        if(score>=Math.pow(10, this.getCurrentLevel().getValue())){
+            this.levelUp();
+            score=0;
+        }
         this.score = score;
     }
 
@@ -61,4 +64,28 @@ public class Player extends Fish {
             this.setDead(true);
         }
     }
+
+    private void levelUp(){
+        int currentLevel = this.getCurrentLevel().getValue();
+        currentLevel+=1;
+        Level newLevel;
+        switch (currentLevel){
+            case 2:
+                newLevel=Level.TWO;
+                break;
+
+            case 3:
+                newLevel=Level.THREE;
+                break;
+
+            case 4:
+                newLevel=Level.FOUR;
+                break;
+            default:
+                newLevel=Level.ONE;
+                break;
+        }
+        this.setCurrentLevel(newLevel);
+    }
+
 }

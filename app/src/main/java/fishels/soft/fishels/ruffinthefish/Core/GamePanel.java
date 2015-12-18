@@ -82,15 +82,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bg.setVector(-1);
         this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
         this.bgFront.setVector(-5);
-        this.progres = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
-                BitmapFactory.decodeResource(getResources(), R.drawable.fillbar));
 
-        //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystickLeft = this.readSettings("left");
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer),this.joystickLeft);
         this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
+        this.progres = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
+                BitmapFactory.decodeResource(getResources(), R.drawable.fillbar),this.player);
         this.initFish();
 
         //we can safely start the game loop
@@ -133,7 +132,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bgFront.update();
         this.player.update();
         this.progres.update(this.player.getScore());
-        //this.hud.update(this.player.getScore());
 
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
@@ -171,10 +169,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                e.draw(canvas);
             }
             this.player.draw(canvas);
-            //this.hud.draw(canvas);
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
-
         }
     }
 
