@@ -14,8 +14,8 @@ import com.example.fishels.ruffinthefish.R;
 import java.util.ArrayList;
 
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
-import fishels.soft.fishels.ruffinthefish.Entity.HUD;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
+import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
@@ -30,8 +30,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private SecondThread secThread;
     private Background bg;
     private Background bgFront;
-    private HUD hud;
     private Player player;
+    private ProgressBar progres;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
     private boolean joystickLeft;
@@ -82,6 +82,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bg.setVector(-1);
         this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
         this.bgFront.setVector(-5);
+        this.progres = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
+                BitmapFactory.decodeResource(getResources(), R.drawable.fillbar));
 
         //hud = new HUD(BitmapFactory.decodeResource(getResources(), R.drawable.hud));
         this.joystickLeft = this.readSettings("left");
@@ -130,6 +132,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bg.update();
         this.bgFront.update();
         this.player.update();
+        this.progres.update(this.player.getScore());
         //this.hud.update(this.player.getScore());
 
         for (int i = 0; i < this.enemies.size(); i++) {
@@ -160,6 +163,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
             this.bgFront.draw(canvas);
+            this.progres.draw(canvas);
 
             //draw enemies
             for(Enemy e: this.enemies)
