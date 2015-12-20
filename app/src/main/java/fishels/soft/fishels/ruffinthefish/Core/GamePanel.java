@@ -17,6 +17,8 @@ import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
+import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
@@ -34,7 +36,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private ProgressBar progres;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
+    private Event event;
     private boolean joystickLeft;
+    long startSpawnTime;
+    // ... the code being measured ...
 
     public GamePanel(Context context)
     {
@@ -98,6 +103,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.thread.setPriority(10);
         this.thread.start();
 
+        this.event = EventFactory.Create(getContext());
+        this.startSpawnTime = System.nanoTime();
         this.secThread= new SecondThread(this);
         this.secThread.setRunning(true);
         this.secThread.start();
@@ -128,27 +135,53 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update() {
 
+        this.spawnEventOnTime();
         this.bg.update();
         this.bgFront.update();
         this.player.update();
         this.progres.update(this.player.getScore());
 
+        if(this.event != null) {
+            if (!this.event.isOnScreen()) {
+                this.event = null;
+            }
+            else {
+                this.event.update();
+                if(this.event.intersects(this.player)){
+                    this.event.eat(this.player);
+                }
+            }
+
+        }
+
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
-            if(currentEnemy.isDead()){
+            if (currentEnemy.isDead()) {
                 this.enemies.remove(i);
                 continue;
             }
+
             currentEnemy.update();
-            if (this.player.intersects(currentEnemy))
-            {
+
+            if (this.player.intersects(currentEnemy)) {
                 this.player.tryEat(currentEnemy);
             }
-            if(this.enemies.size()<=10){
+
+            if (this.enemies.size() <= 10) {
                 initFish();
             }
         }
 
+    }
+
+    private void spawnEventOnTime() {
+        long elapsedSpawnTime = (System.nanoTime() - startSpawnTime) / 10000000;
+        // TODO: make to spawn on random time
+        if(elapsedSpawnTime > 2000)
+        {
+            this.startSpawnTime = System.nanoTime();
+            this.event = EventFactory.Create(getContext());
+        }
     }
 
     @Override
@@ -169,6 +202,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                e.draw(canvas);
             }
             this.player.draw(canvas);
+
+            if(this.event != null) {
+                this.event.draw(canvas);
+            }
+
             this.joystick.draw(canvas);
             canvas.restoreToCount(savedState);
         }
