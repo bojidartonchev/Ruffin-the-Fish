@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.example.fishels.ruffinthefish.R;
 
+import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
+
 public class Splash extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,6 +37,7 @@ public class Splash extends Activity{
         an.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                EnemyFishFactory.LoadImages(getBaseContext());
 
             }
 

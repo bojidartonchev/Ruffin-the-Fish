@@ -83,7 +83,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
-        EnemyFishFactory.LoadImages(getContext());
         this.bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
         this.bg.setVector(-1);
         this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
