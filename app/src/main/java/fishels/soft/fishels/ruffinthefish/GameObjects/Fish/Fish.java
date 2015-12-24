@@ -146,11 +146,13 @@ public abstract class Fish extends GameObject {
 
     public void draw(Canvas canvas)
     {
-        Bitmap currentFrame = animation.getImage();
-        if(!this.isTurnedRight()){
-            currentFrame=flipHorizontal(currentFrame);
+        if(!this.isDead()) {
+            Bitmap currentFrame = animation.getImage();
+            if (!this.isTurnedRight()) {
+                currentFrame = flipHorizontal(currentFrame);
+            }
+            canvas.drawBitmap(currentFrame, x, y, null);
         }
-        canvas.drawBitmap(currentFrame,x,y,null);
     }
 
     public void setPlaying(boolean b){
