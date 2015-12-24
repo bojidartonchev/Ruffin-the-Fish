@@ -28,7 +28,7 @@ public class Enemy extends Fish {
     @Override
     public void setX(int x) {
         if(x+this.getWidth()<-10||x-this.getWidth()>GamePanel.getWIDTH()+10){
-            this.reset();
+            this.setDead(true);
             return;
         }
         super.setX(x);
@@ -39,19 +39,17 @@ public class Enemy extends Fish {
         return super.getY();
     }
 
+    @Override
+    public void setSpeedX(int speedX) {
+        speedX=(int)(speedX*(this.getCurrentLevel().getValue()*0.5));
+        super.setSpeedX(speedX);
+    }
+
     private int generateDirection(){
         if(this.getX()<0){
             return 1;
         }
         return -1;
     }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
-        this.setSpeedY(speedGen.generateYspeed());
-    }
-
 
 }

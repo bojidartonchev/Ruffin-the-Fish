@@ -77,10 +77,10 @@ public class EnemyFishFactory {
         if(current%10==0){
             return Level.FOUR;
         }
-        else if(current%5==0){
+        else if(current%8==0){
             return Level.THREE;
         }
-        else if(current % 4==0){
+        else if(current % 6==0){
             return Level.TWO;
         }
         return Level.ONE;
