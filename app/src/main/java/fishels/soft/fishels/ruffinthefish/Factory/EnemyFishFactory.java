@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.example.fishels.ruffinthefish.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeMap;
@@ -17,41 +18,43 @@ public class EnemyFishFactory {
 
     private static int currentNumRows=0;
     private static int currentNumFrames=0;
+    private static ArrayList<Bitmap> enemyFish;
 
-    public static Enemy Create(Context context) {
+    public static void LoadImages(Context context){
+        enemyFish = new ArrayList<>();
+        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level1_enemy));
+        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.evilfaashe));
+    }
+    public static Enemy Create() {
         Level currentLevel = getLevel();
-        Bitmap currentBitmap = getBitmap(currentLevel,context);
+        Bitmap currentBitmap = getBitmap(currentLevel);
         return new Enemy(currentBitmap, currentLevel, currentNumRows, currentNumFrames);
     }
 
-    private static Bitmap getBitmap(Level currentLevel, Context context) {
+    private static Bitmap getBitmap(Level currentLevel) {
         Bitmap current = null;
         int numOfAnimations=0;
         switch (currentLevel){
             case ONE:
-                current=BitmapFactory.decodeResource(context
-                        .getResources(), R.drawable.level1_enemy);
+                current=enemyFish.get(0);
                 numOfAnimations=4;
                 currentNumRows = 1;
                 currentNumFrames = 5;
                 break;
             case TWO:
-                current=BitmapFactory.decodeResource(context
-                        .getResources(), R.drawable.evilfaashe);
+                current=enemyFish.get(1);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;
                 break;
             case THREE:
-                current=BitmapFactory.decodeResource(context
-                        .getResources(), R.drawable.evilfaashe);
+                current=enemyFish.get(1);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;
                 break;
             case FOUR:
-                current=BitmapFactory.decodeResource(context
-                        .getResources(), R.drawable.evilfaashe);
+                current=enemyFish.get(1);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;

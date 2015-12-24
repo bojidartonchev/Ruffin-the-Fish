@@ -2,6 +2,7 @@ package fishels.soft.fishels.ruffinthefish.Core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
@@ -82,11 +83,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
+        EnemyFishFactory.LoadImages(getContext());
         this.bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
         this.bg.setVector(-1);
         this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
         this.bgFront.setVector(-5);
-
         this.joystickLeft = this.readSettings("left");
         this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer),this.joystickLeft);
@@ -174,7 +175,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
     }
-/*
+    /*
     private void spawnEventOnTime() {
         long elapsedSpawnTime = (System.nanoTime() - startSpawnTime) / 10000000;
         // TODO: make to spawn on random time
@@ -218,7 +219,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void initFish() {
         //add enemy fish if needed
         while(this.enemies.size() <= 10){
-            this.enemies.add(EnemyFishFactory.Create(getContext()));
+            this.enemies.add(EnemyFishFactory.Create());
         }
 
     }
