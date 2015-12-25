@@ -1,7 +1,9 @@
 package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -112,6 +114,7 @@ public class Menu extends Activity {
         super.onResume();
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
+
     }
 
     @Override

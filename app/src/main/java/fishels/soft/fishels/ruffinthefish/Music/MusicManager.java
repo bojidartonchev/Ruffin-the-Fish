@@ -1,12 +1,13 @@
 package fishels.soft.fishels.ruffinthefish.Music;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.fishels.ruffinthefish.R;
 
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class MusicManager {
@@ -15,6 +16,7 @@ public class MusicManager {
     public static final int MUSIC_MENU = 0;
     public static final int MUSIC_GAME = 1;
     public static final int MUSIC_END_GAME = 2;
+    static Context ctx;
 
     private static TreeMap<Integer,MediaPlayer> players = new TreeMap<>();
     private static int currentMusic = -1;
@@ -25,6 +27,10 @@ public class MusicManager {
     }
 
     public static void start(Context context, int music, boolean force) {
+        ctx=context;
+        if(!musicOn()){
+            return;
+        }
         if (!force && currentMusic > -1) {
          // already playing some music and not forced to change
             return;
@@ -113,5 +119,12 @@ public class MusicManager {
         }
         currentMusic = -1;
         Log.d(TAG, "Current music is now [" + currentMusic + "]");
+    }
+
+    private static boolean musicOn() {
+        SharedPreferences prefs = ctx.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        boolean current = prefs.getBoolean("music", true); //true is the default value
+        System.out.println(current);
+        return current;
     }
 }

@@ -24,7 +24,6 @@ public class Settings extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        MusicManager.start(this, MusicManager.MUSIC_MENU);
 
         //set to full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -53,6 +52,11 @@ public class Settings extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSettings("music", isChecked);
+                if (isChecked) {
+                    MusicManager.start(getBaseContext(), MusicManager.MUSIC_MENU);
+                } else {
+                    MusicManager.pause();
+                }
             }
         });
     }

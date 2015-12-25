@@ -1,6 +1,8 @@
 package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,19 +16,6 @@ import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
 
 public class Game extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //turn title off
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //set to full screen
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(new GamePanel(this));
-        MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +40,19 @@ public class Game extends Activity {
     }
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //turn title off
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //set to full screen
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(new GamePanel(this));
+        MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         MusicManager.pause();
@@ -59,6 +61,14 @@ public class Game extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        MusicManager.start(this, MusicManager.MUSIC_GAME);
+        if(this.musicOn()) {
+            MusicManager.start(this, MusicManager.MUSIC_GAME);
+        }
+    }
+
+    private boolean musicOn() {
+        SharedPreferences prefs = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        boolean current = prefs.getBoolean("music", true); //true is the default value
+        return current;
     }
 }
