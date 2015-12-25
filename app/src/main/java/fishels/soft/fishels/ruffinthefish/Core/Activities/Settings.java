@@ -13,6 +13,8 @@ import android.widget.ToggleButton;
 
 import com.example.fishels.ruffinthefish.R;
 
+import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
+
 public class Settings extends Activity {
     RadioButton rbleft;
     RadioButton rbright;
@@ -22,6 +24,7 @@ public class Settings extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        MusicManager.start(this, MusicManager.MUSIC_MENU);
 
         //set to full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -38,10 +41,9 @@ public class Settings extends Activity {
         this.rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId==rbleft.getId()){
+                if (checkedId == rbleft.getId()) {
                     saveSettings("left", true);
-                }
-                else{
+                } else {
                     saveSettings("left", false);
                 }
             }
@@ -67,5 +69,4 @@ public class Settings extends Activity {
         boolean current = prefs.getBoolean(setting, true); //true is the default value
         return current;
     }
-
 }

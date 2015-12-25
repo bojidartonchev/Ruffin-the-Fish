@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
 
 public class Game extends Activity {
@@ -24,6 +25,7 @@ public class Game extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(new GamePanel(this));
+        MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
     }
 
     @Override
@@ -46,5 +48,17 @@ public class Game extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MusicManager.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MusicManager.start(this, MusicManager.MUSIC_GAME);
     }
 }

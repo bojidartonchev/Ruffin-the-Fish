@@ -16,10 +16,14 @@ import android.widget.RelativeLayout;
 
 import com.example.fishels.ruffinthefish.R;
 
+import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
+
 public class Menu extends Activity {
     RelativeLayout layout;
     ImageButton startBtn;
     Button settingsBtn;
+
+    private boolean continuePlaying;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,8 @@ public class Menu extends Activity {
         //set to full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
+        this.continuePlaying = false;
+        MusicManager.start(getApplicationContext(),MusicManager.MUSIC_MENU);
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
@@ -76,6 +82,7 @@ public class Menu extends Activity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
+                        continuePlaying = true;
                         Intent i = new Intent(getBaseContext(), Settings.class);
                         startActivity(i);
 
@@ -89,5 +96,27 @@ public class Menu extends Activity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(!continuePlaying) {
+            MusicManager.pause();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.continuePlaying=false;
+        MusicManager.start(this, MusicManager.MUSIC_MENU);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("DESTROY");
     }
 }
