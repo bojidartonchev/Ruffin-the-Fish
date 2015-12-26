@@ -2,7 +2,6 @@ package fishels.soft.fishels.ruffinthefish.Core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
@@ -18,10 +17,9 @@ import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
-import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
-import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -33,7 +31,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Background bg;
     private Background bgFront;
     private Player player;
-    private ProgressBar progres;
+    private ProgressBar progress;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
     //private Event event;
@@ -92,7 +90,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 BitmapFactory.decodeResource(getResources(), R.drawable.outer),this.joystickLeft);
         this.enemies = new ArrayList<>();
         this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
-        this.progres = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
+        this.progress = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
                 BitmapFactory.decodeResource(getResources(), R.drawable.fillbar),this.player);
         this.initFish();
 
@@ -138,7 +136,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bg.update();
         this.bgFront.update();
         this.player.update();
-        this.progres.update(this.player.getScore());
+        this.progress.update(this.player.getScore());
 
         /*
         if(this.event != null) {
@@ -166,6 +164,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if (this.player.intersects(currentEnemy)) {
                 this.player.tryEat(currentEnemy);
+                SoundManager.playSound(SoundManager.EAT_SOUND);
             }
 
             if (this.enemies.size() <= 10) {
@@ -196,7 +195,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             canvas.scale(scaleFactorX, scaleFactorY);
             this.bg.draw(canvas);
             this.bgFront.draw(canvas);
-            this.progres.draw(canvas);
+            this.progress.draw(canvas);
 
             //draw enemies
             for(Enemy e: this.enemies)

@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Menu extends Activity {
     RelativeLayout layout;
@@ -120,6 +121,7 @@ public class Menu extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        System.out.println("DESTROY");
+        SoundManager.release();
+        MusicManager.release();
     }
 }

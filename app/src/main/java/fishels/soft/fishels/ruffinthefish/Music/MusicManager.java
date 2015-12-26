@@ -3,7 +3,6 @@ package fishels.soft.fishels.ruffinthefish.Music;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.fishels.ruffinthefish.R;

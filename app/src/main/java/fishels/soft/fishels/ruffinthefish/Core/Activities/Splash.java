@@ -1,6 +1,7 @@
 package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Splash extends Activity{
     @Override
@@ -37,7 +39,9 @@ public class Splash extends Activity{
         an.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                EnemyFishFactory.LoadImages(getBaseContext());
+                Context base = getBaseContext();
+                EnemyFishFactory.LoadImages(base);
+                SoundManager.loadSounds(base);
 
             }
 
