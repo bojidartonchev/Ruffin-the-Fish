@@ -41,6 +41,7 @@ public class Splash extends Activity{
             public void onAnimationStart(Animation animation) {
                 Context base = getBaseContext();
                 EnemyFishFactory.LoadImages(base);
+                SoundManager.loadSoundManager();
                 SoundManager.loadSounds(base);
 
             }
