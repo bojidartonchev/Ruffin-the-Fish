@@ -8,26 +8,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Splash">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:contentDescription="@string/Splash"
-        android:src="@drawable/loader"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fishels Software"
+        android:text="Loading..."
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
         android:allowUndo="false"
-        android:textSize="50dp" />
+        android:textSize="30dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

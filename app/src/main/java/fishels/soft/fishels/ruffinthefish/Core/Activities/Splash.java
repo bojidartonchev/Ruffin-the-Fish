@@ -29,13 +29,9 @@ public class Splash extends Activity{
         setContentView(R.layout.splash);
 
         TextView tv = (TextView)findViewById(R.id.textView);
-        Typeface face = Typeface.createFromAsset(getAssets(),
-                "fonts/SpriteGraffiti.otf");
-        tv.setTypeface(face);
 
-        final ImageView iv=(ImageView) findViewById(R.id.imageView);
-        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
-        iv.startAnimation(an);
+        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.blink_animation);
+        tv.startAnimation(an);
         an.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -43,7 +39,6 @@ public class Splash extends Activity{
                 EnemyFishFactory.LoadImages(base);
                 SoundManager.loadSoundManager();
                 SoundManager.loadSounds(base);
-
             }
 
             @Override
