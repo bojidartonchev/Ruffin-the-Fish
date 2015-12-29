@@ -17,6 +17,8 @@ import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
+import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
@@ -34,9 +36,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private ProgressBar progress;
     private ArrayList<Enemy> enemies;
     private Joystick joystick;
-    //private Event event;
+    private Event event;
     private boolean joystickLeft;
-   // long startSpawnTime;
+
     // ... the code being measured ...
 
     public GamePanel(Context context)
@@ -100,11 +102,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.thread.setPriority(10);
         this.thread.start();
 
-        //this.event = EventFactory.Create(getContext());
-        //this.startSpawnTime = System.nanoTime();
         this.secThread= new SecondThread(this);
         this.secThread.setRunning(true);
         this.secThread.start();
+
     }
 
     @Override
@@ -132,26 +133,26 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void update() {
 
-        //this.spawnEventOnTime();
         this.bg.update();
         this.bgFront.update();
+
         this.player.update();
         this.progress.update(this.player.getScore());
 
-        /*
         if(this.event != null) {
             if (!this.event.isOnScreen()) {
-                this.event = null;
+                this.event =null;
             }
             else {
                 this.event.update();
                 if(this.event.intersects(this.player)){
-                    this.event.eat(this.player);
+                    this.event.executeEvent(this.player);
                 }
             }
-
         }
-        */
+        else{
+            this.event=EventFactory.Create();
+        }
 
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
@@ -173,17 +174,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
     }
-    /*
-    private void spawnEventOnTime() {
-        long elapsedSpawnTime = (System.nanoTime() - startSpawnTime) / 10000000;
-        // TODO: make to spawn on random time
-        if(elapsedSpawnTime > 2000)
-        {
-            this.startSpawnTime = System.nanoTime();
-            this.event = EventFactory.Create(getContext());
-        }
-    }
-    */
+
 
     @Override
     public void draw(Canvas canvas)
@@ -203,14 +194,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                e.draw(canvas);
             }
             this.player.draw(canvas);
-/*
+
             if(this.event != null) {
                 this.event.draw(canvas);
             }
-            */
 
             this.joystick.draw(canvas);
+            if(this.player.isDead()){
+
+            }
             canvas.restoreToCount(savedState);
+
         }
     }
 

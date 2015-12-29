@@ -9,12 +9,10 @@ import fishels.soft.fishels.ruffinthefish.Entity.EnemySpeedGenerator;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 
 public class Enemy extends Fish {
-    private int directionMultiplier;
     private EnemySpeedGenerator speedGen = new EnemySpeedGenerator();
 
     public Enemy(Bitmap res, Level level,int numRows, int numFrames) {
         super(res, level, numRows, numFrames);
-        this.directionMultiplier = generateDirection();
         this.setSpeedX(directionMultiplier* speedGen.generateXspeed());
         this.setSpeedY(speedGen.generateYspeed());
         this.setPlaying(true);
@@ -45,11 +43,6 @@ public class Enemy extends Fish {
         super.setSpeedX(speedX);
     }
 
-    private int generateDirection(){
-        if(this.getX()<0){
-            return 1;
-        }
-        return -1;
-    }
+
 
 }

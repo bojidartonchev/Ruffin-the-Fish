@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
+import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Splash extends Activity{
@@ -39,6 +41,7 @@ public class Splash extends Activity{
                 EnemyFishFactory.LoadImages(base);
                 SoundManager.loadSoundManager();
                 SoundManager.loadSounds(base);
+                EventFactory.loadContent(base);
             }
 
             @Override
