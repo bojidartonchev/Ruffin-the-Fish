@@ -26,20 +26,9 @@
             android:textColor="#0a0101"
             android:enabled="true"
             android:checked="true"
-            android:layout_above="@+id/textView3"
-            android:layout_alignRight="@+id/textView3"
-            android:layout_alignEnd="@+id/textView3"
-            android:layout_marginBottom="28dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="JOYSTICK POSSITION"
-            android:id="@+id/textView3"
-            android:textSize="30sp"
-            android:layout_above="@+id/radioGroup"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignTop="@+id/sound_tbtn"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,22 +36,42 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="MUSIC"
             android:id="@+id/textView2"
-            android:textSize="30sp"
-            android:layout_alignBottom="@+id/music_tbtn"
+            android:textSize="25dp"
+            android:layout_alignTop="@+id/textView5"
             android:layout_alignLeft="@+id/textView3"
-            android:layout_alignStart="@+id/textView3"
-            android:layout_marginBottom="5dp" />
+            android:layout_alignStart="@+id/textView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="SOUND"
+            android:id="@+id/textView5"
+            android:textSize="25dp"
+            android:layout_above="@+id/sound_tbtn"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_alignEnd="@+id/textView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="JOYSTICK POSSITION"
+            android:id="@+id/textView3"
+            android:textSize="25dp"
+            android:layout_above="@+id/radioGroup"
+            android:layout_centerHorizontal="true" />
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:id="@+id/radioGroup"
-            android:layout_marginBottom="91dp"
+            android:layout_marginBottom="60dp"
+            android:weightSum="1"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/textView3"
-            android:layout_alignEnd="@+id/textView3"
-            android:weightSum="1">
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignStart="@+id/textView3">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -75,7 +84,6 @@
                 android:layout_alignTop="@+id/right"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp" />
 
             <RadioButton
@@ -88,11 +96,21 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_weight="0.23"
-                android:checked="false" />
+                android:checked="false"
+                android:layout_marginLeft="50dp" />
         </RadioGroup>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sound_tbtn"
+            android:textColor="#0a0101"
+            android:enabled="true"
+            android:checked="true"
+            android:layout_marginBottom="21dp"
+            android:layout_above="@+id/textView3"
+            android:layout_alignRight="@+id/textView5"
+            android:layout_alignEnd="@+id/textView5" />
 
     </RelativeLayout>
 </RelativeLayout>

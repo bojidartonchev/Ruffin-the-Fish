@@ -45,6 +45,15 @@
                 <category android:name="android.intent.category.LAUNCHERS" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Achievements"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHERS" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

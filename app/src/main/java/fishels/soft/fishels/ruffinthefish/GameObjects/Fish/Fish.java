@@ -84,6 +84,9 @@ public abstract class Fish extends GameObject {
 
     public void update()
     {
+        if(this.isDead()){
+            return;
+        }
         long elapsed = (System.nanoTime()-startTime)/1000000;
         if(elapsed>100)
         {

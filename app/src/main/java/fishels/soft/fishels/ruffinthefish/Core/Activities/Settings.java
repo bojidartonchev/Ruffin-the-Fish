@@ -19,7 +19,8 @@ public class Settings extends Activity {
     RadioButton rbleft;
     RadioButton rbright;
     RadioGroup rg;
-    ToggleButton tb;
+    ToggleButton musciTbtn;
+    ToggleButton soundTbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +31,14 @@ public class Settings extends Activity {
         setContentView(R.layout.activity_settings);
 
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);
-        this.tb = (ToggleButton) findViewById(R.id.music_tbtn);
+        this.musciTbtn = (ToggleButton) findViewById(R.id.music_tbtn);
+        this.soundTbtn = (ToggleButton) findViewById(R.id.sound_tbtn);
         this.rbleft = (RadioButton) findViewById(R.id.left);
         this.rbright = (RadioButton) findViewById(R.id.right);
         this.rbright.setChecked(!this.readSettings("left"));
 
-        this.tb.setChecked(this.readSettings("music"));
+        this.musciTbtn.setChecked(this.readSettings("music"));
+        this.soundTbtn.setChecked(this.readSettings("sound"));
 
         this.rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -48,7 +51,7 @@ public class Settings extends Activity {
             }
         });
 
-        this.tb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        this.musciTbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSettings("music", isChecked);
@@ -57,6 +60,13 @@ public class Settings extends Activity {
                 } else {
                     MusicManager.pause();
                 }
+            }
+        });
+
+        this.soundTbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveSettings("sound", isChecked);
             }
         });
     }

@@ -39,7 +39,7 @@ public abstract class Event extends GameObject {
         Bitmap[][] image = this.createBitmap(res);
 
         this.animation.setFrames(image);
-        this.animation.setDelay(100);
+        this.animation.setDelay(200);
         this.startTime = System.nanoTime();
     }
 
@@ -76,9 +76,7 @@ public abstract class Event extends GameObject {
         super.setX(x);
     }
 
-    public void executeEvent(Player player){
-        System.out.println("EVEEEEEEENT EXECUTED");
-    }
+    public abstract void executeEvent(Player player);
 
     public void draw(Canvas canvas)
     {

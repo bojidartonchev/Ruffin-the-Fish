@@ -123,7 +123,6 @@ public class MusicManager {
     private static boolean musicOn() {
         SharedPreferences prefs = ctx.getSharedPreferences("settings", Context.MODE_PRIVATE);
         boolean current = prefs.getBoolean("music", true); //true is the default value
-        System.out.println(current);
         return current;
     }
 }

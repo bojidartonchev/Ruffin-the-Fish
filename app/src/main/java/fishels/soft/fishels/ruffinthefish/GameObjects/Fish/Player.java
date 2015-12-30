@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Player extends Fish {
     private static final int PLAYER_NUMROWS = 2;
@@ -11,6 +12,7 @@ public class Player extends Fish {
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
     private int score;
+    private boolean stunned;
 
     public Player(Bitmap res) {
         super(res, STARTING_PLAYER_LEVEL, PLAYER_NUMROWS, PLAYER_NUMFRAMES);
@@ -31,6 +33,15 @@ public class Player extends Fish {
     }
 
     @Override
+    public void update() {
+        if(this.stunned){
+            getAnimation().update();
+            return;
+        }
+        super.update();
+    }
+
+    @Override
     public void setY(int yCurrent) {
         if(yCurrent<0){
             yCurrent=0;
@@ -39,6 +50,10 @@ public class Player extends Fish {
             yCurrent=GamePanel.getHEIGHT()-this.getHeight();
         }
         super.setY(yCurrent);
+    }
+
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
     }
 
     public int getScore() {
@@ -54,6 +69,9 @@ public class Player extends Fish {
     }
 
     public void tryEat(Fish enemy) {
+        if(this.isDead()){
+            return;
+        }
         if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())) {
             this.setIsEating(true);
             enemy.setDead(true);
@@ -63,6 +81,7 @@ public class Player extends Fish {
             enemy.setIsEating(true);
             this.setDead(true);
         }
+        SoundManager.playSound(SoundManager.EAT_SOUND);
     }
 
     private void levelUp(){

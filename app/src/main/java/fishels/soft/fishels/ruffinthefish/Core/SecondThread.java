@@ -13,15 +13,8 @@ public class SecondThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-
         while (running) {
             this.gamePanel.initFish();
-
-            try {
-                sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 

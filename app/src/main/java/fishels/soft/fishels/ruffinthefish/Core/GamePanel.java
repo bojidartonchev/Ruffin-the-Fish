@@ -21,7 +21,6 @@ import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
-import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -29,7 +28,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private static int HEIGHT;
 
     private MainThread thread;
-    private SecondThread secThread;
+   // private SecondThread secThread;
     private Background bg;
     private Background bgFront;
     private Player player;
@@ -71,8 +70,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             try{thread.setRunning(false);
                 thread.join();
-                secThread.setRunning(false);
-                secThread.join();
+                //secThread.setRunning(false);
+                //secThread.join();
 
             }catch(InterruptedException e){
                 e.printStackTrace();
@@ -102,9 +101,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.thread.setPriority(10);
         this.thread.start();
 
-        this.secThread= new SecondThread(this);
-        this.secThread.setRunning(true);
-        this.secThread.start();
+        //this.secThread= new SecondThread(this);
+        //this.secThread.setRunning(true);
+        //this.secThread.start();
 
     }
 
@@ -165,14 +164,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if (this.player.intersects(currentEnemy)) {
                 this.player.tryEat(currentEnemy);
-                SoundManager.playSound(SoundManager.EAT_SOUND);
-            }
-
-            if (this.enemies.size() <= 10) {
-                initFish();
             }
         }
 
+        if (this.enemies.size() <= 10) {
+            initFish();
+        }
     }
 
 
@@ -191,7 +188,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             //draw enemies
             for(Enemy e: this.enemies)
             {
-               e.draw(canvas);
+                e.draw(canvas);
             }
             this.player.draw(canvas);
 

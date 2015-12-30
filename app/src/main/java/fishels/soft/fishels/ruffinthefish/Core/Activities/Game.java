@@ -13,6 +13,7 @@ import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 
 public class Game extends Activity {
@@ -49,7 +50,9 @@ public class Game extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(new GamePanel(this));
+
         MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
+        SoundManager.setSoundOn(getBaseContext());
     }
 
     @Override
@@ -61,14 +64,6 @@ public class Game extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(this.musicOn()) {
-            MusicManager.start(this, MusicManager.MUSIC_GAME);
-        }
-    }
-
-    private boolean musicOn() {
-        SharedPreferences prefs = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
-        boolean current = prefs.getBoolean("music", true); //true is the default value
-        return current;
+        MusicManager.start(this, MusicManager.MUSIC_GAME);
     }
 }

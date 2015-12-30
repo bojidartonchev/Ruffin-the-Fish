@@ -2,6 +2,7 @@ package fishels.soft.fishels.ruffinthefish.Music;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -13,18 +14,21 @@ import java.util.ArrayList;
 
 public class SoundManager {
     public static int EAT_SOUND = 0;
+    private static boolean soundOn;
 
     private static ArrayList<Integer> sounds = new ArrayList<>();
 
     private static SoundPool sp;
 
     public static void loadSounds(Context context){
-        sounds.add(sp.load(context, R.raw.eat,1));
+        sounds.add(sp.load(context, R.raw.eat, 1));
     }
 
     public static void playSound(int sound){
-        int currentId = sounds.get(sound);
-        sp.play(currentId, 1, 1, 1, 0, 1.0f);
+        if(soundOn){
+            int currentId = sounds.get(sound);
+            sp.play(currentId, 1, 1, 1, 0, 1.0f);
+        }
     }
 
     public static void release(){
@@ -54,6 +58,12 @@ public class SoundManager {
     @SuppressWarnings("deprecation")
     protected static void createOldSoundPool(){
         sp = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+    }
+
+    public static void setSoundOn(Context ctx) {
+        SharedPreferences prefs = ctx.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        boolean current = prefs.getBoolean("sound", true); //true is the default value
+        soundOn = current;
     }
 
 

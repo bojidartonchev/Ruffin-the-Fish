@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class Menu extends Activity {
     RelativeLayout layout;
     ImageButton startBtn;
     Button settingsBtn;
+    Button achivBtn;
 
     private boolean continuePlaying;
 
@@ -41,11 +43,14 @@ public class Menu extends Activity {
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
+        this.achivBtn = (Button) findViewById(R.id.achiv_button);
         this.layout = (RelativeLayout) findViewById(R.id.layout);
         Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground);
         this.layout.setBackground(bg);
         Drawable setbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.settingicon);
         this.settingsBtn.setBackground(setbg);
+        Drawable achvbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.bulb);
+        this.achivBtn.setBackground(achvbg);
         Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel);
         this.startBtn.setBackground(playbg);
 
@@ -87,6 +92,32 @@ public class Menu extends Activity {
                     case MotionEvent.ACTION_UP:
                         continuePlaying = true;
                         Intent i = new Intent(getBaseContext(), Settings.class);
+                        startActivity(i);
+
+                    case MotionEvent.ACTION_CANCEL: {
+                        Button view = (Button) v;
+                        view.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
+        this.achivBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        Button view = (Button) v;
+                        view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                        continuePlaying = true;
+                        Intent i = new Intent(getBaseContext(), Achievements.class);
                         startActivity(i);
 
                     case MotionEvent.ACTION_CANCEL: {
