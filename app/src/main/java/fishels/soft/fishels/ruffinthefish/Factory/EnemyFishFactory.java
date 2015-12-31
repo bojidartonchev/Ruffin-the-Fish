@@ -23,7 +23,9 @@ public class EnemyFishFactory {
     public static void LoadImages(Context context){
         enemyFish = new ArrayList<>();
         enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level1_enemy));
-        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.evilfaashe));
+        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level2_enemy));
+        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level3_enemy));
+        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level4_enemy));
     }
     public static Enemy Create() {
         Level currentLevel = getLevel();
@@ -48,19 +50,21 @@ public class EnemyFishFactory {
                 currentNumFrames=9;
                 break;
             case THREE:
-                current=enemyFish.get(1);
+                current=enemyFish.get(2);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;
                 break;
             case FOUR:
-                current=enemyFish.get(1);
+                current=enemyFish.get(3);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;
                 break;
         }
-        current = getRandomStyle(current,numOfAnimations);
+        if(numOfAnimations>1) {
+            current = getRandomStyle(current, numOfAnimations);
+        }
         return current;
     }
 
