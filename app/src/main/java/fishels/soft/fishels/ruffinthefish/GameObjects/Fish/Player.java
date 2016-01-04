@@ -2,20 +2,19 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 import android.graphics.Bitmap;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Player extends Fish {
-    private static final int PLAYER_NUMROWS = 2;
+    private static final int PLAYER_NUMROWS = 3;
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
     private int score;
-    private boolean stunned;
 
     public Player(Bitmap res) {
         super(res, STARTING_PLAYER_LEVEL, PLAYER_NUMROWS, PLAYER_NUMFRAMES);
+        this.updateBitmap();
         this.setX(GamePanel.getWIDTH() / 2);
         this.setY(GamePanel.getHEIGHT() / 2);
         this.setScore(STARTING_PLAYER_SCORE);
@@ -32,14 +31,7 @@ public class Player extends Fish {
         super.setX(xCurrent);
     }
 
-    @Override
-    public void update() {
-        if(this.stunned){
-            getAnimation().update();
-            return;
-        }
-        super.update();
-    }
+
 
     @Override
     public void setY(int yCurrent) {
@@ -52,9 +44,6 @@ public class Player extends Fish {
         super.setY(yCurrent);
     }
 
-    public void setStunned(boolean stunned) {
-        this.stunned = stunned;
-    }
 
     public int getScore() {
         return score;
@@ -63,6 +52,7 @@ public class Player extends Fish {
     public void setScore(int score) {
         if(score>=Math.pow(10, this.getCurrentLevel().getValue())){
             this.levelUp();
+            this.updateBitmap();
             score=0;
         }
         this.score = score;
@@ -74,14 +64,19 @@ public class Player extends Fish {
         }
         if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())) {
             this.setIsEating(true);
-            enemy.setDead(true);
-            this.setScore(this.getScore() + enemy.getCurrentLevel().getValue());
+            if(this.intersects(enemy,40,50)) {
+                enemy.setDead(true);
+                this.setScore(this.getScore() + enemy.getCurrentLevel().getValue());
+                SoundManager.playSound(SoundManager.EAT_SOUND);
+            }
         }
         else {
-            enemy.setIsEating(true);
-            this.setDead(true);
+            if(this.intersects(enemy,40,50)) {
+                enemy.setIsEating(true);
+                this.setDead(true);
+                SoundManager.playSound(SoundManager.EAT_SOUND);
+            }
         }
-        SoundManager.playSound(SoundManager.EAT_SOUND);
     }
 
     private void levelUp(){
@@ -91,6 +86,7 @@ public class Player extends Fish {
         switch (currentLevel){
             case 2:
                 newLevel=Level.TWO;
+
                 break;
 
             case 3:

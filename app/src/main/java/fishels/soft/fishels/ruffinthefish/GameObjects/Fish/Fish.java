@@ -15,11 +15,15 @@ public abstract class Fish extends GameObject {
     //animation
     private int currentAction;
     private boolean isEating;
+    private boolean stunned;
     private Animation animation = new Animation();
+    private Bitmap fishImage;
+    private Bitmap[][] image;
 
     // Animation actions
     private static final int SWIMMING = 0;
     private static final int EATING = 1;
+    private static final int STUNNED = 2;
 
     //stats
     private Level currentLevel;
@@ -30,18 +34,16 @@ public abstract class Fish extends GameObject {
         this.numRows = numRows;
         this.numFrames = numFrames;
         this.setCurrentLevel(level);
-
-        this.height = res.getHeight()/this.numRows;
-        this.width = res.getWidth()/this.numFrames;
+        this.fishImage=res;
+        this.getFrameDimensions(fishImage);
         this.setX(this.getRandomX());
         this.setY(this.getRandomY());
 
         this.setPlaying(true);
         this.setDead(false);
 
-        Bitmap[][] image = this.createBitmap(res);
-
-        this.animation.setFrames(image);
+        this.image = this.createBitmap(res);
+        this.animation.setFrames(this.image);
         this.animation.setDelay(100);
         this.startTime = System.nanoTime();
     }
@@ -70,8 +72,16 @@ public abstract class Fish extends GameObject {
         return this.isEating;
     }
 
+    public boolean isStunned() { return this.stunned; }
+
     public void setIsEating(boolean isEating) {
         this.isEating = isEating;
+    }
+
+
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
+        this.update();
     }
 
     public int getCurrentAction() {
@@ -85,6 +95,15 @@ public abstract class Fish extends GameObject {
     public void update()
     {
         if(this.isDead()){
+            return;
+        }
+
+        if(this.isStunned()){
+            if(this.getCurrentAction() != this.STUNNED) {
+                this.setCurrentAction((this.STUNNED));
+                this.getAnimation().setCurrentAction(this.STUNNED);
+            }
+            this.animation.update();
             return;
         }
         long elapsed = (System.nanoTime()-startTime)/1000000;
@@ -104,6 +123,7 @@ public abstract class Fish extends GameObject {
             }
         }
 
+
         if(this.isEating()){
             if(this.getCurrentAction() != this.EATING){
                 this.setCurrentAction(this.EATING);
@@ -117,6 +137,18 @@ public abstract class Fish extends GameObject {
                 this.getAnimation().setCurrentAction(this.SWIMMING);
             }
         }
+
+    }
+
+    public void updateBitmap(){
+
+        Bitmap resized = Bitmap.createScaledBitmap(fishImage,
+                (int)(fishImage.getWidth()*0.25)*(this.getCurrentLevel().getValue()+1),
+                (int)(fishImage.getHeight()*0.25)*(this.getCurrentLevel().getValue()+1),
+                true);
+        this.getFrameDimensions(resized);
+        this.image = this.createBitmap(resized);
+        this.animation.setFrames(this.image);
     }
 
     public void draw(Canvas canvas)
@@ -130,5 +162,9 @@ public abstract class Fish extends GameObject {
         }
     }
 
+    private void getFrameDimensions(Bitmap frame){
+        this.height = frame.getHeight()/this.numRows;
+        this.width = frame.getWidth()/this.numFrames;
+    }
 
 }

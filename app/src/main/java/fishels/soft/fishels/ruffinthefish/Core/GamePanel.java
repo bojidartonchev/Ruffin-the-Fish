@@ -144,7 +144,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             else {
                 this.event.update();
-                if(this.event.intersects(this.player)){
+                if(this.event.intersects(this.player,40,50)){
                     this.event.executeEvent(this.player);
                 }
             }
@@ -162,7 +162,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             currentEnemy.update();
 
-            if (this.player.intersects(currentEnemy)) {
+            if (this.player.intersects(currentEnemy,120,50)) {
                 this.player.tryEat(currentEnemy);
             }
         }
