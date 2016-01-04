@@ -19,11 +19,12 @@ public abstract class Fish extends GameObject {
     private Animation animation = new Animation();
     private Bitmap fishImage;
     private Bitmap[][] image;
+    private int gold = 0;
 
     // Animation actions
     private static final int SWIMMING = 0;
     private static final int EATING = 1;
-    private static final int STUNNED = 2;
+    private static final int STUNNED = 4;
 
     //stats
     private Level currentLevel;
@@ -78,10 +79,17 @@ public abstract class Fish extends GameObject {
         this.isEating = isEating;
     }
 
-
     public void setStunned(boolean stunned) {
         this.stunned = stunned;
         this.update();
+    }
+
+    public void setGold(boolean gold) {
+        if(gold) {
+            this.gold = 2;
+            return;
+        }
+        this.gold = 0;
     }
 
     public int getCurrentAction() {
@@ -123,25 +131,22 @@ public abstract class Fish extends GameObject {
             }
         }
 
-
         if(this.isEating()){
             if(this.getCurrentAction() != this.EATING){
                 this.setCurrentAction(this.EATING);
-                this.getAnimation().setCurrentAction(this.EATING);
+                this.getAnimation().setCurrentAction(this.EATING+this.gold);
             }
         }
 
         else {
             if(this.getCurrentAction() != this.SWIMMING) {
                 this.setCurrentAction(this.SWIMMING);
-                this.getAnimation().setCurrentAction(this.SWIMMING);
+                this.getAnimation().setCurrentAction(this.SWIMMING+this.gold);
             }
         }
-
     }
 
     public void updateBitmap(){
-
         Bitmap resized = Bitmap.createScaledBitmap(fishImage,
                 (int)(fishImage.getWidth()*0.25)*(this.getCurrentLevel().getValue()+1),
                 (int)(fishImage.getHeight()*0.25)*(this.getCurrentLevel().getValue()+1),
@@ -166,5 +171,4 @@ public abstract class Fish extends GameObject {
         this.height = frame.getHeight()/this.numRows;
         this.width = frame.getWidth()/this.numFrames;
     }
-
 }

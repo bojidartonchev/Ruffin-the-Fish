@@ -3,8 +3,6 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Event;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-import java.util.Random;
-
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Entity.EnemySpeedGenerator;
@@ -39,7 +37,7 @@ public abstract class Event extends GameObject {
         Bitmap[][] image = this.createBitmap(res);
 
         this.animation.setFrames(image);
-        this.animation.setDelay(200);
+        this.animation.setDelay(100);
         this.startTime = System.nanoTime();
     }
 

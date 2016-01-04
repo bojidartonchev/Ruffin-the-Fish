@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Goldfish;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Jellyfish;
 
 public class EventFactory {
@@ -36,15 +37,17 @@ public class EventFactory {
         //load bitmaps
         events = new ArrayList<>();
         events.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.jelly));
+        events.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.goldfish));
     }
 
     private static Event getRandomEvent(){
         Random rand = new Random();
-        int current = rand.nextInt(4);
-        //TODO random event generation
-        return new Jellyfish(events.get(0));
+        int current = rand.nextInt(10000);
+        if(current%2==0){
+            return new Jellyfish(events.get(0));
+        }
+        return new Goldfish(events.get(1));
     }
-
 
     private static boolean getIsReady() {
         long elapsedSpawnTime = (System.nanoTime() - spawnTimer) / 10000000;

@@ -16,14 +16,17 @@ public class Jellyfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
+        if(player.isStunned()){
+            return;
+        }
         player.setStunned(true);
-    Thread thr = new Thread(new Runnable() {
+        Thread thr = new Thread(new Runnable() {
         @Override
         public void run() {
-            SystemClock.sleep(2000);
+            SystemClock.sleep(3000);
             player.setStunned(false);
         }
-    });
+        });
         thr.start();
     }
 

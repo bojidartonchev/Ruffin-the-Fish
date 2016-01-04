@@ -6,7 +6,7 @@ import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Player extends Fish {
-    private static final int PLAYER_NUMROWS = 3;
+    private static final int PLAYER_NUMROWS = 5;
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
@@ -30,8 +30,6 @@ public class Player extends Fish {
         }
         super.setX(xCurrent);
     }
-
-
 
     @Override
     public void setY(int yCurrent) {
@@ -86,7 +84,6 @@ public class Player extends Fish {
         switch (currentLevel){
             case 2:
                 newLevel=Level.TWO;
-
                 break;
 
             case 3:
