@@ -53,7 +53,7 @@ public class EnemyFishFactory {
                 current=enemyFish.get(2);
                 numOfAnimations=1;
                 currentNumRows=2;
-                currentNumFrames=9;
+                currentNumFrames=7;
                 break;
             case FOUR:
                 current=enemyFish.get(3);
