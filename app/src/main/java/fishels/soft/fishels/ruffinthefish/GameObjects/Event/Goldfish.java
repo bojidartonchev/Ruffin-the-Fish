@@ -7,7 +7,7 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class Goldfish extends Event {
     private static final int GOLDFISH_NUMROWS = 1;
-    private static final int GOLDFISH_NUMFRAMES = 8;
+    private static final int GOLDFISH_NUMFRAMES = 6;
 
     public Goldfish(Bitmap res) {
         super(res, GOLDFISH_NUMROWS, GOLDFISH_NUMFRAMES);

@@ -38,8 +38,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Event event;
     private boolean joystickLeft;
 
-    // ... the code being measured ...
-
     public GamePanel(Context context)
     {
         super(context);
@@ -124,7 +122,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 joystick.resetPosition();
                 return true;
             }
-
         }
         return super.onTouchEvent(event);
     }
@@ -133,7 +130,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this.bg.update();
         this.bgFront.update();
-
         this.player.update();
         this.progress.update(this.player.getScore());
 
