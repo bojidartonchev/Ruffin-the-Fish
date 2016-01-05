@@ -18,6 +18,10 @@ public class EventFactory {
     private static long spawnTimer;
     private static long nextSpawnIn;
 
+    //values
+    public static final int JELLYFISH = 0;
+    public static final int GOLDFISH = 1;
+
     public static Event Create() {
         if(getIsReady()) {
             Event currentEvent = getRandomEvent();
@@ -44,9 +48,9 @@ public class EventFactory {
         Random rand = new Random();
         int current = rand.nextInt(10000);
         if(current%2==0){
-            return new Jellyfish(events.get(0));
+            return new Jellyfish(events.get(JELLYFISH));
         }
-        return new Goldfish(events.get(1));
+        return new Goldfish(events.get(GOLDFISH));
     }
 
     private static boolean getIsReady() {

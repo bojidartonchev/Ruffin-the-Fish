@@ -3,20 +3,18 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fishels.ruffinthefish.R;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
-import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Splash extends Activity{
@@ -42,6 +40,7 @@ public class Splash extends Activity{
                 SoundManager.loadSoundManager();
                 SoundManager.loadSounds(base);
                 EventFactory.loadContent(base);
+                Data.loadContent(base);
             }
 
             @Override

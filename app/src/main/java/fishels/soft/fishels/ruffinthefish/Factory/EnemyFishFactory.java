@@ -20,6 +20,12 @@ public class EnemyFishFactory {
     private static int currentNumFrames=0;
     private static ArrayList<Bitmap> enemyFish;
 
+    //values
+    public static final int LEVEL_1 = 0;
+    public static final int LEVEL_2 = 1;
+    public static final int LEVEL_3 = 2;
+    public static final int LEVEL_4 = 3;
+
     public static void LoadImages(Context context){
         enemyFish = new ArrayList<>();
         enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level1_enemy));
@@ -38,25 +44,25 @@ public class EnemyFishFactory {
         int numOfAnimations=0;
         switch (currentLevel){
             case ONE:
-                current=enemyFish.get(0);
+                current=enemyFish.get(LEVEL_1);
                 numOfAnimations=4;
                 currentNumRows = 1;
                 currentNumFrames = 5;
                 break;
             case TWO:
-                current=enemyFish.get(1);
+                current=enemyFish.get(LEVEL_2);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;
                 break;
             case THREE:
-                current=enemyFish.get(2);
+                current=enemyFish.get(LEVEL_3);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=7;
                 break;
             case FOUR:
-                current=enemyFish.get(3);
+                current=enemyFish.get(LEVEL_4);
                 numOfAnimations=1;
                 currentNumRows=2;
                 currentNumFrames=9;

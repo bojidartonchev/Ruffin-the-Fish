@@ -33,11 +33,6 @@ public class Enemy extends Fish {
     }
 
     @Override
-    public int getY() {
-        return super.getY();
-    }
-
-    @Override
     public void setSpeedX(int speedX) {
         speedX=(int)(speedX*(this.getCurrentLevel().getValue()*0.5));
         super.setSpeedX(speedX);

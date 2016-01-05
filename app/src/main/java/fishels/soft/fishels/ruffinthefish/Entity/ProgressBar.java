@@ -26,7 +26,7 @@ public class ProgressBar {
     {
         if(score==0){
             this.scoreToLevelUp = (int) Math.pow(10, this.player.getCurrentLevel().getValue());
-            this.scoreWidth = (double)GamePanel.getWIDTH()/this.scoreToLevelUp;
+            this.scoreWidth = GamePanel.getWIDTH()/this.scoreToLevelUp;
         }
         int width = 1+(int) (score*this.scoreWidth);
         outputBar = Bitmap.createBitmap(barImage, 0, 0,
@@ -37,7 +37,6 @@ public class ProgressBar {
     {
         canvas.drawBitmap(outputBar, 0,0, null);
         canvas.drawBitmap(frame,0,0,null);
-
     }
 }
 

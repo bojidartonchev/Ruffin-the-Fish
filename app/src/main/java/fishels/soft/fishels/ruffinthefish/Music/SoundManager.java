@@ -13,11 +13,11 @@ import com.example.fishels.ruffinthefish.R;
 import java.util.ArrayList;
 
 public class SoundManager {
+    //values
     public static int EAT_SOUND = 0;
+
     private static boolean soundOn;
-
     private static ArrayList<Integer> sounds = new ArrayList<>();
-
     private static SoundPool sp;
 
     public static void loadSounds(Context context){

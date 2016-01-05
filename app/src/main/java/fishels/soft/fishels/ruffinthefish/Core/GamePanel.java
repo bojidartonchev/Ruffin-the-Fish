@@ -82,23 +82,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
-        this.bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+        this.bg = new Background(Data.getImage(Data.BACKGROUND));
         this.bg.setVector(-1);
-        this.bgFront = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.frontground));
+        this.bgFront = new Background(Data.getImage(Data.FRONTGROUND));
         this.bgFront.setVector(-5);
         this.joystickLeft = this.readSettings("left");
-        this.joystick = new Joystick(BitmapFactory.decodeResource(getResources(), R.drawable.inner),
-                BitmapFactory.decodeResource(getResources(), R.drawable.outer),this.joystickLeft);
+        this.joystick = new Joystick(Data.getImage(Data.JOYSTICK_INNER),
+                Data.getImage(Data.JOYSTICK_OUTER),this.joystickLeft);
         this.enemies = new ArrayList<>();
-        this.player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.player));
-        this.progress = new ProgressBar(BitmapFactory.decodeResource(getResources(),R.drawable.frame),
-                BitmapFactory.decodeResource(getResources(), R.drawable.fillbar),this.player);
+        this.player = new Player(Data.getImage(Data.PLAYER));
+        this.progress = new ProgressBar(Data.getImage(Data.PROGRESS_FRAME),
+                Data.getImage(Data.PROGRESS_FILL),this.player);
         this.initFish();
 
         //we can safely start the game loop
         this.thread = new MainThread(getHolder(), this);
         this.thread.setRunning(true);
-        this.thread.setPriority(10);
         this.thread.start();
 
         //this.secThread= new SecondThread(this);
@@ -172,7 +171,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-
     @Override
     public void draw(Canvas canvas)
     {
@@ -201,7 +199,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             }
             canvas.restoreToCount(savedState);
-
         }
     }
 
@@ -210,7 +207,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         while(this.enemies.size() <= 10){
             this.enemies.add(EnemyFishFactory.Create());
         }
-
     }
 
     private void setProportions(Context context) {

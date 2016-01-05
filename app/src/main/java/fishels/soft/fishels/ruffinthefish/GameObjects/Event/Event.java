@@ -41,10 +41,6 @@ public abstract class Event extends GameObject {
         this.startTime = System.nanoTime();
     }
 
-    public Animation getAnimation() {
-        return this.animation;
-    }
-
     public boolean isOnScreen() {
         return this.onScreen;
     }
