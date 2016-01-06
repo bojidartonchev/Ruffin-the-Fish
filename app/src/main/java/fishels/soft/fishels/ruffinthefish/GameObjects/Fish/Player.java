@@ -71,7 +71,6 @@ public class Player extends Fish {
         if(this.getGold()){
             score*=2;
         }
-        System.out.println("SCORE ADDED: "+score);
         this.setScore(this.getScore()+score);
     }
 
