@@ -42,18 +42,8 @@ public class Player extends Fish {
         super.setY(yCurrent);
     }
 
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        if(score>=Math.pow(10, this.getCurrentLevel().getValue())){
-            this.levelUp();
-            this.updateBitmap();
-            score=0;
-        }
-        this.score = score;
     }
 
     public void tryEat(Fish enemy) {
@@ -64,7 +54,7 @@ public class Player extends Fish {
             this.setIsEating(true);
             if(this.intersects(enemy,40,50)) {
                 enemy.setDead(true);
-                this.setScore(this.getScore() + enemy.getCurrentLevel().getValue());
+                this.addScore( enemy.getCurrentLevel().getValue());
                 SoundManager.playSound(SoundManager.EAT_SOUND);
             }
         }
@@ -75,6 +65,23 @@ public class Player extends Fish {
                 SoundManager.playSound(SoundManager.EAT_SOUND);
             }
         }
+    }
+
+    protected void addScore(int score){
+        if(this.getGold()){
+            score*=2;
+        }
+        System.out.println("SCORE ADDED: "+score);
+        this.setScore(this.getScore()+score);
+    }
+
+    private void setScore(int score) {
+        if(score>=Math.pow(10, this.getCurrentLevel().getValue())){
+            this.levelUp();
+            this.updateBitmap();
+            score=0;
+        }
+        this.score = score;
     }
 
     private void levelUp(){
@@ -99,5 +106,4 @@ public class Player extends Fish {
         }
         this.setCurrentLevel(newLevel);
     }
-
 }

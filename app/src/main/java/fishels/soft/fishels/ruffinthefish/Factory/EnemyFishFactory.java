@@ -33,6 +33,7 @@ public class EnemyFishFactory {
         enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level3_enemy));
         enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level4_enemy));
     }
+
     public static Enemy Create() {
         Level currentLevel = getLevel();
         Bitmap currentBitmap = getBitmap(currentLevel);
@@ -95,6 +96,4 @@ public class EnemyFishFactory {
         }
         return Level.ONE;
     }
-
-
 }

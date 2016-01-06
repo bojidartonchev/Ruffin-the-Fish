@@ -2,14 +2,11 @@ package fishels.soft.fishels.ruffinthefish.Core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import com.example.fishels.ruffinthefish.R;
 
 import java.util.ArrayList;
 
@@ -19,6 +16,7 @@ import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Goldfish;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
@@ -141,6 +139,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this.event.update();
                 if(this.event.intersects(this.player,40,50)){
                     this.event.executeEvent(this.player);
+                    if(this.event.getClass()== Goldfish.class){
+                        this.event=null;
+                    }
                 }
             }
         }

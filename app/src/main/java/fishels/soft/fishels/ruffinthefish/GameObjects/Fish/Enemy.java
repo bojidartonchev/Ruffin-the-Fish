@@ -37,7 +37,4 @@ public class Enemy extends Fish {
         speedX=(int)(speedX*(this.getCurrentLevel().getValue()*0.5));
         super.setSpeedX(speedX);
     }
-
-
-
 }

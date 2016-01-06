@@ -92,6 +92,18 @@ public abstract class Fish extends GameObject {
         this.gold = 0;
     }
 
+    public boolean getGold(){
+        return this.gold==2;
+    }
+
+    @Override
+    public void setSpeedX(int speedX) {
+        if(this.getGold()){
+            speedX*=2;
+        }
+        super.setSpeedX(speedX);
+    }
+
     public int getCurrentAction() {
         return this.currentAction;
     }
@@ -114,6 +126,7 @@ public abstract class Fish extends GameObject {
             this.animation.update();
             return;
         }
+
         long elapsed = (System.nanoTime()-startTime)/1000000;
         if(elapsed>100)
         {
