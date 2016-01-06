@@ -214,7 +214,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this.event.draw(canvas);
             }
 
-
             if(!this.gameOver){
                 this.joystick.draw(canvas);
             }
@@ -244,7 +243,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         return current;
     }
 
-    public void setGameOver(boolean gameOver) {
+    private void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
 }

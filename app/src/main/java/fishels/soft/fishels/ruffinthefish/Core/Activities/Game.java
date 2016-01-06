@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Core.Labels.GameOver;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
@@ -52,6 +53,7 @@ public class Game extends Activity {
 
         MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
         SoundManager.setSoundOn(getBaseContext());
+        GameOver.loadGameOverContent();
     }
 
     @Override

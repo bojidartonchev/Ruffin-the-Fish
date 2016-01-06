@@ -32,6 +32,7 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.fillbar));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.player));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.againbtn));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover));
     }
 
     public static Bitmap getImage(int current){

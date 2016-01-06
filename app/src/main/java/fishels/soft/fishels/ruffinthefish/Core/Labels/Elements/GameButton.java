@@ -9,6 +9,8 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+
 public class GameButton {
     public Matrix btn_matrix = new Matrix();
     public RectF btn_rect;
@@ -17,14 +19,16 @@ public class GameButton {
     static Bitmap bg;
     private static Paint paint;
 
-    public GameButton(Bitmap bg)
+    public GameButton(Bitmap bg,int y)
     {
         this.width = bg.getWidth();
         this.height = bg.getHeight();
         this.bg = bg;
 
         btn_rect = new RectF(0, 0, width, height);
-        this.setPosition(500,500);
+        int x = GamePanel.getWIDTH()/2-this.bg.getWidth()/2;
+        y+=this.bg.getHeight()/2;
+        this.setPosition(x,y);
     }
 
     public void setPosition(float x, float y)
@@ -46,7 +50,7 @@ public class GameButton {
                 break;
             }
             case MotionEvent.ACTION_UP:
-                System.out.println("RESTART GAME");
+
 
             case MotionEvent.ACTION_CANCEL: {
                 paint = null;
