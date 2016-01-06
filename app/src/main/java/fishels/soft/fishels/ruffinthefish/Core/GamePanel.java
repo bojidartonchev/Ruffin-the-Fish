@@ -3,6 +3,7 @@ package fishels.soft.fishels.ruffinthefish.Core;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -10,6 +11,7 @@ import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
+import fishels.soft.fishels.ruffinthefish.Core.Labels.GameOver;
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
@@ -35,6 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Joystick joystick;
     private Event event;
     private boolean joystickLeft;
+    private boolean gameOver;
 
     public GamePanel(Context context)
     {
@@ -78,6 +81,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
+        this.gameOver = false;
         this.bg = new Background(Data.getImage(Data.BACKGROUND));
         this.bg.setVector(-1);
         this.bgFront = new Background(Data.getImage(Data.FRONTGROUND));
@@ -106,6 +110,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()&MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
+                if(this.gameOver){
+                    GameOver.onTouch(event);
+                }
                 return true;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -115,6 +122,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 break;
             }
             case MotionEvent.ACTION_UP:{
+                if(this.gameOver){
+                    GameOver.onTouch(event);
+                    break;
+                }
                 this.player.setSpeedX(0);
                 this.player.setSpeedY(0);
                 joystick.resetPosition();
@@ -166,6 +177,18 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         if (this.enemies.size() <= 10) {
             initFish();
         }
+
+        if(this.player.isDead()){
+
+            Thread thr = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(2000);
+                    setGameOver(true);
+                }
+            });
+            thr.start();
+        }
     }
 
     @Override
@@ -191,9 +214,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this.event.draw(canvas);
             }
 
-            this.joystick.draw(canvas);
-            if(this.player.isDead()){
 
+            if(!this.gameOver){
+                this.joystick.draw(canvas);
+            }
+            else {
+                GameOver.draw(canvas);
             }
             canvas.restoreToCount(savedState);
         }
@@ -216,5 +242,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         SharedPreferences prefs = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
         boolean current = prefs.getBoolean(setting, true); //true is the default value
         return current;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 }

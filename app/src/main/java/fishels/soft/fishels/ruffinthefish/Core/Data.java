@@ -19,6 +19,7 @@ public class Data {
     public static final int PROGRESS_FRAME = 4;
     public static final int PROGRESS_FILL = 5;
     public static final int PLAYER = 6;
+    public static final int PLAY_AGAIN_BTN = 7;
 
 
     public static void loadContent(Context context){
@@ -30,6 +31,7 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.frame));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.fillbar));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.player));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.againbtn));
     }
 
     public static Bitmap getImage(int current){

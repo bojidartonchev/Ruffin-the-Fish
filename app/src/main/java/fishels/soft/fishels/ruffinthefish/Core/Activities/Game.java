@@ -15,7 +15,6 @@ import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
-
 public class Game extends Activity {
 
     @Override
