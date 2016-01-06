@@ -161,8 +161,8 @@ public abstract class Fish extends GameObject {
 
     public void updateBitmap(){
         Bitmap resized = Bitmap.createScaledBitmap(fishImage,
-                (int)(fishImage.getWidth()*0.25)*(this.getCurrentLevel().getValue()+1),
-                (int)(fishImage.getHeight()*0.25)*(this.getCurrentLevel().getValue()+1),
+                (int)(fishImage.getWidth()*0.25*(this.getCurrentLevel().getValue()+1)),
+                (int)(fishImage.getHeight()*0.25*(this.getCurrentLevel().getValue()+1)),
                 true);
         this.getFrameDimensions(resized);
         this.image = this.createBitmap(resized);

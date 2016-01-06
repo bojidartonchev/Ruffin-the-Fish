@@ -9,7 +9,7 @@ public class Player extends Fish {
     private static final int PLAYER_NUMROWS = 5;
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
-    private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
+    private static final Level STARTING_PLAYER_LEVEL = Level.THREE;
     private int score;
 
     public Player(Bitmap res) {

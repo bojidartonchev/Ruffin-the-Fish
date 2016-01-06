@@ -60,13 +60,13 @@ public class EnemyFishFactory {
                 current=enemyFish.get(LEVEL_3);
                 numOfAnimations=1;
                 currentNumRows=2;
-                currentNumFrames=7;
+                currentNumFrames=9;
                 break;
             case FOUR:
                 current=enemyFish.get(LEVEL_4);
                 numOfAnimations=1;
                 currentNumRows=2;
-                currentNumFrames=9;
+                currentNumFrames=7;
                 break;
         }
         if(numOfAnimations>1) {
