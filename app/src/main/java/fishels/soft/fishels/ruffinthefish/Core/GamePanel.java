@@ -28,7 +28,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private static int HEIGHT;
 
     private MainThread thread;
-   // private SecondThread secThread;
     private Background bg;
     private Background bgFront;
     private Player player;
@@ -38,6 +37,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Event event;
     private boolean joystickLeft;
     private boolean gameOver;
+    private boolean alreadyEnded;
 
     public GamePanel(Context context)
     {
@@ -67,11 +67,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         boolean retry = true;
         while(retry)
         {
-            try{thread.setRunning(false);
+            try{
+                thread.setRunning(false);
                 thread.join();
-                //secThread.setRunning(false);
-                //secThread.join();
-
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
@@ -81,7 +79,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder){
-        this.gameOver = false;
         this.bg = new Background(Data.getImage(Data.BACKGROUND));
         this.bg.setVector(-1);
         this.bgFront = new Background(Data.getImage(Data.FRONTGROUND));
@@ -90,20 +87,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.joystick = new Joystick(Data.getImage(Data.JOYSTICK_INNER),
                 Data.getImage(Data.JOYSTICK_OUTER),this.joystickLeft);
         this.enemies = new ArrayList<>();
-        this.player = new Player(Data.getImage(Data.PLAYER));
-        this.progress = new ProgressBar(Data.getImage(Data.PROGRESS_FRAME),
-                Data.getImage(Data.PROGRESS_FILL),this.player);
+        this.initPlayerFeatures();
         this.initFish();
 
         //we can safely start the game loop
         this.thread = new MainThread(getHolder(), this);
         this.thread.setRunning(true);
         this.thread.start();
-
-        //this.secThread= new SecondThread(this);
-        //this.secThread.setRunning(true);
-        //this.secThread.start();
-
     }
 
     @Override
@@ -123,8 +113,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             case MotionEvent.ACTION_UP:{
                 if(this.gameOver){
-                    GameOver.onTouch(event);
-                    break;
+                    if(GameOver.onTouch(event)){
+                        this.initPlayerFeatures();
+                    }
                 }
                 this.player.setSpeedX(0);
                 this.player.setSpeedY(0);
@@ -136,7 +127,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void update() {
-
         this.bg.update();
         this.bgFront.update();
         this.player.update();
@@ -178,8 +168,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             initFish();
         }
 
-        if(this.player.isDead()){
-
+        if(this.player.isDead()&&!this.alreadyEnded){
+            this.alreadyEnded=true;
             Thread thr = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -225,10 +215,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void initFish() {
-        //add enemy fish if needed
-        while(this.enemies.size() <= 10){
-            this.enemies.add(EnemyFishFactory.Create());
-        }
+        this.enemies.add(EnemyFishFactory.Create());
     }
 
     private void setProportions(Context context) {
@@ -245,5 +232,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    private void initPlayerFeatures(){
+        this.player = new Player(Data.getImage(Data.PLAYER));
+        this.progress = new ProgressBar(Data.getImage(Data.PROGRESS_FRAME),
+                Data.getImage(Data.PROGRESS_FILL),this.player);
+        this.setGameOver(false);
+        this.alreadyEnded=false;
     }
 }

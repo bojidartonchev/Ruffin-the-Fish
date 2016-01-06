@@ -13,6 +13,7 @@ public class GameOver {
     private static Bitmap gameOverLbl;
     private static int x;
     private static int y;
+    private static boolean pressed = false;
 
     public static void draw(Canvas canvas)
     {
@@ -31,10 +32,10 @@ public class GameOver {
     public static boolean onTouch(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
-        if (playAgainBtn.btn_rect.contains(x, y)||event.getActionMasked()== MotionEvent.ACTION_UP)
+        if (playAgainBtn.btn_rect.contains(x, y)||(event.getActionMasked()== MotionEvent.ACTION_UP&&pressed))
         {
-            playAgainBtn.onTouch(event);
-            return true;
+            pressed = !pressed;
+            return playAgainBtn.onTouch(event);
         }
         return false;
     }

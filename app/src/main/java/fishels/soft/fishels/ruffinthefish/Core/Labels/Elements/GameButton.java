@@ -19,8 +19,7 @@ public class GameButton {
     static Bitmap bg;
     private static Paint paint;
 
-    public GameButton(Bitmap bg,int y)
-    {
+    public GameButton(Bitmap bg,int y){
         this.width = bg.getWidth();
         this.height = bg.getHeight();
         this.bg = bg;
@@ -31,14 +30,12 @@ public class GameButton {
         this.setPosition(x,y);
     }
 
-    public void setPosition(float x, float y)
-    {
+    public void setPosition(float x, float y){
         btn_matrix.setTranslate(x, y);
         btn_matrix.mapRect(btn_rect);
     }
 
-    public void draw(Canvas canvas)
-    {
+    public void draw(Canvas canvas){
         canvas.drawBitmap(bg, btn_matrix, paint);
     }
 
@@ -49,9 +46,9 @@ public class GameButton {
                 paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
                 break;
             }
-            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_UP:{
 
-
+            }
             case MotionEvent.ACTION_CANCEL: {
                 paint = null;
                 break;
