@@ -25,7 +25,7 @@ public class ProgressBar {
     public void update(int score)
     {
         if(score==0){
-            this.scoreToLevelUp = (int) Math.pow(10, this.player.getCurrentLevel().getValue());
+            this.scoreToLevelUp = 10+this.player.getCurrentLevel().getValue()*10;
             this.scoreWidth = GamePanel.getWIDTH()/this.scoreToLevelUp;
         }
         int width = 1+(int) (score*this.scoreWidth);
