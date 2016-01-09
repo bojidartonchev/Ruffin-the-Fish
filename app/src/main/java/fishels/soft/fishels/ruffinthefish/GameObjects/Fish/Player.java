@@ -60,10 +60,12 @@ public class Player extends Fish {
             }
         }
         else {
-            if(this.intersects(enemy,40,50)) {
+            if(this.intersects(enemy,150,70)) {
                 enemy.setIsEating(true);
-                this.setDead(true);
-                SoundManager.playSound(SoundManager.EAT_SOUND);
+                if(this.intersects(enemy,40,50)) {
+                    this.setDead(true);
+                    SoundManager.playSound(SoundManager.EAT_SOUND);
+                }
             }
         }
     }
@@ -101,7 +103,6 @@ public class Player extends Fish {
                 break;
             default:
                 ShardsContainer.add(1);
-                ShardsContainer.save();
                 newLevel=Level.ONE;
                 break;
         }

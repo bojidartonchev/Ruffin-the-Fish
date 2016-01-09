@@ -27,10 +27,12 @@ public class ShardsContainer {
     }
     public static void add(int count){
         shards+=count;
+        save();
     }
 
     public static void remove(int count){
         shards-=count;
+        save();
     }
 
 
