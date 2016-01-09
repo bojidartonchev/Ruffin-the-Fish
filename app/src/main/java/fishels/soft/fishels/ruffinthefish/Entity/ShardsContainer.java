@@ -35,6 +35,10 @@ public class ShardsContainer {
         save();
     }
 
+    public static int getShards(){
+        return shards;
+    }
+
 
 
 }
