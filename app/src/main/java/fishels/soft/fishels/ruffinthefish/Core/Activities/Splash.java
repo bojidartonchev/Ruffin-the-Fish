@@ -14,6 +14,7 @@ import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
@@ -43,6 +44,7 @@ public class Splash extends Activity{
                 EventFactory.loadContent(base);
                 Data.loadContent(base);
                 ShardsContainer.load(base);
+                Vibration.loadVibrator(base);
             }
 
             @Override

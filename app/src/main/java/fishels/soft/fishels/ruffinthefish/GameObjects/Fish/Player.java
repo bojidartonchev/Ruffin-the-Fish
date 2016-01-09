@@ -3,6 +3,7 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 import android.graphics.Bitmap;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
@@ -64,6 +65,7 @@ public class Player extends Fish {
                 enemy.setIsEating(true);
                 if(this.intersects(enemy,40,50)) {
                     this.setDead(true);
+                    Vibration.vibrate(200);
                     SoundManager.playSound(SoundManager.EAT_SOUND);
                 }
             }
