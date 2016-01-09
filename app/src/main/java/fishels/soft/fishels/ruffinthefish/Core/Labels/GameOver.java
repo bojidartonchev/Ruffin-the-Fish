@@ -24,7 +24,7 @@ public class GameOver {
     public static void loadGameOverContent(){
         gameOverLbl = Data.getImage(8);
         x = GamePanel.getWIDTH()/2-gameOverLbl.getWidth()/2;
-        y = gameOverLbl.getHeight()/4;
+        y = GamePanel.getHEIGHT()/2-gameOverLbl.getHeight();
         int btnY = y+gameOverLbl.getHeight();
         playAgainBtn = new GameButton(Data.getImage(Data.PLAY_AGAIN_BTN),btnY);
     }

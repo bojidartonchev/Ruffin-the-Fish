@@ -25,7 +25,7 @@ public class GameButton {
         this.bg = bg;
 
         btn_rect = new RectF(0, 0, width, height);
-        int x = GamePanel.getWIDTH()/2-this.bg.getWidth()/2;
+        int x = GamePanel.getWIDTH()/3-this.bg.getWidth()/2;
         y+=this.bg.getHeight()/2;
         this.setPosition(x,y);
     }
