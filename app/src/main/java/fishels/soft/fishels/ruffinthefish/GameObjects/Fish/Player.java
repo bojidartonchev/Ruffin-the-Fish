@@ -1,10 +1,8 @@
 package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import fishels.soft.fishels.ruffinthefish.Core.Activities.Game;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
@@ -14,7 +12,6 @@ public class Player extends Fish {
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
     private int score;
-    private int shards;
 
     public Player(Bitmap res) {
         super(res, STARTING_PLAYER_LEVEL, PLAYER_NUMROWS, PLAYER_NUMFRAMES);
@@ -22,7 +19,6 @@ public class Player extends Fish {
         this.setX(GamePanel.getWIDTH() / 2);
         this.setY(GamePanel.getHEIGHT() / 2);
         this.setScore(STARTING_PLAYER_SCORE);
-        this.loadShards();
     }
 
     @Override
@@ -76,7 +72,7 @@ public class Player extends Fish {
         if(this.getGold()){
             score*=2;
         }
-        this.setScore(this.getScore()+score);
+        this.setScore(this.getScore() + score);
     }
 
     private void setScore(int score) {
@@ -87,24 +83,6 @@ public class Player extends Fish {
         }
         this.score = score;
     }
-
-    private void saveShards(){;
-        SharedPreferences settings = Game.main.getApplicationContext().getSharedPreferences("shards", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("shards", this.getShards());
-        editor.apply();
-    }
-
-    private void loadShards() {
-        this.setShards(0);
-        try {
-            SharedPreferences sharedPref = Game.main.getSharedPreferences("shards", 0);
-            this.setShards(sharedPref.getInt("shards", 0));
-        } catch (NullPointerException ex){
-            this.setShards(0);
-        }
-    }
-
     private void levelUp(){
         int currentLevel = this.getCurrentLevel().getValue();
         currentLevel+=1;
@@ -122,20 +100,11 @@ public class Player extends Fish {
                 newLevel=Level.FOUR;
                 break;
             default:
-                this.setShards(this.getShards()+1);
-                this.saveShards();
+                ShardsContainer.add(1);
+                ShardsContainer.save();
                 newLevel=Level.ONE;
                 break;
         }
-        System.out.println(this.getShards());
         this.setCurrentLevel(newLevel);
-    }
-
-    private void setShards(int count){
-        this.shards = count;
-    }
-
-    private int getShards(){
-        return shards;
     }
 }
