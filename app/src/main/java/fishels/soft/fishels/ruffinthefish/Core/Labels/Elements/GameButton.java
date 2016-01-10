@@ -12,20 +12,20 @@ import android.view.MotionEvent;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 
 public class GameButton {
-    public Matrix btn_matrix = new Matrix();
+    public Matrix btn_matrix;
     public RectF btn_rect;
-    float width;
+    public float width;
     float height;
-    static Bitmap bg;
-    private static Paint paint;
+    private Bitmap bg;
+    private Paint paint;
 
-    public GameButton(Bitmap bg,int y){
+    public GameButton(Bitmap bg,int x,int y){
+        this.btn_matrix = new Matrix();
         this.width = bg.getWidth();
         this.height = bg.getHeight();
         this.bg = bg;
 
-        btn_rect = new RectF(0, 0, width, height);
-        int x = GamePanel.getWIDTH()/3-this.bg.getWidth()/2;
+        this.btn_rect = new RectF(0, 0, width, height);
         y+=this.bg.getHeight()/2;
         this.setPosition(x,y);
     }
@@ -39,10 +39,10 @@ public class GameButton {
         canvas.drawBitmap(bg, btn_matrix, paint);
     }
 
-    public static boolean onTouch(MotionEvent event) {
+    public boolean onTouch(MotionEvent event) {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN: {
-                paint = new Paint();
+                this.paint = new Paint();
                 paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
                 break;
             }
@@ -50,7 +50,7 @@ public class GameButton {
 
             }
             case MotionEvent.ACTION_CANCEL: {
-                paint = null;
+                this.paint = null;
                 break;
             }
         }

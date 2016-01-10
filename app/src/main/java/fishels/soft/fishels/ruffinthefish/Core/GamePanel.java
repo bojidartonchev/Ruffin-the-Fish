@@ -15,6 +15,7 @@ import fishels.soft.fishels.ruffinthefish.Core.Labels.GameOver;
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
+import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
@@ -113,8 +114,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             case MotionEvent.ACTION_UP:{
                 if(this.gameOver){
-                    if(GameOver.onTouch(event)){
+                    if(GameOver.onTouch(event)==1){
                         this.initPlayerFeatures();
+                    }
+                    else if(GameOver.onTouch(event)==2&&ShardsContainer.getShards()>=3){
+                        ShardsContainer.remove(3);
+                        this.setGameOver(false);
+                        this.player.setDead(false);
+                        this.alreadyEnded = false;
                     }
                 }
                 this.player.setSpeedX(0);

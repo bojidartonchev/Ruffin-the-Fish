@@ -10,33 +10,44 @@ import fishels.soft.fishels.ruffinthefish.Core.Labels.Elements.GameButton;
 
 public class GameOver {
     private static GameButton playAgainBtn;
+    private static GameButton continueBtn;
     private static Bitmap gameOverLbl;
     private static int x;
     private static int y;
-    private static boolean pressed = false;
+    private static boolean againPressed = false;
+    private static boolean continuePressed = false;
 
     public static void draw(Canvas canvas)
     {
         canvas.drawBitmap(gameOverLbl,x,y,null);
         playAgainBtn.draw(canvas);
+        continueBtn.draw(canvas);
     }
 
     public static void loadGameOverContent(){
-        gameOverLbl = Data.getImage(8);
+        gameOverLbl = Data.getImage(Data.GAMEOVER_LABEL);
         x = GamePanel.getWIDTH()/2-gameOverLbl.getWidth()/2;
         y = GamePanel.getHEIGHT()/2-gameOverLbl.getHeight();
         int btnY = y+gameOverLbl.getHeight();
-        playAgainBtn = new GameButton(Data.getImage(Data.PLAY_AGAIN_BTN),btnY);
+        playAgainBtn = new GameButton(Data.getImage(Data.PLAY_AGAIN_BTN),x,btnY);
+        int btnX= (int) (x+playAgainBtn.width);
+        continueBtn = new GameButton(Data.getImage(Data.CONTINUE_BTN),btnX,btnY);
     }
 
-    public static boolean onTouch(MotionEvent event) {
+    public static int onTouch(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
-        if (playAgainBtn.btn_rect.contains(x, y)||(event.getActionMasked()== MotionEvent.ACTION_UP&&pressed))
+        if (playAgainBtn.btn_rect.contains(x, y)||(event.getActionMasked()== MotionEvent.ACTION_UP&&againPressed))
         {
-            pressed = !pressed;
-            return playAgainBtn.onTouch(event);
+            againPressed = !againPressed;
+            playAgainBtn.onTouch(event);
+            return 1;
         }
-        return false;
+        else if(continueBtn.btn_rect.contains(x, y)||(event.getActionMasked()== MotionEvent.ACTION_UP&&continuePressed)){
+            continuePressed = !continuePressed;
+            continueBtn.onTouch(event);
+            return 2;
+        }
+        return 0;
     }
 }

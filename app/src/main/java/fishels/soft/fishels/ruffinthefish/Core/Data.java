@@ -20,6 +20,9 @@ public class Data {
     public static final int PROGRESS_FILL = 5;
     public static final int PLAYER = 6;
     public static final int PLAY_AGAIN_BTN = 7;
+    public static final int CONTINUE_BTN = 8;
+    public static final int GAMEOVER_LABEL = 9;
+
 
 
     public static void loadContent(Context context){
@@ -32,6 +35,7 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.fillbar));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.player));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.againbtn));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.continuebtn));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover));
     }
 
