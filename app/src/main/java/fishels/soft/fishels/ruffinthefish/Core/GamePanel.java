@@ -22,6 +22,7 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Goldfish;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {

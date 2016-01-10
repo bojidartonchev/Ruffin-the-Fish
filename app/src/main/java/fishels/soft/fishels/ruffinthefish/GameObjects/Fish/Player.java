@@ -88,6 +88,7 @@ public class Player extends Fish {
         this.score = score;
     }
     private void levelUp(){
+        SoundManager.playSound(SoundManager.LEVELUP);
         int currentLevel = this.getCurrentLevel().getValue();
         currentLevel+=1;
         Level newLevel;

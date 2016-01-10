@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.SystemClock;
 
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Goldfish extends Event {
     private static final int GOLDFISH_NUMROWS = 1;
@@ -15,6 +16,7 @@ public class Goldfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
+        SoundManager.playSound(SoundManager.EAT_GOLD);
         player.setGold(true);
         player.setCurrentAction(-1);
         Thread thr = new Thread(new Runnable() {
