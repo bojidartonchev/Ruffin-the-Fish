@@ -43,6 +43,7 @@ public class Menu extends Activity {
         setContentView(R.layout.activity_menu);
         this.continuePlaying = false;
         MusicManager.start(getApplicationContext(),MusicManager.MUSIC_MENU);
+        ShardsContainer.load(getBaseContext());
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);

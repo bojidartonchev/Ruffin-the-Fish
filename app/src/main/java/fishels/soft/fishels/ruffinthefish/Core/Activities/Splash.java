@@ -44,7 +44,6 @@ public class Splash extends Activity{
                 SoundManager.loadSounds(base);
                 EventFactory.loadContent(base);
                 Data.loadContent(base);
-                ShardsContainer.load(base);
                 Vibration.loadVibrator(base);
                 GamePanel.setProportions(base);
             }
