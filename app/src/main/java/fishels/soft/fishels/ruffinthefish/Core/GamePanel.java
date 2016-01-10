@@ -182,6 +182,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 public void run() {
                     SystemClock.sleep(2000);
                     setGameOver(true);
+                    SoundManager.playSound(SoundManager.GAME_OVER);
                 }
             });
             thr.start();

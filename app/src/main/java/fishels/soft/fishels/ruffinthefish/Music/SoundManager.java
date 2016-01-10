@@ -17,6 +17,7 @@ public class SoundManager {
     public static int EAT_SOUND = 0;
     public static int EAT_GOLD = 1;
     public static int LEVELUP = 2;
+    public static int GAME_OVER = 3;
 
     private static boolean soundOn;
     private static ArrayList<Integer> sounds = new ArrayList<>();
@@ -26,6 +27,7 @@ public class SoundManager {
         sounds.add(sp.load(context, R.raw.eat, 1));
         sounds.add(sp.load(context, R.raw.eatgold, 1));
         sounds.add(sp.load(context, R.raw.levelup, 1));
+        sounds.add(sp.load(context, R.raw.gameover, 1));
     }
 
     public static void playSound(int sound){
