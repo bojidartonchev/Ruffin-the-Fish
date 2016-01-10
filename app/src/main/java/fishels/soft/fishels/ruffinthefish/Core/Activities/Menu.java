@@ -132,7 +132,7 @@ public class Menu extends Activity {
         super.onResume();
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
-
+        ShardsContainer.load(getBaseContext());
     }
 
     @Override
