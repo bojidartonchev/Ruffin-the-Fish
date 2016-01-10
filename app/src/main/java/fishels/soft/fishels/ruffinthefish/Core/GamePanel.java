@@ -43,7 +43,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public GamePanel(Context context)
     {
         super(context);
-        setProportions(context);
 
         //add the callback to the surfaceholder to intercept events
         getHolder().addCallback(this);
@@ -225,10 +224,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.enemies.add(EnemyFishFactory.Create());
     }
 
-    private void setProportions(Context context) {
+    public static void setProportions(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        this.WIDTH = metrics.widthPixels;
-        this.HEIGHT = metrics.heightPixels;
+        WIDTH = metrics.widthPixels;
+        HEIGHT = metrics.heightPixels;
     }
 
     private boolean readSettings(String setting) {

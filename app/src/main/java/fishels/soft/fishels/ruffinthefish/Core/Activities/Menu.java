@@ -1,10 +1,7 @@
 package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -22,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.fishels.ruffinthefish.R;
 
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
@@ -53,8 +51,8 @@ public class Menu extends Activity {
         this.shardIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
 
         this.shardText = (TextView) findViewById(R.id.shardText);
-        this.shardText.setText(": " + ShardsContainer.getShards()+95);
-        this.shardText.setTextSize(30);
+        this.shardText.setText(": " + ShardsContainer.getShards());
+        this.shardText.setTextSize(GamePanel.getHEIGHT()/36);
         Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/SeaTurtle.ttf");
         this.shardText.setTypeface(typeFace);
 

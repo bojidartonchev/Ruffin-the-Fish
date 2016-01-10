@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
@@ -45,6 +46,7 @@ public class Splash extends Activity{
                 Data.loadContent(base);
                 ShardsContainer.load(base);
                 Vibration.loadVibrator(base);
+                GamePanel.setProportions(base);
             }
 
             @Override
