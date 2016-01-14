@@ -31,6 +31,8 @@ import android.widget.RadioGroup;
 import android.widget.ToggleButton;
 
 import com.example.fishels.ruffinthefish.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
@@ -40,6 +42,8 @@ public class Settings extends Activity {
     RadioGroup rg;
     ToggleButton musciTbtn;
     ToggleButton soundTbtn;
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,14 @@ public class Settings extends Activity {
         //set to full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_settings);
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
 
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);
         this.musciTbtn = (ToggleButton) findViewById(R.id.music_tbtn);
@@ -101,5 +113,30 @@ public class Settings extends Activity {
         SharedPreferences prefs = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
         boolean current = prefs.getBoolean(setting, true); //true is the default value
         return current;
+    }
+
+    @Override
+    protected void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 }
