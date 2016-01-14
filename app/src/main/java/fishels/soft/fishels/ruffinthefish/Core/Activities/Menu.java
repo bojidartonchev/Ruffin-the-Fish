@@ -37,6 +37,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.fishels.ruffinthefish.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
@@ -49,6 +51,7 @@ public class Menu extends Activity {
     Button settingsBtn;
     ImageView shardIcon;
     TextView shardText;
+    private AdView mAdView;
 
     private boolean continuePlaying;
 
@@ -82,6 +85,17 @@ public class Menu extends Activity {
         this.settingsBtn.setBackground(setbg);
         Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel);
         this.startBtn.setBackground(playbg);
+
+        mAdView = (AdView) findViewById(R.id.ad_view);
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
 
 
         this.startBtn.setOnTouchListener(new View.OnTouchListener() {
@@ -139,10 +153,13 @@ public class Menu extends Activity {
 
     @Override
     protected void onPause() {
-        super.onPause();
         if(!continuePlaying) {
             MusicManager.pause();
         }
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
 
     }
 
@@ -152,12 +169,18 @@ public class Menu extends Activity {
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
         ShardsContainer.load(getBaseContext());
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         SoundManager.release();
         MusicManager.release();
+        super.onDestroy();
     }
 }

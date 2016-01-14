@@ -33,13 +33,13 @@ import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Splash extends Activity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -79,5 +79,6 @@ public class Splash extends Activity{
 
             }
         });
+
     }
 }
