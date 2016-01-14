@@ -67,6 +67,14 @@ public class Menu extends Activity {
         MusicManager.start(getApplicationContext(),MusicManager.MUSIC_MENU);
         ShardsContainer.load(getBaseContext());
 
+        mAdView = (AdView) findViewById(R.id.ad_view);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
         this.layout = (RelativeLayout) findViewById(R.id.layout);
@@ -75,8 +83,8 @@ public class Menu extends Activity {
 
         this.shardText = (TextView) findViewById(R.id.shardText);
         this.shardText.setText(": " + ShardsContainer.getShards());
-        this.shardText.setTextSize(GamePanel.getHEIGHT()/36);
-        Typeface typeFace=Typeface.createFromAsset(getAssets(),"fonts/SeaTurtle.ttf");
+        this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
+        Typeface typeFace=Typeface.createFromAsset(getAssets(), "fonts/SeaTurtle.ttf");
         this.shardText.setTypeface(typeFace);
 
         Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground);
@@ -85,18 +93,6 @@ public class Menu extends Activity {
         this.settingsBtn.setBackground(setbg);
         Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel);
         this.startBtn.setBackground(playbg);
-
-        mAdView = (AdView) findViewById(R.id.ad_view);
-        // Create an ad request. Check your logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-
-        // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);
-
 
         this.startBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -148,7 +144,6 @@ public class Menu extends Activity {
                 return true;
             }
         });
-
     }
 
     @Override
