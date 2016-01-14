@@ -68,6 +68,16 @@
                 <category android:name="android.intent.category.LAUNCHERS" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="fishels.soft.fishels.ruffinthefish.Core.Activities.Shop"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHERS" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
