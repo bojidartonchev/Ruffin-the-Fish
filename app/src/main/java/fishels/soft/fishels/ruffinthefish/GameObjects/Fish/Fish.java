@@ -24,7 +24,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
-import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.GameObjects.GameObject;
 
