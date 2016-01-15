@@ -32,7 +32,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,7 +48,7 @@ public class Menu extends Activity {
     RelativeLayout layout;
     ImageButton startBtn;
     Button settingsBtn;
-    ImageView shardIcon;
+    ImageButton shardBtn;
     TextView shardText;
     private AdView mAdView;
 
@@ -78,8 +77,8 @@ public class Menu extends Activity {
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
         this.layout = (RelativeLayout) findViewById(R.id.layout);
-        this.shardIcon =(ImageView)findViewById(R.id.shardIcon);
-        this.shardIcon.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
+        this.shardBtn =(ImageButton)findViewById(R.id.shardIcon);
+        this.shardBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
 
         this.shardText = (TextView) findViewById(R.id.shardText);
         this.shardText.setText(": " + ShardsContainer.getShards());
@@ -144,6 +143,31 @@ public class Menu extends Activity {
                 return true;
             }
         });
+
+        this.shardBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                        Intent i = new Intent(getBaseContext(), Shop.class);
+                        startActivity(i);
+
+                    case MotionEvent.ACTION_CANCEL: {
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -163,7 +187,7 @@ public class Menu extends Activity {
         super.onResume();
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
-        ShardsContainer.load(getBaseContext());
+        this.shardText.setText(": " + ShardsContainer.getShards());
         if (mAdView != null) {
             mAdView.resume();
         }
