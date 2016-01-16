@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.fishels.ruffinthefish.R;
@@ -37,11 +36,40 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Frenzy;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Shield;
 
 public class Shop extends Activity {
-    private ImageView shieldImg;
+
     private ImageButton watchAdd;
+    private ImageButton shieldBtn;
+    private ImageButton frenzyBtn;
+    private ImageButton thirdBtn;
+    private ImageButton buyBtn;
     private InterstitialAd mInterstitialAd;
+
+    private PowerUp selected;
+
+    public void setSelected(int selected) {
+        if(selected!=-1){
+            this.buyBtn.setVisibility(View.VISIBLE);
+
+            switch (selected){
+                case 0:
+                    this.selected = new Shield();
+                    break;
+                case 1:
+                    this.selected = new Frenzy();
+                    break;
+                case 2:
+                    this.selected = new Shield();
+                    break;
+            }
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +80,96 @@ public class Shop extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_shop);
 
-        this.shieldImg = (ImageView) findViewById(R.id.shield_img);
-        this.shieldImg.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
+        this.shieldBtn = (ImageButton) findViewById(R.id.shield_img);
+        this.shieldBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
+        this.shieldBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        clearMarkEffect();
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        setSelected(0);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
+        this.frenzyBtn = (ImageButton) findViewById(R.id.frenzy_img);
+        this.frenzyBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.teeth));
+        this.frenzyBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        clearMarkEffect();
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        setSelected(1);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
+        this.thirdBtn = (ImageButton) findViewById(R.id.third_btn);
+        this.thirdBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.boots));
+        this.thirdBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        clearMarkEffect();
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        setSelected(2);
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
+
+        this.buyBtn = (ImageButton) findViewById(R.id.buy_btn);
+        this.buyBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP:
+                        if(ShardsContainer.getShards()<selected.getCost()){
+                            Toast.makeText(getBaseContext(), "Not enough shards", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                        else if(Player.getPowerUp()!=null){
+                            Toast.makeText(getBaseContext(), "You already have a power up", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+                        Player.setPowerUp(selected);
+                        Toast.makeText(getBaseContext(), selected.getClass().getSimpleName()+" is successfully added", Toast.LENGTH_LONG).show();
+
+                    case MotionEvent.ACTION_CANCEL: {
+                        ImageButton view = (ImageButton) v;
+                        view.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                    }
+                }
+                return true;
+            }
+        });
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
@@ -109,5 +225,16 @@ public class Shop extends Activity {
             Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
             requestNewInterstitial();
         }
+    }
+
+    private void clearMarkEffect(){
+        this.shieldBtn.getBackground().clearColorFilter();
+        this.shieldBtn.invalidate();
+
+        this.frenzyBtn.getBackground().clearColorFilter();
+        this.frenzyBtn.invalidate();
+
+        this.thirdBtn.getBackground().clearColorFilter();
+        this.thirdBtn.invalidate();
     }
 }

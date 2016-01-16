@@ -45,11 +45,11 @@ import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Menu extends Activity {
-    RelativeLayout layout;
-    ImageButton startBtn;
-    Button settingsBtn;
-    ImageButton shardBtn;
-    TextView shardText;
+    private RelativeLayout layout;
+    private ImageButton startBtn;
+    private Button settingsBtn;
+    private ImageButton shardBtn;
+    private TextView shardText;
     private AdView mAdView;
 
     private boolean continuePlaying;

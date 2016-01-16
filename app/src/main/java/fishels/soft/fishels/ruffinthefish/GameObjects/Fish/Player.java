@@ -20,10 +20,12 @@
 package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 import android.graphics.Bitmap;
+
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Player extends Fish {
@@ -31,6 +33,7 @@ public class Player extends Fish {
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
+    private static PowerUp powerUp;
     private int score;
 
     public Player(Bitmap res) {
@@ -91,6 +94,14 @@ public class Player extends Fish {
         }
     }
 
+    public static void setPowerUp(PowerUp currentUp){
+        powerUp = currentUp;
+    }
+
+    public static PowerUp getPowerUp(){
+       return powerUp;
+    }
+
     protected void addScore(int score){
         if(this.getGold()){
             score*=2;
@@ -106,6 +117,7 @@ public class Player extends Fish {
         }
         this.score = score;
     }
+
     private void levelUp(){
         SoundManager.playSound(SoundManager.LEVELUP);
         int currentLevel = this.getCurrentLevel().getValue();
