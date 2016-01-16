@@ -1,5 +1,6 @@
 /*
  * Copyright © 2015 Ruffin the Fish
+<<<<<<< Updated upstream
  *
  * This file is part of "Ruffin the Fish".
  *
@@ -15,6 +16,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with "Ruffin the Fish".  If not, see <http://www.gnu.org/licenses/>.
+=======
+>>>>>>> Stashed changes
  */
 
 package fishels.soft.fishels.ruffinthefish.Core;
@@ -81,6 +84,7 @@ public class MainThread extends Thread implements Runnable
             frameCount++;
             if(frameCount == FPS)
             {
+                this.gamePanel.initBubbles();
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount = 0;
                 totalTime = 0;

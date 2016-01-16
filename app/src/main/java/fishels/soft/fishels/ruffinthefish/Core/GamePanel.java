@@ -1,5 +1,6 @@
 /*
  * Copyright © 2015 Ruffin the Fish
+<<<<<<< Updated upstream
  *
  * This file is part of "Ruffin the Fish".
  *
@@ -15,6 +16,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with "Ruffin the Fish".  If not, see <http://www.gnu.org/licenses/>.
+=======
+>>>>>>> Stashed changes
  */
 
 package fishels.soft.fishels.ruffinthefish.Core;
@@ -32,9 +35,11 @@ import java.util.ArrayList;
 
 import fishels.soft.fishels.ruffinthefish.Core.Labels.GameOver;
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
+import fishels.soft.fishels.ruffinthefish.Entity.Bubble;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Factory.BubbleFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
@@ -54,6 +59,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private Player player;
     private ProgressBar progress;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Bubble> bubbles;
     private Joystick joystick;
     private Event event;
     private boolean joystickLeft;
@@ -107,6 +113,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.joystick = new Joystick(Data.getImage(Data.JOYSTICK_INNER),
                 Data.getImage(Data.JOYSTICK_OUTER),this.joystickLeft);
         this.enemies = new ArrayList<>();
+        this.bubbles = new ArrayList<>();
         this.initPlayerFeatures();
         this.initFish();
 
@@ -176,6 +183,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             this.event=EventFactory.Create();
         }
 
+        for (int i = 0; i < this.bubbles.size(); i++) {
+            Bubble currentBubble = this.bubbles.get(i);
+            if(currentBubble.isOutsideScreen()){
+                this.bubbles.remove(i);
+            }
+            currentBubble.update();
+        }
         for (int i = 0; i < this.enemies.size(); i++) {
             Enemy currentEnemy = this.enemies.get(i);
             if (currentEnemy.isDead()) {
@@ -220,6 +234,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             this.bgFront.draw(canvas);
             this.progress.draw(canvas);
 
+            //draw bubbles
+            for(Bubble b: this.bubbles){
+                b.draw(canvas);
+            }
             //draw enemies
             for(Enemy e: this.enemies)
             {
@@ -243,6 +261,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public void initFish() {
         this.enemies.add(EnemyFishFactory.Create());
+    }
+
+    public void initBubbles() {
+        this.bubbles.add(BubbleFactory.Create());
     }
 
     public static void setProportions(Context context) {
