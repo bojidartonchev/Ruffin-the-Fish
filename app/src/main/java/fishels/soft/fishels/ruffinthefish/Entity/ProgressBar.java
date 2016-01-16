@@ -20,8 +20,18 @@
 package fishels.soft.fishels.ruffinthefish.Entity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
+import android.graphics.Matrix;
 
+import com.example.fishels.ruffinthefish.R;
+
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
@@ -30,15 +40,18 @@ public class ProgressBar {
     private Bitmap frame;
     private Bitmap barImage;
     private Bitmap outputBar;
+    private Bitmap pattern;
     private double scoreWidth;
     private Player player;
     private int scoreToLevelUp;
+
 
     public ProgressBar(Bitmap frame, Bitmap bar,Player player)
     {
         this.frame = Bitmap.createScaledBitmap(frame, GamePanel.getWIDTH(),frame.getHeight(),true);
         this.barImage= bar;
         this.player=player;
+        this.pattern= Data.getImage(Data.PATTERN);
     }
 
     public void update(int score)
@@ -52,10 +65,45 @@ public class ProgressBar {
                 width, barImage.getHeight());
     }
 
+    private Paint applyFilter(){
+
+        Paint pnt = new Paint();
+        pnt.setTextSize(70);
+        int[] rainbow = getRainbowColors();
+        /*Shader shader = new LinearGradient(0, 0, 400, 500, rainbow,
+                null, Shader.TileMode.MIRROR);
+        Matrix matrix = new Matrix();
+        matrix.setRotate(90);
+        shader.setLocalMatrix(matrix);
+        pnt.setShader(shader);
+        */
+        Shader shader = new BitmapShader(barImage,
+                Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        pnt.setShader(shader);
+
+
+        float radius = pnt.getTextSize() / 10;
+        BlurMaskFilter filter = new BlurMaskFilter(radius,  BlurMaskFilter.Blur.SOLID);
+        pnt.setMaskFilter(filter);
+        return pnt;
+    }
+
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(outputBar, 0,0, null);
-        canvas.drawBitmap(frame,0,0,null);
+        canvas.drawBitmap(outputBar, 0, 0, null);
+        canvas.drawBitmap(frame, 0, 0, null);
+        canvas.drawText("TESTTEXT", 500, 500, this.applyFilter());
+    }
+
+    private int[] getRainbowColors() {
+        return new int[] {
+                Color.RED,
+                Color.BLUE,
+                Color.GREEN,
+                Color.CYAN,
+                Color.YELLOW
+        };
     }
 }
+
 

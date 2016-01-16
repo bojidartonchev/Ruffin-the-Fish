@@ -42,6 +42,7 @@ public class Data {
     public static final int CONTINUE_BTN = 8;
     public static final int GAMEOVER_LABEL = 9;
     public static final int BUBBLE = 10;
+    public static final int PATTERN = 11;
 
 
 
@@ -58,6 +59,7 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.continuebtn));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.bubble));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.pattern));
     }
 
     public static Bitmap getImage(int current){
