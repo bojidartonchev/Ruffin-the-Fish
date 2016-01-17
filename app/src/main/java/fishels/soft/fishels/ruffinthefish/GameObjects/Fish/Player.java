@@ -89,7 +89,7 @@ public class Player extends Fish {
                 enemy.setDead(true);
                 int currentEnemyLevel = enemy.getCurrentLevel().getValue();
                 this.addScore(currentEnemyLevel);
-                ScoreContainer.addGlobalScore(currentEnemyLevel*100);
+                ScoreContainer.addGlobalScore(currentEnemyLevel*103);
                 SoundManager.playSound(SoundManager.EAT_SOUND);
             }
         }
@@ -124,6 +124,7 @@ public class Player extends Fish {
         if(score>=10+this.getCurrentLevel().getValue()*10){
             this.levelUp();
             this.updateBitmap();
+            this.setCurrentAction(-1);
             score=0;
         }
         this.score = score;

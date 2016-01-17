@@ -36,8 +36,9 @@ public class Goldfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
+        player.setIsEating(true);
         SoundManager.playSound(SoundManager.EAT_GOLD);
-        ScoreContainer.addGlobalScore(500);
+        ScoreContainer.addGlobalScore(517);
         player.setGold(true);
         player.setCurrentAction(-1);
         Thread thr = new Thread(new Runnable() {

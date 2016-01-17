@@ -38,7 +38,7 @@ public class Jellyfish extends Event {
         if(player.isStunned()){
             return;
         }
-        ScoreContainer.addGlobalScore(-500);
+        ScoreContainer.addGlobalScore(-528);
         player.setStunned(true);
         Thread thr = new Thread(new Runnable() {
         @Override

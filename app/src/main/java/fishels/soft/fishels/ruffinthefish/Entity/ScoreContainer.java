@@ -19,22 +19,22 @@
 
 package fishels.soft.fishels.ruffinthefish.Entity;
 
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 
 public class ScoreContainer {
-    private static long highestScore;
-    private static long currentScore;
-    private static long scoreToAdd;
+    private static int highestScore;
+    private static int currentScore;
+    private static int newScore;
     private static Context context;
 
     public static void loadHighestScore(Context ctx) {
         context=ctx;
         currentScore = 0;
+        newScore = 0;
         SharedPreferences prefs = context.getSharedPreferences("highestScore", Context.MODE_PRIVATE);
-        long score = prefs.getLong("highscore", 0); //0 is the default value
+        int score = prefs.getInt("highscore", 0); //0 is the default value
         highestScore = score;
     }
 
@@ -45,27 +45,37 @@ public class ScoreContainer {
         highestScore = currentScore;
         SharedPreferences keyValues = context.getSharedPreferences("highestScore", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = keyValues.edit();
-        editor.putLong("highscore", highestScore);
+        editor.putInt("highscore", highestScore);
         editor.commit();
     }
 
-    public static void addGlobalScore(long score){
+    public static void addGlobalScore(int score){
         //we can use system clock to make it count up;
-        scoreToAdd=score;
-        currentScore+=score;
-
+        newScore+=score;
+        animateScore(score);
     }
 
-    public static long getCurrentScore(){
+    public static int getCurrentScore(){
         return currentScore;
     }
 
-    public static long getScoreToAdd(){
-        return scoreToAdd;
-    }
-
-
     public static void resetGlobalScore(){
         currentScore=0;
+        newScore = 0;
+    }
+
+    private static void animateScore(int added) {
+        final int scorePerTick = added/100;
+        Thread thr = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while((currentScore<newScore&&scorePerTick>0)||(currentScore>newScore&&scorePerTick<0)) {
+                    SystemClock.sleep(10);
+                    currentScore+=scorePerTick;
+                }
+            }
+        });
+        thr.start();
+
     }
 }
