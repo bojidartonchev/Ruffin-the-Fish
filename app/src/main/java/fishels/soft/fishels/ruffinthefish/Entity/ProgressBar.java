@@ -69,22 +69,15 @@ public class ProgressBar {
 
         Paint pnt = new Paint();
         pnt.setTextSize(70);
-        int[] rainbow = getRainbowColors();
-        /*Shader shader = new LinearGradient(0, 0, 400, 500, rainbow,
-                null, Shader.TileMode.MIRROR);
-        Matrix matrix = new Matrix();
-        matrix.setRotate(90);
-        shader.setLocalMatrix(matrix);
-        pnt.setShader(shader);
-        */
-        Shader shader = new BitmapShader(barImage,
+
+        Shader shader = new BitmapShader(pattern,
                 Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         pnt.setShader(shader);
-
 
         float radius = pnt.getTextSize() / 10;
         BlurMaskFilter filter = new BlurMaskFilter(radius,  BlurMaskFilter.Blur.SOLID);
         pnt.setMaskFilter(filter);
+
         return pnt;
     }
 
@@ -93,16 +86,6 @@ public class ProgressBar {
         canvas.drawBitmap(outputBar, 0, 0, null);
         canvas.drawBitmap(frame, 0, 0, null);
         canvas.drawText("TESTTEXT", 500, 500, this.applyFilter());
-    }
-
-    private int[] getRainbowColors() {
-        return new int[] {
-                Color.RED,
-                Color.BLUE,
-                Color.GREEN,
-                Color.CYAN,
-                Color.YELLOW
-        };
     }
 }
 
