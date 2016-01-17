@@ -54,4 +54,8 @@ public class ScoreContainer {
     public static long getCurrentScore(){
         return currentScore;
     }
+
+    public static void resetGlobalScore(){
+        currentScore=0;
+    }
 }

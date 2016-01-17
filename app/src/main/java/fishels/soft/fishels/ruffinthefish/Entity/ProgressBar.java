@@ -75,8 +75,6 @@ public class ProgressBar {
 
     }
 
-
-
     private Paint getFillPaint(){
         Paint pnt = new Paint();
         pnt.setTextSize(this.textSize);

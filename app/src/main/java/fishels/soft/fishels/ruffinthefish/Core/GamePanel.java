@@ -38,6 +38,7 @@ import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Bubble;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
+import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Factory.BubbleFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
@@ -289,5 +290,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 Data.getImage(Data.PROGRESS_FILL),this.player);
         this.setGameOver(false);
         this.alreadyEnded=false;
+        ScoreContainer.resetGlobalScore();
     }
 }
