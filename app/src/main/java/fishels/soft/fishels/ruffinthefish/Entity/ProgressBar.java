@@ -19,12 +19,15 @@
 
 package fishels.soft.fishels.ruffinthefish.Entity;
 
+import android.animation.ValueAnimator;
+import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.view.animation.DecelerateInterpolator;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
@@ -53,6 +56,7 @@ public class ProgressBar {
         this.pattern= Data.getImage(Data.PATTERN);
         this.fillPnt = this.getFillPaint();
         this.strokePnt = this.getStrokePaint();
+        this.scoreText="";
     }
 
     public void update(int score)
@@ -64,14 +68,14 @@ public class ProgressBar {
         int width = 1+(int) (score*this.scoreWidth);
         outputBar = Bitmap.createBitmap(barImage, 0, 0,
                 width, barImage.getHeight());
-        this.scoreText = Long.toString(ScoreContainer.getCurrentScore());
+        //this.animateScore();
     }
 
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(outputBar, 0, 0, null);
         canvas.drawBitmap(frame, 0, 0, null);
-        drawStrokedText("Score: "+scoreText,500,500,canvas);
+        drawStrokedText("Score: " + scoreText, 500, 500, canvas);
 
     }
 
@@ -100,6 +104,24 @@ public class ProgressBar {
         canvas.drawText(text, x, y, this.strokePnt);
         canvas.drawText(text, x, y, this.fillPnt);
     }
+    private void setScoreText(String text){
+        this.scoreText=text;
+    }
+
+    public void animateScore() {
+                final ValueAnimator animValue = ValueAnimator.ofInt((int)ScoreContainer.getCurrentScore()-(int)ScoreContainer.getScoreToAdd(), (int)ScoreContainer.getCurrentScore());
+                animValue.setInterpolator(new DecelerateInterpolator());
+                animValue.setDuration(1000);
+                animValue.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        setScoreText((String)animValue.getAnimatedValue());
+                    }
+                });
+                animValue.start();
+    }
+
 }
 
 

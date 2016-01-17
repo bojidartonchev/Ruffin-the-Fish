@@ -19,12 +19,15 @@
 
 package fishels.soft.fishels.ruffinthefish.Entity;
 
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public class ScoreContainer {
     private static long highestScore;
     private static long currentScore;
+    private static long scoreToAdd;
     private static Context context;
 
     public static void loadHighestScore(Context ctx) {
@@ -48,12 +51,19 @@ public class ScoreContainer {
 
     public static void addGlobalScore(long score){
         //we can use system clock to make it count up;
+        scoreToAdd=score;
         currentScore+=score;
+
     }
 
     public static long getCurrentScore(){
         return currentScore;
     }
+
+    public static long getScoreToAdd(){
+        return scoreToAdd;
+    }
+
 
     public static void resetGlobalScore(){
         currentScore=0;
