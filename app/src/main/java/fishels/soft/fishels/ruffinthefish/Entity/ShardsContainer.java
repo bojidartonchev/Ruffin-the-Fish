@@ -27,7 +27,7 @@ public class ShardsContainer {
     private static int shards;
     private static Context context;
 
-    public static void save(){;
+    public static void save(){
         SharedPreferences settings = context.getApplicationContext().getSharedPreferences("shards", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("shards", shards);
@@ -57,7 +57,4 @@ public class ShardsContainer {
     public static int getShards(){
         return shards;
     }
-
-
-
 }

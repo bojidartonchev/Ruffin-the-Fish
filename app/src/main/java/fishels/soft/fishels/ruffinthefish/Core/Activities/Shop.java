@@ -68,7 +68,6 @@ public class Shop extends Activity {
                     break;
             }
         }
-
     }
 
     @Override

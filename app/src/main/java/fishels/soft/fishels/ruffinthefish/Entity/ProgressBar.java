@@ -21,15 +21,10 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import android.graphics.Matrix;
-
-import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
@@ -44,6 +39,9 @@ public class ProgressBar {
     private double scoreWidth;
     private Player player;
     private int scoreToLevelUp;
+    private Paint fillPnt;
+    private Paint strokePnt;
+    private int textSize;
 
 
     public ProgressBar(Bitmap frame, Bitmap bar,Player player)
@@ -51,7 +49,10 @@ public class ProgressBar {
         this.frame = Bitmap.createScaledBitmap(frame, GamePanel.getWIDTH(),frame.getHeight(),true);
         this.barImage= bar;
         this.player=player;
+        this.textSize = GamePanel.getWIDTH()/32;
         this.pattern= Data.getImage(Data.PATTERN);
+        this.fillPnt = this.getFillPaint();
+        this.strokePnt = this.getStrokePaint();
     }
 
     public void update(int score)
@@ -65,27 +66,38 @@ public class ProgressBar {
                 width, barImage.getHeight());
     }
 
-    private Paint applyFilter(){
+    public void draw(Canvas canvas)
+    {
+        canvas.drawBitmap(outputBar, 0, 0, null);
+        canvas.drawBitmap(frame, 0, 0, null);
+        drawStrokedText("TESTTEXT",500,500,canvas);
 
+    }
+
+    private Paint getFillPaint(){
         Paint pnt = new Paint();
-        pnt.setTextSize(70);
+        pnt.setTextSize(this.textSize);
 
         Shader shader = new BitmapShader(pattern,
                 Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         pnt.setShader(shader);
 
-        float radius = pnt.getTextSize() / 10;
-        BlurMaskFilter filter = new BlurMaskFilter(radius,  BlurMaskFilter.Blur.SOLID);
-        pnt.setMaskFilter(filter);
+        return pnt;
+    }
+
+    private Paint getStrokePaint(){
+        Paint pnt = new Paint();
+        pnt.setTextSize(this.textSize);
+        pnt.setStyle(Paint.Style.STROKE);
+        pnt.setStrokeWidth(2);
+        pnt.setColor(Color.BLACK);
 
         return pnt;
     }
 
-    public void draw(Canvas canvas)
-    {
-        canvas.drawBitmap(outputBar, 0, 0, null);
-        canvas.drawBitmap(frame, 0, 0, null);
-        canvas.drawText("TESTTEXT", 500, 500, this.applyFilter());
+    private void drawStrokedText(String text,int x,int y, Canvas canvas){
+        canvas.drawText(text, x, y, this.strokePnt);
+        canvas.drawText(text, x, y, this.fillPnt);
     }
 }
 
