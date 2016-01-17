@@ -22,6 +22,7 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 import android.graphics.Bitmap;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
@@ -70,6 +71,14 @@ public class Player extends Fish {
         return score;
     }
 
+    @Override
+    public void setDead(boolean dead) {
+        if(dead){
+            ScoreContainer.saveNewHighestScore();
+        }
+        super.setDead(dead);
+    }
+
     public void tryEat(Fish enemy) {
         if(this.isDead()){
             return;
@@ -78,7 +87,9 @@ public class Player extends Fish {
             this.setIsEating(true);
             if(this.intersects(enemy,40,50)) {
                 enemy.setDead(true);
-                this.addScore( enemy.getCurrentLevel().getValue());
+                int currentEnemyLevel = enemy.getCurrentLevel().getValue();
+                this.addScore(currentEnemyLevel);
+                ScoreContainer.addGlobalScore(currentEnemyLevel*100);
                 SoundManager.playSound(SoundManager.EAT_SOUND);
             }
         }
@@ -142,4 +153,5 @@ public class Player extends Fish {
         }
         this.setCurrentLevel(newLevel);
     }
+
 }

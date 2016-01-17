@@ -33,6 +33,7 @@ import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
@@ -65,6 +66,7 @@ public class Splash extends Activity{
                 Data.loadContent(base);
                 Vibration.loadVibrator(base);
                 GamePanel.setProportions(base);
+                ScoreContainer.loadHighestScore(base);
             }
 
             @Override

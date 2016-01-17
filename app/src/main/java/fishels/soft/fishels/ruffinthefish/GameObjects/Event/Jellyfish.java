@@ -20,9 +20,9 @@
 package fishels.soft.fishels.ruffinthefish.GameObjects.Event;
 
 import android.graphics.Bitmap;
-import android.os.Handler;
 import android.os.SystemClock;
 
+import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class Jellyfish extends Event {
@@ -38,6 +38,7 @@ public class Jellyfish extends Event {
         if(player.isStunned()){
             return;
         }
+        ScoreContainer.addGlobalScore(-500);
         player.setStunned(true);
         Thread thr = new Thread(new Runnable() {
         @Override

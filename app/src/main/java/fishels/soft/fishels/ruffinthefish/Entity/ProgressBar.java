@@ -42,7 +42,7 @@ public class ProgressBar {
     private Paint fillPnt;
     private Paint strokePnt;
     private int textSize;
-
+    private String scoreText;
 
     public ProgressBar(Bitmap frame, Bitmap bar,Player player)
     {
@@ -64,15 +64,18 @@ public class ProgressBar {
         int width = 1+(int) (score*this.scoreWidth);
         outputBar = Bitmap.createBitmap(barImage, 0, 0,
                 width, barImage.getHeight());
+        this.scoreText = Long.toString(ScoreContainer.getCurrentScore());
     }
 
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(outputBar, 0, 0, null);
         canvas.drawBitmap(frame, 0, 0, null);
-        drawStrokedText("TESTTEXT",500,500,canvas);
+        drawStrokedText("Score: "+scoreText,500,500,canvas);
 
     }
+
+
 
     private Paint getFillPaint(){
         Paint pnt = new Paint();
