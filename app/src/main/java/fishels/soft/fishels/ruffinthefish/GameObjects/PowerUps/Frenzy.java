@@ -22,7 +22,7 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class Frenzy extends PowerUp {
-    private static final String FRENZY_ABOUT = "I E MEGA PROST";
+    private static final String FRENZY_ABOUT = "Ruffin enrages for 8 seconds and can eat almost everything";
     private static final int FRENZY_COST = 8;
 
     public Frenzy() {

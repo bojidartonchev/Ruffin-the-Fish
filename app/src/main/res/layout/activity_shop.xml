@@ -116,5 +116,17 @@
             android:layout_toEndOf="@+id/shield_img"
             android:visibility="gone" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/info_txt"
+            android:layout_alignLeft="@+id/shield_img"
+            android:layout_alignStart="@+id/shield_img"
+            android:layout_above="@+id/watchAdd_btn"
+            android:layout_toLeftOf="@+id/textView6"
+            android:layout_toStartOf="@+id/textView6"
+            android:layout_below="@+id/shield_img" />
+
     </RelativeLayout>
 </RelativeLayout>

@@ -22,7 +22,7 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class Shield extends PowerUp {
-    private static final String SHIELD_ABOUT = "stefo e pedal";
+    private static final String SHIELD_ABOUT = "A magic shield will protect Ruffin for 12 seconds";
     private static final int SHIELD_COST = 5;
 
     public Shield() {

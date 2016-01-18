@@ -155,6 +155,7 @@ public class Menu extends Activity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
+                        continuePlaying = true;
                         Intent i = new Intent(getBaseContext(), Shop.class);
                         startActivity(i);
 

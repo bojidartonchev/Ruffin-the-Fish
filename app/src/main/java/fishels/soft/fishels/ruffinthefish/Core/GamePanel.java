@@ -30,6 +30,7 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -144,11 +145,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     if(GameOver.onTouch(event)==1){
                         this.initPlayerFeatures();
                     }
-                    else if(GameOver.onTouch(event)==2&&ShardsContainer.getShards()>=3){
-                        ShardsContainer.remove(3);
-                        this.setGameOver(false);
-                        this.player.setDead(false);
-                        this.alreadyEnded = false;
+                    else if(GameOver.onTouch(event)==2){
+                        if(ShardsContainer.getShards()>=3) {
+                            ShardsContainer.remove(3);
+                            this.setGameOver(false);
+                            this.player.setDead(false);
+                            this.alreadyEnded = false;
+                        }else{
+                            Toast.makeText(this.getContext(), "Not enough shards", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 this.player.setSpeedX(0);

@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fishels.ruffinthefish.R;
@@ -49,6 +50,7 @@ public class Shop extends Activity {
     private ImageButton thirdBtn;
     private ImageButton buyBtn;
     private InterstitialAd mInterstitialAd;
+    private TextView infoTxt;
 
     private PowerUp selected;
 
@@ -67,6 +69,7 @@ public class Shop extends Activity {
                     this.selected = new Shield();
                     break;
             }
+            this.infoTxt.setText(this.selected.getAbout());
         }
     }
 
@@ -78,6 +81,8 @@ public class Shop extends Activity {
         //set to full screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_shop);
+
+        this.infoTxt = (TextView)findViewById(R.id.info_txt);
 
         this.shieldBtn = (ImageButton) findViewById(R.id.shield_img);
         this.shieldBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
@@ -206,6 +211,12 @@ public class Shop extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        clearMarkEffect();
     }
 
     private void requestNewInterstitial() {
