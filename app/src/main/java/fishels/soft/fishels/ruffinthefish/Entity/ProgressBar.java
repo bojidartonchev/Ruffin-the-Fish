@@ -24,6 +24,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Shader;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
@@ -69,7 +70,7 @@ public class ProgressBar {
     {
         canvas.drawBitmap(outputBar, 0, 0, null);
         canvas.drawBitmap(frame, 0, 0, null);
-        drawStrokedText("Score: " + ScoreContainer.getCurrentScore(), 500, 500, canvas);
+        drawStrokedText("Score: " + ScoreContainer.getCurrentScore(), canvas);
 
     }
 
@@ -94,7 +95,16 @@ public class ProgressBar {
         return pnt;
     }
 
-    private void drawStrokedText(String text,int x,int y, Canvas canvas){
+
+    private void drawStrokedText(String text, Canvas canvas){
+
+        Rect r = new Rect();
+        this.strokePnt.setTextAlign(Paint.Align.LEFT);
+        this.strokePnt.getTextBounds(text, 0, text.length(), r);
+        this.fillPnt.setTextAlign(Paint.Align.LEFT);
+        this.fillPnt.getTextBounds(text, 0, text.length(), r);
+        float x = GamePanel.getWIDTH() / 2f - r.width() / 2f - r.left;
+        float y = this.barImage.getHeight()/1.5f;
         canvas.drawText(text, x, y, this.strokePnt);
         canvas.drawText(text, x, y, this.fillPnt);
     }
