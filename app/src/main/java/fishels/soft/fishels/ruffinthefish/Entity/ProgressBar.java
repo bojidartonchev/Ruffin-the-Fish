@@ -70,7 +70,7 @@ public class ProgressBar {
     {
         canvas.drawBitmap(outputBar, 0, 0, null);
         canvas.drawBitmap(frame, 0, 0, null);
-        drawStrokedText("Score: " + ScoreContainer.getCurrentScore(), canvas);
+        drawStrokedText(""+ScoreContainer.getCurrentScore(), canvas);
 
     }
 

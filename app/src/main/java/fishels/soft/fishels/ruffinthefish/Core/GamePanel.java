@@ -177,7 +177,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             else {
                 this.event.update();
-                if(this.event.intersects(this.player,40,50)){
+                if(this.event.intersects(this.player,60,60)){
                     this.event.executeEvent(this.player);
                     if(this.event.getClass()== Goldfish.class){
                         this.event=null;

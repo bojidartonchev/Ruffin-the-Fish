@@ -51,6 +51,9 @@ public class ScoreContainer {
 
     public static void addGlobalScore(int score){
         //we can use system clock to make it count up;
+        if((newScore+score)<0){
+            score=-newScore;
+        }
         newScore+=score;
         animateScore(score);
     }
