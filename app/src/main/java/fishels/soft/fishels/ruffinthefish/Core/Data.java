@@ -22,6 +22,7 @@ package fishels.soft.fishels.ruffinthefish.Core;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 
 import com.example.fishels.ruffinthefish.R;
 
@@ -29,6 +30,9 @@ import java.util.ArrayList;
 
 public class Data {
     private static ArrayList<Bitmap> images;
+
+    //font
+    private static Typeface font;
 
     //values
     public static final int BACKGROUND = 0;
@@ -60,10 +64,18 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.bubble));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.pattern));
+
+        //load fonts;
+        font = Typeface.createFromAsset(context.getAssets(), "fonts/Grandstander.ttf");
     }
 
     public static Bitmap getImage(int current){
         return images.get(current);
     }
+
+    public static Typeface getTypeFace(){
+        return font;
+    }
+
 
 }

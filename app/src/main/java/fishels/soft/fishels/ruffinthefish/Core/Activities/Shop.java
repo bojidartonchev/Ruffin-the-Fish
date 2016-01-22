@@ -21,6 +21,7 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
@@ -36,6 +37,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Frenzy;
@@ -51,6 +54,7 @@ public class Shop extends Activity {
     private ImageButton buyBtn;
     private InterstitialAd mInterstitialAd;
     private TextView infoTxt;
+    private TextView shardText;
 
     private PowerUp selected;
 
@@ -83,6 +87,10 @@ public class Shop extends Activity {
         setContentView(R.layout.activity_shop);
 
         this.infoTxt = (TextView)findViewById(R.id.info_txt);
+
+        this.shardText = (TextView) findViewById(R.id.shardText);
+        this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
+        this.shardText.setTypeface(Data.getTypeFace());
 
         this.shieldBtn = (ImageButton) findViewById(R.id.shield_img);
         this.shieldBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
@@ -163,6 +171,8 @@ public class Shop extends Activity {
                         }
                         Player.setPowerUp(selected);
                         Toast.makeText(getBaseContext(), selected.getClass().getSimpleName()+" is successfully added", Toast.LENGTH_LONG).show();
+                        ShardsContainer.remove(selected.getCost());
+                        updateShardText();
 
                     case MotionEvent.ACTION_CANCEL: {
                         ImageButton view = (ImageButton) v;
@@ -219,6 +229,12 @@ public class Shop extends Activity {
         clearMarkEffect();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.updateShardText();
+    }
+
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -246,5 +262,9 @@ public class Shop extends Activity {
 
         this.thirdBtn.getBackground().clearColorFilter();
         this.thirdBtn.invalidate();
+    }
+
+    private void updateShardText(){
+        this.shardText.setText(": " + ShardsContainer.getShards());
     }
 }

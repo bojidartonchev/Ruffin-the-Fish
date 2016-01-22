@@ -41,43 +41,29 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:id="@+id/watchAdd_btn"
-            android:layout_marginBottom="48dp"
             android:background="#cb1a1a"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/shardText"
+            android:layout_alignEnd="@+id/shardText" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0 :"
-            android:id="@+id/textView4"
-            android:layout_marginRight="100dp"
-            android:layout_marginEnd="100dp"
+            android:id="@+id/shardText"
+            android:layout_marginRight="64dp"
             android:layout_alignBottom="@+id/imageButton"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="64dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
             android:background="@drawable/shard"
-            android:layout_below="@+id/shield_img"
-            android:layout_toLeftOf="@+id/textView4"
-            android:layout_toStartOf="@+id/textView4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="* "
-            android:id="@+id/textView6"
-            android:layout_marginBottom="19dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/shield_img"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
-            android:layout_toLeftOf="@+id/textView4"
-            android:layout_toStartOf="@+id/textView4" />
+            android:layout_alignTop="@+id/third_btn"
+            android:layout_toLeftOf="@+id/shardText" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -86,7 +72,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="45dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="67dp" />
 
@@ -96,7 +82,8 @@
             android:id="@+id/frenzy_img"
             android:layout_alignTop="@+id/shield_img"
             android:layout_toRightOf="@+id/shield_img"
-            android:layout_toEndOf="@+id/shield_img" />
+            android:layout_toEndOf="@+id/shield_img"
+            android:layout_marginLeft="30dp" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -104,29 +91,26 @@
             android:id="@+id/third_btn"
             android:layout_alignTop="@+id/frenzy_img"
             android:layout_toRightOf="@+id/frenzy_img"
-            android:layout_toEndOf="@+id/frenzy_img" />
+            android:layout_toEndOf="@+id/frenzy_img"
+            android:layout_marginLeft="30dp" />
 
         <ImageButton
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/buy_btn"
             android:background="#160d0d"
-            android:layout_alignBottom="@+id/watchAdd_btn"
-            android:layout_toRightOf="@+id/shield_img"
-            android:layout_toEndOf="@+id/shield_img"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_below="@+id/watchAdd_btn"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/info_txt"
-            android:layout_alignLeft="@+id/shield_img"
-            android:layout_alignStart="@+id/shield_img"
-            android:layout_above="@+id/watchAdd_btn"
-            android:layout_toLeftOf="@+id/textView6"
-            android:layout_toStartOf="@+id/textView6"
-            android:layout_below="@+id/shield_img" />
+            android:layout_alignTop="@+id/imageButton"
+            android:layout_toRightOf="@+id/shield_img"
+            android:layout_toEndOf="@+id/shield_img" />
 
     </RelativeLayout>
 </RelativeLayout>

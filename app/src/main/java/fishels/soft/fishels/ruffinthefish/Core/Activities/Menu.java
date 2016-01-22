@@ -39,6 +39,7 @@ import com.example.fishels.ruffinthefish.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
@@ -83,8 +84,7 @@ public class Menu extends Activity {
         this.shardText = (TextView) findViewById(R.id.shardText);
         this.shardText.setText(": " + ShardsContainer.getShards());
         this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
-        Typeface typeFace=Typeface.createFromAsset(getAssets(), "fonts/SeaTurtle.ttf");
-        this.shardText.setTypeface(typeFace);
+        this.shardText.setTypeface(Data.getTypeFace());
 
         Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground);
         this.layout.setBackground(bg);

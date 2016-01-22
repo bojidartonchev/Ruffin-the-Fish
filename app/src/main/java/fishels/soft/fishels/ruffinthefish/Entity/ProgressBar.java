@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
@@ -53,6 +54,9 @@ public class ProgressBar {
         this.pattern= Data.getImage(Data.PATTERN);
         this.fillPnt = this.getFillPaint();
         this.strokePnt = this.getStrokePaint();
+
+        this.fillPnt.setTypeface(Data.getTypeFace());
+        this.strokePnt.setTypeface(Data.getTypeFace());
     }
 
     public void update(int score)
