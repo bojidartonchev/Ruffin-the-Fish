@@ -30,9 +30,8 @@
     tools:ignore="MergeRootFrame">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="-10dp">
@@ -69,12 +68,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/shield_img"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="33dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="67dp" />
+            android:layout_alignParentStart="true" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -96,21 +95,38 @@
 
         <ImageButton
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="30dp"
             android:id="@+id/buy_btn"
             android:background="#160d0d"
-            android:visibility="gone"
-            android:layout_below="@+id/watchAdd_btn"
-            android:layout_centerHorizontal="true" />
+            android:visibility="visible"
+            android:layout_above="@+id/quoute"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/info_txt"
-            android:layout_alignTop="@+id/imageButton"
-            android:layout_toRightOf="@+id/shield_img"
-            android:layout_toEndOf="@+id/shield_img" />
+            android:layout_toLeftOf="@+id/watchAdd_btn"
+            android:layout_alignLeft="@+id/shield_img"
+            android:layout_alignStart="@+id/shield_img"
+            android:layout_above="@+id/buy_btn"
+            android:layout_below="@+id/shield_img"
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:text="kljklj" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="* You can only have one power up at a time."
+            android:id="@+id/quoute"
+            android:textColor="#36000000"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="7dp" />
 
     </RelativeLayout>
 </RelativeLayout>
