@@ -35,7 +35,7 @@ public class Jellyfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
-        if(player.isStunned()){
+        if(player.isStunned()||player.isPowerUpActivated()){
             return;
         }
         ScoreContainer.addGlobalScore(-528);

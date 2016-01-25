@@ -35,6 +35,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import fishels.soft.fishels.ruffinthefish.Core.Labels.GameOver;
+import fishels.soft.fishels.ruffinthefish.Core.Labels.PowerUp;
 import fishels.soft.fishels.ruffinthefish.Entity.Background;
 import fishels.soft.fishels.ruffinthefish.Entity.Bubble;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
@@ -67,6 +68,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private boolean joystickLeft;
     private boolean gameOver;
     private boolean alreadyEnded;
+    private PowerUp powerUpLabel = null;
 
     public GamePanel(Context context)
     {
@@ -118,6 +120,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bubbles = new ArrayList<>();
         this.initPlayerFeatures();
         this.initFish();
+        if(Player.getPowerUp()!=null){
+            this.powerUpLabel = new PowerUp(!this.joystickLeft);
+        }
 
         //we can safely start the game loop
         this.thread = new MainThread(getHolder(), this);
@@ -132,6 +137,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 if(this.gameOver){
                     GameOver.onTouch(event);
                 }
+                else if(this.powerUpLabel!=null){
+                    this.powerUpLabel.onTouch(event);
+                }
                 return true;
             }
             case MotionEvent.ACTION_MOVE: {
@@ -144,6 +152,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 if(this.gameOver){
                     if(GameOver.onTouch(event)==1){
                         this.initPlayerFeatures();
+                        Player.setPowerUp(null);
+                        this.powerUpLabel=null;
                     }
                     else if(GameOver.onTouch(event)==2){
                         if(ShardsContainer.getShards()>=3) {
@@ -154,6 +164,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                         }else{
                             Toast.makeText(this.getContext(), "Not enough shards", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                }
+                else if(this.powerUpLabel!=null){
+                    if(this.powerUpLabel.onTouch(event)==1){
+                        Player.getPowerUp().applyEffect(this.player);
                     }
                 }
                 this.player.setSpeedX(0);
@@ -257,6 +272,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if(!this.gameOver){
                 this.joystick.draw(canvas);
+
+                if(this.powerUpLabel!=null){
+                    this.powerUpLabel.draw(canvas);
+                }
             }
             else {
                 GameOver.draw(canvas);

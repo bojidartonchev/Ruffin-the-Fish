@@ -28,13 +28,11 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-
 public class GameButton {
     public Matrix btn_matrix;
     public RectF btn_rect;
     public float width;
-    float height;
+    public float height;
     private Bitmap bg;
     private Paint paint;
 

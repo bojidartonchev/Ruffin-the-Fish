@@ -21,7 +21,6 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
@@ -41,9 +40,9 @@ import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
-import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Frenzy;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Whirlpool;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
-import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Shield;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.AquaShield;
 
 public class Shop extends Activity {
 
@@ -64,13 +63,13 @@ public class Shop extends Activity {
 
             switch (selected){
                 case 0:
-                    this.selected = new Shield();
+                    this.selected = new AquaShield();
                     break;
                 case 1:
-                    this.selected = new Frenzy();
+                    this.selected = new Whirlpool();
                     break;
                 case 2:
-                    this.selected = new Shield();
+                    this.selected = new AquaShield();
                     break;
             }
             this.infoTxt.setText(this.selected.getAbout());
@@ -193,7 +192,7 @@ public class Shop extends Activity {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                ShardsContainer.add(1);
+                ShardsContainer.add(50);
             }
         });
 

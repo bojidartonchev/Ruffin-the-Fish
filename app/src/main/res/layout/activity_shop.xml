@@ -114,8 +114,7 @@
             android:layout_above="@+id/buy_btn"
             android:layout_below="@+id/shield_img"
             android:layout_margin="10dp"
-            android:textSize="20dp"
-            android:text="kljklj" />
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"

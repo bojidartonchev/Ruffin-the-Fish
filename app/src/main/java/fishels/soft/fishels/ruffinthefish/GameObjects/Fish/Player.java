@@ -30,12 +30,13 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Player extends Fish {
-    private static final int PLAYER_NUMROWS = 5;
+    private static final int PLAYER_NUMROWS = 8;
     private static final int PLAYER_NUMFRAMES = 8;
     private static final int STARTING_PLAYER_SCORE = 0;
     private static final Level STARTING_PLAYER_LEVEL = Level.ONE;
     private static PowerUp powerUp;
     private int score;
+    private boolean powerUpActivated = false;
 
     public Player(Bitmap res) {
         super(res, STARTING_PLAYER_LEVEL, PLAYER_NUMROWS, PLAYER_NUMFRAMES);
@@ -71,6 +72,14 @@ public class Player extends Fish {
         return score;
     }
 
+    public boolean isPowerUpActivated() {
+        return powerUpActivated;
+    }
+
+    public void setPowerUpActivated(boolean powerUpActivated) {
+        this.powerUpActivated = powerUpActivated;
+    }
+
     @Override
     public void setDead(boolean dead) {
         if(dead){
@@ -83,7 +92,7 @@ public class Player extends Fish {
         if(this.isDead()){
             return;
         }
-        if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())) {
+        if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())||this.isInWhirlpool()) {
             this.setIsEating(true);
             if(this.intersects(enemy,40,50)) {
                 enemy.setDead(true);
@@ -94,7 +103,10 @@ public class Player extends Fish {
             }
         }
         else {
-            if(this.intersects(enemy,150,70)) {
+            if(this.isInAquaShielded()){
+                return;
+            }
+            if(this.intersects(enemy, 150, 70)) {
                 enemy.setIsEating(true);
                 if(this.intersects(enemy,40,50)) {
                     this.setDead(true);

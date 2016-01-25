@@ -21,13 +21,10 @@ package fishels.soft.fishels.ruffinthefish.GameObjects.Fish;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 
 import fishels.soft.fishels.ruffinthefish.Entity.Animation;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.GameObjects.GameObject;
-
-import java.util.Random;
 
 public abstract class Fish extends GameObject {
     //animation
@@ -38,11 +35,14 @@ public abstract class Fish extends GameObject {
     private Bitmap fishImage;
     private Bitmap[][] image;
     private int gold = 0;
+    private int aquaShield = 0;
+    private boolean inWhirlpool = false;
 
     // Animation actions
     private static final int SWIMMING = 0;
     private static final int EATING = 1;
     private static final int STUNNED = 4;
+    private static final int WHIRLPOOL = 7;
 
     //stats
     private Level currentLevel;
@@ -110,13 +110,34 @@ public abstract class Fish extends GameObject {
         this.gold = 0;
     }
 
+    public void setAquaShielded(boolean aquaShield) {
+        if(aquaShield) {
+            this.aquaShield = 5;
+            this.setGold(false);
+            return;
+        }
+        this.aquaShield = 0;
+    }
+
     public boolean getGold(){
         return this.gold==2;
     }
 
+    public boolean isInAquaShielded(){
+        return this.aquaShield == 5;
+    }
+
+    public void setInWhirlpool(boolean inWhirlpool){
+        this.inWhirlpool = inWhirlpool;
+    }
+
+    public boolean isInWhirlpool(){
+        return this.inWhirlpool;
+    }
+
     @Override
     public void setSpeedX(int speedX) {
-        if(this.getGold()){
+        if(this.getGold()||this.isInWhirlpool()){
             speedX*=2;
         }
         super.setSpeedX(speedX);
@@ -162,17 +183,20 @@ public abstract class Fish extends GameObject {
             }
         }
 
-        if(this.isEating()){
+        if(this.isInWhirlpool()){
+            if(this.getCurrentAction() != this.WHIRLPOOL) {
+                this.setCurrentAction((this.WHIRLPOOL));
+                this.getAnimation().setCurrentAction(this.WHIRLPOOL);
+            }
+        }else if(this.isEating()){
             if(this.getCurrentAction() != this.EATING){
                 this.setCurrentAction(this.EATING);
-                this.getAnimation().setCurrentAction(this.EATING+this.gold);
+                this.getAnimation().setCurrentAction(this.EATING+this.gold+this.aquaShield);
             }
-        }
-
-        else {
+        }else {
             if(this.getCurrentAction() != this.SWIMMING) {
                 this.setCurrentAction(this.SWIMMING);
-                this.getAnimation().setCurrentAction(this.SWIMMING+this.gold);
+                this.getAnimation().setCurrentAction(this.SWIMMING+this.gold+this.aquaShield);
             }
         }
     }

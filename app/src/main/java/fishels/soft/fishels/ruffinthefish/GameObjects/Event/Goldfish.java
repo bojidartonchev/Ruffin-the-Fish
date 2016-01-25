@@ -36,6 +36,9 @@ public class Goldfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
+        if(player.isPowerUpActivated()){
+            return;
+        }
         player.setIsEating(true);
         SoundManager.playSound(SoundManager.EAT_GOLD);
         ScoreContainer.addGlobalScore(517);

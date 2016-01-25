@@ -47,6 +47,7 @@ public class Data {
     public static final int GAMEOVER_LABEL = 9;
     public static final int BUBBLE = 10;
     public static final int PATTERN = 11;
+    public static final int POWER_UP_BTN = 12;
 
     public static void loadContent(Context context){
         images = new ArrayList<>();
@@ -62,6 +63,7 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.gameover));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.bubble));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.pattern));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.powerupbtn));
 
         //load fonts;
         font = Typeface.createFromAsset(context.getAssets(), "fonts/Grandstander.ttf");
