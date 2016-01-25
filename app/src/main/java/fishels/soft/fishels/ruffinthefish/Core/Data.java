@@ -48,8 +48,6 @@ public class Data {
     public static final int BUBBLE = 10;
     public static final int PATTERN = 11;
 
-
-
     public static void loadContent(Context context){
         images = new ArrayList<>();
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.background));
