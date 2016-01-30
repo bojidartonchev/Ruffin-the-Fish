@@ -58,7 +58,8 @@ public class GameButton {
 
     public boolean onTouch(MotionEvent event) {
         switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN: {
                 this.paint = new Paint();
                 paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
                 break;
@@ -66,6 +67,7 @@ public class GameButton {
             case MotionEvent.ACTION_UP:{
 
             }
+            case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
                 this.paint = null;
                 break;

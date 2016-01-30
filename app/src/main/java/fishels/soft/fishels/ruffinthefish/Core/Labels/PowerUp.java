@@ -21,6 +21,7 @@ package fishels.soft.fishels.ruffinthefish.Core.Labels;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
@@ -53,9 +54,23 @@ public class PowerUp {
     }
 
     public int onTouch(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-        if (this.usePowerUpBtn.btn_rect.contains(x, y)||(event.getActionMasked()== MotionEvent.ACTION_UP&&usePowerUpBtnPressed))
+        int index = MotionEventCompat.getActionIndex(event);
+        int x;
+        int y;
+
+        if (event.getPointerCount() > 1) {
+            // The coordinates of the current screen contact, relative to
+            // the responding View or Activity.
+            x = (int)MotionEventCompat.getX(event, index);
+            y = (int)MotionEventCompat.getY(event, index);
+
+        } else {
+            // Single touch event
+            x = (int)MotionEventCompat.getX(event, index);
+            y = (int)MotionEventCompat.getY(event, index);
+        }
+
+        if (this.usePowerUpBtn.btn_rect.contains(x, y)||((event.getActionMasked()== MotionEvent.ACTION_UP||event.getActionMasked()== MotionEvent.ACTION_POINTER_UP)&&usePowerUpBtnPressed))
         {
             this.usePowerUpBtnPressed = !this.usePowerUpBtnPressed;
             this.usePowerUpBtn.onTouch(event);

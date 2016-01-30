@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.SystemClock;
+import android.support.v4.view.MotionEventCompat;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -132,7 +133,26 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()&MotionEvent.ACTION_MASK) {
+        int action = MotionEventCompat.getActionMasked(event);
+        // Get the index of the pointer associated with the action.
+        int index = MotionEventCompat.getActionIndex(event);
+        int xPos = -1;
+        int yPos = -1;
+
+        if (event.getPointerCount() > 1) {
+            // The coordinates of the current screen contact, relative to
+            // the responding View or Activity.
+            xPos = (int)MotionEventCompat.getX(event, index);
+            yPos = (int)MotionEventCompat.getY(event, index);
+
+        } else {
+            // Single touch event
+            xPos = (int)MotionEventCompat.getX(event, index);
+            yPos = (int)MotionEventCompat.getY(event, index);
+        }
+
+        switch (action) {
+            case MotionEvent.ACTION_POINTER_DOWN:
             case MotionEvent.ACTION_DOWN: {
                 if(this.gameOver){
                     GameOver.onTouch(event);
@@ -148,6 +168,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this.player.setSpeedY(joystick.calculateFishSpeedY());
                 break;
             }
+            case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_UP:{
                 if(this.gameOver){
                     if(GameOver.onTouch(event)==1){
