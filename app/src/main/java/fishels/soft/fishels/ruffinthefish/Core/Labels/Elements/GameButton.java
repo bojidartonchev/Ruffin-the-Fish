@@ -64,9 +64,7 @@ public class GameButton {
                 paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
                 break;
             }
-            case MotionEvent.ACTION_UP:{
-
-            }
+            case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
                 this.paint = null;

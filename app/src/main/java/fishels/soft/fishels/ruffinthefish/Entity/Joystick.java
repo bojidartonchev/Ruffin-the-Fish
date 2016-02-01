@@ -37,6 +37,7 @@ public class Joystick {
     private float angle;
     private float distance;
 
+    private boolean isEnabled;
     private boolean isLeft;
 
     // data
@@ -44,10 +45,11 @@ public class Joystick {
     private Bitmap innerCircle;
 
     public Joystick(Bitmap inner, Bitmap outer,boolean isLeft,boolean isEnabled){
+        this.isEnabled = isEnabled;
         this.outerCircle = outer;
         this.innerCircle = inner;
-        this.setIsLeft(isLeft,isEnabled);
-        this.setIsCenterY(isEnabled);
+        this.setIsLeft(isLeft);
+        this.zeroY = GamePanel.getHEIGHT()-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
         this.radius =outerCircle.getWidth()/2;
     }
 
@@ -94,9 +96,13 @@ public class Joystick {
         }
     }
 
-    public void onTouch(MotionEvent event){
+    public void onTouch(MotionEvent event,int x,int y){
         this.clickedX = event.getX();
         this.clickedY = event.getY();
+        if(!isEnabled){
+            this.zeroX = x;
+            this.zeroY = y;
+        }
         this.update();
     }
 
@@ -115,24 +121,12 @@ public class Joystick {
         return (int)(clickedY-zeroY)/5;
     }
 
-    private void setIsLeft(boolean isLeft,boolean isEnabled) {
+    private void setIsLeft(boolean isLeft) {
         this.isLeft = isLeft;
-        if(!isEnabled){
-            this.zeroX = GamePanel.getWIDTH()/2;
-            return;
-        }
         if(isLeft==false){
             this.zeroX = GamePanel.getWIDTH()-this.outerCircle.getWidth()+(this.outerCircle.getWidth()/3);
             return;
         }
         this.zeroX = this.outerCircle.getWidth()-(this.outerCircle.getWidth()/3);
-    }
-
-    private void setIsCenterY(boolean isEnabled){
-        if(!isEnabled){
-            this.zeroY = GamePanel.getHEIGHT()/2;
-            return;
-        }
-        this.zeroY = GamePanel.getHEIGHT()-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
     }
 }

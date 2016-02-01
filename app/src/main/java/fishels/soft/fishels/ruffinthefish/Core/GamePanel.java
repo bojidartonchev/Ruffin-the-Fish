@@ -136,22 +136,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = MotionEventCompat.getActionMasked(event);
-        // Get the index of the pointer associated with the action.
-        int index = MotionEventCompat.getActionIndex(event);
-        int xPos = -1;
-        int yPos = -1;
-
-        if (event.getPointerCount() > 1) {
-            // The coordinates of the current screen contact, relative to
-            // the responding View or Activity.
-            xPos = (int)MotionEventCompat.getX(event, index);
-            yPos = (int)MotionEventCompat.getY(event, index);
-
-        } else {
-            // Single touch event
-            xPos = (int)MotionEventCompat.getX(event, index);
-            yPos = (int)MotionEventCompat.getY(event, index);
-        }
 
         switch (action) {
             case MotionEvent.ACTION_POINTER_DOWN:
@@ -159,15 +143,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 if(this.gameOver){
                     GameOver.onTouch(event);
                 }
-                else if(this.powerUpLabel!=null){
-                    this.powerUpLabel.onTouch(event);
+                else if(this.powerUpLabel!=null&&this.powerUpLabel.onTouch(event)==1){
+                    return true;
+                }
+                if(!this.joystickEnabled&&action==MotionEvent.ACTION_DOWN) {
+                    this.movePlayer(event);
                 }
                 return true;
             }
             case MotionEvent.ACTION_MOVE: {
-                joystick.onTouch(event);
-                this.player.setSpeedX(joystick.calculateFishSpeedX());
-                this.player.setSpeedY(joystick.calculateFishSpeedY());
+                this.movePlayer(event);
                 break;
             }
             case MotionEvent.ACTION_POINTER_UP:
@@ -294,7 +279,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
 
             if(!this.gameOver){
-                this.joystick.draw(canvas);
+                if(this.joystickEnabled) {
+                    this.joystick.draw(canvas);
+                }
 
                 if(this.powerUpLabel!=null){
                     this.powerUpLabel.draw(canvas);
@@ -338,5 +325,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.setGameOver(false);
         this.alreadyEnded=false;
         ScoreContainer.resetGlobalScore();
+    }
+
+    private void movePlayer(MotionEvent event){
+        joystick.onTouch(event,this.player.getX(),this.player.getY());
+        this.player.setSpeedX(joystick.calculateFishSpeedX());
+        this.player.setSpeedY(joystick.calculateFishSpeedY());
     }
 }
