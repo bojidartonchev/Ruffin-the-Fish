@@ -66,6 +66,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private ArrayList<Bubble> bubbles;
     private Joystick joystick;
     private Event event;
+    private boolean joystickEnabled;
     private boolean joystickLeft;
     private boolean gameOver;
     private boolean alreadyEnded;
@@ -114,9 +115,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this.bg.setVector(-1);
         this.bgFront = new Background(Data.getImage(Data.FRONTGROUND));
         this.bgFront.setVector(-5);
+        this.joystickEnabled = this.readSettings("joystick");
         this.joystickLeft = this.readSettings("left");
         this.joystick = new Joystick(Data.getImage(Data.JOYSTICK_INNER),
-                Data.getImage(Data.JOYSTICK_OUTER),this.joystickLeft);
+                Data.getImage(Data.JOYSTICK_OUTER),this.joystickLeft,this.joystickEnabled);
         this.enemies = new ArrayList<>();
         this.bubbles = new ArrayList<>();
         this.initPlayerFeatures();

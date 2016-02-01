@@ -28,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.fishels.ruffinthefish.R;
@@ -42,6 +43,8 @@ public class Settings extends Activity {
     RadioGroup rg;
     ToggleButton musciTbtn;
     ToggleButton soundTbtn;
+    ToggleButton joystickTbtn;
+    TextView joyposLbl;
     private AdView mAdView;
 
     @Override
@@ -61,7 +64,9 @@ public class Settings extends Activity {
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
 
+        this.joyposLbl = (TextView)findViewById(R.id.joypos_lbl);
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);
+        this.joystickTbtn = (ToggleButton) findViewById(R.id.joy_tbtn);
         this.musciTbtn = (ToggleButton) findViewById(R.id.music_tbtn);
         this.soundTbtn = (ToggleButton) findViewById(R.id.sound_tbtn);
         this.rbleft = (RadioButton) findViewById(R.id.left);
@@ -70,6 +75,10 @@ public class Settings extends Activity {
 
         this.musciTbtn.setChecked(this.readSettings("music"));
         this.soundTbtn.setChecked(this.readSettings("sound"));
+        this.joystickTbtn.setChecked(this.readSettings("joystick"));
+        this.rbright.setEnabled(this.readSettings("joystick"));
+        this.rbleft.setEnabled(this.readSettings("joystick"));
+        this.joyposLbl.setEnabled(this.readSettings("joystick"));
 
         this.rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -78,6 +87,22 @@ public class Settings extends Activity {
                     saveSettings("left", true);
                 } else {
                     saveSettings("left", false);
+                }
+            }
+        });
+
+        this.joystickTbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveSettings("joystick", isChecked);
+                if (isChecked) {
+                    rbleft.setEnabled(true);
+                    rbright.setEnabled(true);
+                    joyposLbl.setEnabled(true);
+                } else {
+                    rbleft.setEnabled(false);
+                    rbright.setEnabled(false);
+                    joyposLbl.setEnabled(false);
                 }
             }
         });
