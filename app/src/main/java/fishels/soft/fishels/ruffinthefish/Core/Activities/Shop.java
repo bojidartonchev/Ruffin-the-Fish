@@ -40,6 +40,7 @@ import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.MultiScore;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Whirlpool;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.AquaShield;
@@ -49,7 +50,7 @@ public class Shop extends Activity {
     private ImageButton watchAdd;
     private ImageButton shieldBtn;
     private ImageButton frenzyBtn;
-    private ImageButton thirdBtn;
+    private ImageButton multiScoreBtn;
     private ImageButton buyBtn;
     private InterstitialAd mInterstitialAd;
     private TextView infoTxt;
@@ -69,7 +70,7 @@ public class Shop extends Activity {
                     this.selected = new Whirlpool();
                     break;
                 case 2:
-                    this.selected = new AquaShield();
+                    this.selected = new MultiScore();
                     break;
             }
             this.infoTxt.setText(this.selected.getAbout());
@@ -130,9 +131,9 @@ public class Shop extends Activity {
             }
         });
 
-        this.thirdBtn = (ImageButton) findViewById(R.id.third_btn);
-        this.thirdBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.boots));
-        this.thirdBtn.setOnTouchListener(new View.OnTouchListener() {
+        this.multiScoreBtn = (ImageButton) findViewById(R.id.multiScore_img);
+        this.multiScoreBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.boots));
+        this.multiScoreBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getActionMasked()) {
@@ -260,8 +261,8 @@ public class Shop extends Activity {
         this.frenzyBtn.getBackground().clearColorFilter();
         this.frenzyBtn.invalidate();
 
-        this.thirdBtn.getBackground().clearColorFilter();
-        this.thirdBtn.invalidate();
+        this.multiScoreBtn.getBackground().clearColorFilter();
+        this.multiScoreBtn.invalidate();
     }
 
     private void updateShardText(){

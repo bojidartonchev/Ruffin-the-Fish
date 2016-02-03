@@ -36,6 +36,7 @@ public abstract class Fish extends GameObject {
     private Bitmap[][] image;
     private int gold = 0;
     private int aquaShield = 0;
+    private int multiScore = 1;
     private boolean inWhirlpool = false;
 
     // Animation actions
@@ -110,6 +111,14 @@ public abstract class Fish extends GameObject {
         this.gold = 0;
     }
 
+    public void setMultiScore(boolean multiScore) {
+        if(multiScore) {
+            this.multiScore = 4;
+            return;
+        }
+        this.multiScore = 1;
+    }
+
     public void setAquaShielded(boolean aquaShield) {
         if(aquaShield) {
             this.aquaShield = 5;
@@ -121,6 +130,10 @@ public abstract class Fish extends GameObject {
 
     public boolean getGold(){
         return this.gold==2;
+    }
+
+    public int getMultiScore(){
+        return this.multiScore;
     }
 
     public boolean isInAquaShielded(){

@@ -98,7 +98,8 @@ public class Player extends Fish {
                 enemy.setDead(true);
                 int currentEnemyLevel = enemy.getCurrentLevel().getValue();
                 this.addScore(currentEnemyLevel);
-                ScoreContainer.addGlobalScore(currentEnemyLevel*103);
+                int currentGoldMultiplier = this.getGold()?2:1;
+                ScoreContainer.addGlobalScore(currentEnemyLevel*103*this.getMultiScore()*currentGoldMultiplier);
                 SoundManager.playSound(SoundManager.EAT_SOUND);
             }
         }
@@ -129,6 +130,7 @@ public class Player extends Fish {
         if(this.getGold()){
             score*=2;
         }
+        score*= this.getMultiScore();
         this.setScore(this.getScore() + score);
     }
 

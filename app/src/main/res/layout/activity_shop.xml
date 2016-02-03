@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
             android:background="@drawable/shard"
-            android:layout_alignTop="@+id/third_btn"
+            android:layout_alignTop="@+id/multiScore_img"
             android:layout_toLeftOf="@+id/shardText" />
 
         <ImageButton
@@ -87,7 +87,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/third_btn"
+            android:id="@+id/multiScore_img"
             android:layout_alignTop="@+id/frenzy_img"
             android:layout_toRightOf="@+id/frenzy_img"
             android:layout_toEndOf="@+id/frenzy_img"
@@ -114,7 +114,8 @@
             android:layout_above="@+id/buy_btn"
             android:layout_below="@+id/shield_img"
             android:layout_margin="10dp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:shadowColor="#5e4e4e" />
 
         <TextView
             android:layout_width="wrap_content"
