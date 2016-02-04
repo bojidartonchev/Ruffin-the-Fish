@@ -25,7 +25,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Shop"
+    tools:context="danonino.game.fishels.danoninothegame.Core.Activities.Shop"
     android:background="@drawable/menubackground"
     tools:ignore="MergeRootFrame">
 
