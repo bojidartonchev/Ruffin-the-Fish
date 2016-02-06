@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +48,7 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.AquaShield;
 
 public class Shop extends Activity {
 
-    private ImageButton coinImg;
+    private ImageView coinImg;
     private ImageButton watchAdd;
     private ImageButton shieldBtn;
     private ImageButton whirlpoolBtn;
@@ -87,7 +88,7 @@ public class Shop extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_shop);
 
-        this.coinImg = (ImageButton)findViewById(R.id.coinImg);
+        this.coinImg = (ImageView)findViewById(R.id.coinImg);
         this.coinImg.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.COIN)));
 
         this.infoTxt = (TextView)findViewById(R.id.info_txt);

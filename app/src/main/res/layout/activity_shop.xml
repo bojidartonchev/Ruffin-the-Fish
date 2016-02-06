@@ -41,35 +41,35 @@
             android:layout_height="50dp"
             android:id="@+id/watchAdd_btn"
             android:background="#cb1a1a"
-            android:layout_centerVertical="true"
-            android:layout_alignRight="@+id/shardText"
-            android:layout_alignEnd="@+id/shardText" />
+            android:layout_alignBottom="@+id/quoute"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/coinImg"
+            android:layout_alignStart="@+id/coinImg" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 :"
             android:id="@+id/shardText"
-            android:layout_marginRight="64dp"
             android:layout_alignBottom="@+id/coinImg"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="64dp" />
+            android:layout_alignParentEnd="true" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/coinImg"
             android:background="@drawable/shard"
-            android:layout_alignTop="@+id/multiScore_img"
-            android:layout_toLeftOf="@+id/shardText" />
+            android:layout_above="@+id/watchAdd_btn"
+            android:layout_toLeftOf="@+id/shardText"
+            android:layout_toStartOf="@+id/shardText" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/shield_img"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="33dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -98,7 +98,7 @@
             android:layout_height="30dp"
             android:id="@+id/buy_btn"
             android:background="#160d0d"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:layout_above="@+id/quoute"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp" />
@@ -108,14 +108,17 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/info_txt"
-            android:layout_toLeftOf="@+id/watchAdd_btn"
             android:layout_alignLeft="@+id/shield_img"
             android:layout_alignStart="@+id/shield_img"
             android:layout_above="@+id/buy_btn"
             android:layout_below="@+id/shield_img"
-            android:layout_margin="10dp"
             android:textSize="20dp"
-            android:shadowColor="#5e4e4e" />
+            android:shadowColor="#5e4e4e"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toStartOf="@+id/coinImg"
+            android:layout_toLeftOf="@+id/coinImg" />
 
         <TextView
             android:layout_width="wrap_content"
