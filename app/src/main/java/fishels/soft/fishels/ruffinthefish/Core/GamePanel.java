@@ -107,6 +107,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             retry = false;
         }
+        Player.setPowerUp(null);
     }
 
     @Override

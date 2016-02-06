@@ -41,7 +41,6 @@ public abstract class PowerUp {
         this.about = about;
         this.cost=cost;
         this.inCooldown = false;
-        this.timer = new Timer();
     }
 
     public int getCost() {
