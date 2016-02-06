@@ -19,14 +19,23 @@
 
 package fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+
+import static com.google.android.gms.internal.zzir.runOnUiThread;
 
 public abstract class PowerUp {
 
     private String about;
     private int cost;
+    private int time;
+    private Timer timer;
+    private int currentTimerSeconds;
 
     public PowerUp(String about, int cost) {
+        this.timer = new Timer();
         this.about = about;
         this.cost=cost;
     }
@@ -39,5 +48,32 @@ public abstract class PowerUp {
         return this.about;
     }
 
-    public abstract void applyEffect(Player player);
+    public void setTime(int time){
+        if(time<0){
+            throw new IllegalArgumentException("Time must be positive value");
+        }
+        this.time=time/100;
+    }
+
+    public void applyEffect(Player player){
+        this.startTimer(this.time);
+    }
+
+    private void startTimer(int sec){
+        this.currentTimerSeconds = sec;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        currentTimerSeconds--;
+                        System.out.println(time);
+                    }
+                });
+            }
+        }, 1000, 1000);
+    }
 }
