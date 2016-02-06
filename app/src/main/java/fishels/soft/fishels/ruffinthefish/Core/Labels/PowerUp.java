@@ -45,7 +45,6 @@ public class PowerUp {
 
     //text
     private int textSize;
-    private double textWidth;
     private Paint fillPnt;
     private Paint strokePnt;
     private Bitmap pattern;
@@ -143,17 +142,14 @@ public class PowerUp {
     }
 
     private void drawStrokedText(String text, Canvas canvas){
-
         Rect r = new Rect();
         this.strokePnt.setTextAlign(Paint.Align.LEFT);
         this.strokePnt.getTextBounds(text, 0, text.length(), r);
         this.fillPnt.setTextAlign(Paint.Align.LEFT);
         this.fillPnt.getTextBounds(text, 0, text.length(), r);
         float curx = this.width / 2f - r.width() / 2f - r.left;
-        float cury = this.height / 1.5f + r.height() - r.top;
+        float cury = this.height / 1.5f + r.height()/2 - r.top;
         canvas.drawText(text, this.x+curx, this.y + cury, this.strokePnt);
         canvas.drawText(text, this.x+curx, this.y + cury, this.fillPnt);
-        System.out.println(this.y);
-        System.out.println(cury);
     }
 }
