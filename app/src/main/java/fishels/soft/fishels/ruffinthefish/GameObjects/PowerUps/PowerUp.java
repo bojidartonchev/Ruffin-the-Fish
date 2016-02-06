@@ -27,17 +27,20 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 import static com.google.android.gms.internal.zzir.runOnUiThread;
 
 public abstract class PowerUp {
+    public final static int DEFAULT_COOLDOWN_TIME = 60;
 
     private String about;
+    private boolean inCooldown;
     private int cost;
     private int time;
     private Timer timer;
     private int currentTimerSeconds;
+    private boolean currentTimerIsCooldown;
 
     public PowerUp(String about, int cost) {
-        this.timer = new Timer();
         this.about = about;
         this.cost=cost;
+        this.inCooldown = false;
     }
 
     public int getCost() {
@@ -48,32 +51,54 @@ public abstract class PowerUp {
         return this.about;
     }
 
+    public String getCurrentTimerSeconds(){
+        return Integer.toString(this.currentTimerSeconds);
+    }
+
     public void setTime(int time){
         if(time<0){
             throw new IllegalArgumentException("Time must be positive value");
         }
-        this.time=time/100;
+        this.time=time/1000;
     }
 
     public void applyEffect(Player player){
-        this.startTimer(this.time);
+        this.setInCooldown(true);
+        this.startTimer(this.time,false);
     }
 
-    private void startTimer(int sec){
+    public void setInCooldown(boolean inCd){
+        this.inCooldown = inCd;
+    }
+
+    public boolean getInCooldown(){
+        return this.inCooldown;
+    }
+
+    public void startTimer(int sec,boolean isCooldownTimer){
         this.currentTimerSeconds = sec;
+        this.currentTimerIsCooldown = isCooldownTimer;
+        this.timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable()
-                {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void run()
-                    {
-                        currentTimerSeconds--;
-                        System.out.println(time);
+                    public void run() {
+                        tick();
                     }
                 });
             }
         }, 1000, 1000);
+    }
+
+    private void tick(){
+        currentTimerSeconds--;
+        if(currentTimerSeconds<=0){
+            this.timer.cancel();
+            if(this.currentTimerIsCooldown){
+                this.setInCooldown(false);
+            }
+        }
     }
 }

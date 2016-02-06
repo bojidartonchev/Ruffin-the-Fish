@@ -24,25 +24,29 @@ import android.os.SystemClock;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class Whirlpool extends PowerUp {
-    private static final String FRENZY_ABOUT = "Ruffin enrages for 8 seconds and can eat almost everything";
-    private static final int FRENZY_COST = 8;
+    private static final String WHIRLPOOL_ABOUT = "Ruffin enrages for 8 seconds and can eat almost everything";
+    private static final int WHIRLPOOL_COST = 8;
+    private static final int WHIRLPOOL_TIME = 8000;
 
     public Whirlpool() {
-        super(FRENZY_ABOUT,FRENZY_COST);
+        super(WHIRLPOOL_ABOUT,WHIRLPOOL_COST);
+        this.setTime(WHIRLPOOL_TIME);
     }
 
     @Override
     public void applyEffect(final Player player) {
+        super.applyEffect(player);
         player.setPowerUpActivated(true);
         player.setInWhirlpool(true);
         player.setCurrentAction(-1);
         Thread thr = new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(8000);
+                SystemClock.sleep(WHIRLPOOL_TIME);
                 player.setInWhirlpool(false);
                 player.setPowerUpActivated(false);
                 player.setCurrentAction(-1);
+                startTimer(PowerUp.DEFAULT_COOLDOWN_TIME, true);
             }
         });
         thr.start();

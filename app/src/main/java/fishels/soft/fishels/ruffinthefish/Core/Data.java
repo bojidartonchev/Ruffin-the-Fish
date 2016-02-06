@@ -47,6 +47,8 @@ public class Data {
     public static final int GAMEOVER_LABEL = 9;
     public static final int BUBBLE = 10;
     public static final int PATTERN = 11;
+    public static final int PATTERN_GREEN = 27;
+    public static final int PATTERN_YELLOW = 28;
     public static final int POWER_UP_BTN = 12;
     //enemies
     public static final int LEVEL1_ENEMY = 13;
@@ -98,6 +100,8 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.shield));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.teeth));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.boots));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.patterngreen));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.patternyellow));
 
         //load fonts;
         font = Typeface.createFromAsset(context.getAssets(), "fonts/Grandstander.ttf");

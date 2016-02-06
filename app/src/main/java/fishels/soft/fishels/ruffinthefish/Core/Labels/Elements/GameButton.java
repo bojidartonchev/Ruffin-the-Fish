@@ -28,6 +28,8 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
+import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+
 public class GameButton {
     public Matrix btn_matrix;
     public RectF btn_rect;
@@ -60,17 +62,28 @@ public class GameButton {
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_POINTER_DOWN: {
-                this.paint = new Paint();
-                paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
+                this.setFilter();
                 break;
             }
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL: {
-                this.paint = null;
+                this.clearFilter();
                 break;
             }
         }
         return true;
+    }
+
+    public void setFilter(){
+        this.paint = new Paint();
+        paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
+    }
+
+    public void clearFilter(){
+        if(Player.getPowerUp().getInCooldown()){
+            return;
+        }
+        this.paint = null;
     }
 }

@@ -25,22 +25,26 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class MultiScore extends PowerUp {
     private static final String MULTISCORE_ABOUT = "Multiplies all the score Ruffing gains for 10 seconds.";
-    private static final int MULTISCORE_COST = 9;
+    private static final int MULTISCORE_COST = 6;
+    private static final int MULTISCORE_TIME = 10000;
 
     public MultiScore() {
         super(MULTISCORE_ABOUT, MULTISCORE_COST);
+        this.setTime(MULTISCORE_TIME);
     }
 
     @Override
     public void applyEffect(final Player player) {
+        super.applyEffect(player);
         player.setPowerUpActivated(true);
         player.setMultiScore(true);
         Thread thr = new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(10000);
+                SystemClock.sleep(MULTISCORE_TIME);
                 player.setMultiScore(false);
                 player.setPowerUpActivated(false);
+                startTimer(PowerUp.DEFAULT_COOLDOWN_TIME,true);
             }
         });
         thr.start();

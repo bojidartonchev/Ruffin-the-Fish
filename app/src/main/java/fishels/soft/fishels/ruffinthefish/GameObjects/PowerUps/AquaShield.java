@@ -26,23 +26,27 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 public class AquaShield extends PowerUp {
     private static final String SHIELD_ABOUT = "A magic aqua shield will protect Ruffin for 12 seconds";
     private static final int SHIELD_COST = 7;
+    private static final int MULTISCORE_TIME = 12000;
 
     public AquaShield() {
-        super(SHIELD_ABOUT,SHIELD_COST);
+        super(SHIELD_ABOUT, SHIELD_COST);
+        this.setTime(MULTISCORE_TIME);
     }
 
     @Override
     public void applyEffect(final Player player) {
+        super.applyEffect(player);
         player.setPowerUpActivated(true);
         player.setAquaShielded(true);
         player.setCurrentAction(-1);
         Thread thr = new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(12000);
+                SystemClock.sleep(MULTISCORE_TIME);
                 player.setAquaShielded(false);
                 player.setPowerUpActivated(false);
                 player.setCurrentAction(-1);
+                startTimer(PowerUp.DEFAULT_COOLDOWN_TIME, true);
             }
         });
         thr.start();

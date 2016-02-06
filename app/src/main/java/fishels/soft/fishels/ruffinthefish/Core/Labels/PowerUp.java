@@ -20,13 +20,19 @@
 package fishels.soft.fishels.ruffinthefish.Core.Labels;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.Shader;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Core.Labels.Elements.GameButton;
+import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class PowerUp {
     private GameButton usePowerUpBtn;
@@ -37,6 +43,13 @@ public class PowerUp {
     private boolean isLeft;
     private boolean usePowerUpBtnPressed;
 
+    //text
+    private int textSize;
+    private double textWidth;
+    private Paint fillPnt;
+    private Paint strokePnt;
+    private Bitmap pattern;
+
     public PowerUp(boolean left) {
         this.usePowerUpBtnPressed = false;
         Bitmap currentBtnImage = Data.getImage(Data.POWER_UP_BTN);
@@ -46,14 +59,32 @@ public class PowerUp {
         this.setIsLeft(left);
         this.usePowerUpBtn = new GameButton(currentBtnImage,this.x,this.y);
 
+        this.textSize = GamePanel.getWIDTH()/32;
+        this.pattern= Data.getImage(Data.PATTERN);
+        this.fillPnt = this.getFillPaint();
+        this.strokePnt = this.getStrokePaint();
+
+        this.fillPnt.setTypeface(Data.getTypeFace());
+        this.strokePnt.setTypeface(Data.getTypeFace());
+
     }
 
     public void draw(Canvas canvas)
     {
         this.usePowerUpBtn.draw(canvas);
+        if(Player.getPowerUp().getInCooldown()){
+            this.drawStrokedText(Player.getPowerUp().getCurrentTimerSeconds(),canvas);
+            this.usePowerUpBtn.setFilter();
+        }
+        else if(!usePowerUpBtnPressed) {
+            this.usePowerUpBtn.clearFilter();
+        }
     }
 
     public int onTouch(MotionEvent event) {
+        if(Player.getPowerUp().getInCooldown()){
+            return 0;
+        }
         int index = MotionEventCompat.getActionIndex(event);
         int x;
         int y;
@@ -88,5 +119,41 @@ public class PowerUp {
         }
         //left
         this.x = this.width/2;
+    }
+
+    private Paint getFillPaint(){
+        Paint pnt = new Paint();
+        pnt.setTextSize(this.textSize);
+
+        Shader shader = new BitmapShader(pattern,
+                Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        pnt.setShader(shader);
+
+        return pnt;
+    }
+
+    private Paint getStrokePaint(){
+        Paint pnt = new Paint();
+        pnt.setTextSize(this.textSize);
+        pnt.setStyle(Paint.Style.STROKE);
+        pnt.setStrokeWidth(2);
+        pnt.setColor(Color.BLACK);
+
+        return pnt;
+    }
+
+    private void drawStrokedText(String text, Canvas canvas){
+
+        Rect r = new Rect();
+        this.strokePnt.setTextAlign(Paint.Align.LEFT);
+        this.strokePnt.getTextBounds(text, 0, text.length(), r);
+        this.fillPnt.setTextAlign(Paint.Align.LEFT);
+        this.fillPnt.getTextBounds(text, 0, text.length(), r);
+        float curx = this.width / 2f - r.width() / 2f - r.left;
+        float cury = this.height / 1.5f + r.height() - r.top;
+        canvas.drawText(text, this.x+curx, this.y + cury, this.strokePnt);
+        canvas.drawText(text, this.x+curx, this.y + cury, this.fillPnt);
+        System.out.println(this.y);
+        System.out.println(cury);
     }
 }
