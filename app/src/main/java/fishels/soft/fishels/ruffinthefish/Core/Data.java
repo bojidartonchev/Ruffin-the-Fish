@@ -34,7 +34,7 @@ public class Data {
     //font
     private static Typeface font;
 
-    //values
+    //game images
     public static final int BACKGROUND = 0;
     public static final int FRONTGROUND = 1;
     public static final int JOYSTICK_INNER = 2;
@@ -48,6 +48,26 @@ public class Data {
     public static final int BUBBLE = 10;
     public static final int PATTERN = 11;
     public static final int POWER_UP_BTN = 12;
+    //enemies
+    public static final int LEVEL1_ENEMY = 13;
+    public static final int LEVEL2_ENEMY = 14;
+    public static final int LEVEL3_ENEMY = 15;
+    public static final int LEVEL4_ENEMY = 16;
+    //events
+    public static final int JELLYFISH = 17;
+    public static final int GOLDFISH = 18;
+
+    //menu buttons
+    public static final int COIN = 19;
+    public static final int SETTINGS_BTN = 20;
+    public static final int PLAY_BTN = 21;
+    public static final int MENU_BACKGROUND = 22;
+    public static final int SCROLL = 23;
+
+    //shop images
+    public static final int AQUASHIELD = 24;
+    public static final int WHIRLPOOL = 25;
+    public static final int MULTIPLY_BY_3 = 26;
 
     public static void loadContent(Context context){
         images = new ArrayList<>();
@@ -64,6 +84,20 @@ public class Data {
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.bubble));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.pattern));
         images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.powerupbtn));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level1_enemy));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level2_enemy));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level3_enemy));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level4_enemy));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.jelly));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.goldfish));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.shard));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.settingicon));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.woodenlabel));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.menubackground));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.scroll));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.shield));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.teeth));
+        images.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.boots));
 
         //load fonts;
         font = Typeface.createFromAsset(context.getAssets(), "fonts/Grandstander.ttf");

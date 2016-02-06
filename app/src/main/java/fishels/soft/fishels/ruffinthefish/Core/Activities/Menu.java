@@ -22,10 +22,8 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -41,7 +39,7 @@ import com.google.android.gms.ads.AdView;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.CoinsContainer;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
@@ -49,7 +47,7 @@ public class Menu extends Activity {
     private RelativeLayout layout;
     private ImageButton startBtn;
     private Button settingsBtn;
-    private ImageButton shardBtn;
+    private ImageButton coinBtn;
     private TextView shardText;
     private AdView mAdView;
 
@@ -65,7 +63,7 @@ public class Menu extends Activity {
         setContentView(R.layout.activity_menu);
         this.continuePlaying = false;
         MusicManager.start(getApplicationContext(),MusicManager.MUSIC_MENU);
-        ShardsContainer.load(getBaseContext());
+        CoinsContainer.load(getBaseContext());
 
         mAdView = (AdView) findViewById(R.id.ad_view);
         AdRequest adRequest = new AdRequest.Builder()
@@ -76,22 +74,19 @@ public class Menu extends Activity {
         mAdView.loadAd(adRequest);
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
+        this.startBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.PLAY_BTN)));
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
+        this.settingsBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.SETTINGS_BTN)));
         this.layout = (RelativeLayout) findViewById(R.id.layout);
-        this.shardBtn =(ImageButton)findViewById(R.id.shardIcon);
-        this.shardBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
+        this.coinBtn =(ImageButton)findViewById(R.id.shardIcon);
+        this.coinBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.COIN)));
 
         this.shardText = (TextView) findViewById(R.id.shardText);
-        this.shardText.setText(": " + ShardsContainer.getShards());
+        this.shardText.setText(": " + CoinsContainer.getCoins());
         this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
         this.shardText.setTypeface(Data.getTypeFace());
 
-        Drawable bg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground);
-        this.layout.setBackground(bg);
-        Drawable setbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.settingicon);
-        this.settingsBtn.setBackground(setbg);
-        Drawable playbg = ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel);
-        this.startBtn.setBackground(playbg);
+        this.layout.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MENU_BACKGROUND)));
 
         this.startBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -144,7 +139,7 @@ public class Menu extends Activity {
             }
         });
 
-        this.shardBtn.setOnTouchListener(new View.OnTouchListener() {
+        this.coinBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getActionMasked()) {
@@ -188,7 +183,7 @@ public class Menu extends Activity {
         super.onResume();
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
-        this.shardText.setText(": " + ShardsContainer.getShards());
+        this.shardText.setText(": " + CoinsContainer.getCoins());
         if (mAdView != null) {
             mAdView.resume();
         }

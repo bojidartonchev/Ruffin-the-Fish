@@ -27,6 +27,7 @@ import com.example.fishels.ruffinthefish.R;
 import java.util.ArrayList;
 import java.util.Random;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Event;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Goldfish;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Event.Jellyfish;
@@ -53,14 +54,14 @@ public class EventFactory {
         return null;
     }
 
-    public static void loadContent(Context context){
+    public static void loadContent(){
         spawnTimer = System.nanoTime();
         nextSpawnIn = getNextSpawnTime();
 
         //load bitmaps
         events = new ArrayList<>();
-        events.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.jelly));
-        events.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.goldfish));
+        events.add(Data.getImage(Data.JELLYFISH));
+        events.add(Data.getImage(Data.GOLDFISH));
     }
 
     private static Event getRandomEvent(){

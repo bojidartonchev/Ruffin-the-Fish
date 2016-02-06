@@ -23,7 +23,7 @@ import android.graphics.Bitmap;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
-import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.CoinsContainer;
 import fishels.soft.fishels.ruffinthefish.Entity.Vibration;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
@@ -162,7 +162,7 @@ public class Player extends Fish {
                 newLevel=Level.FOUR;
                 break;
             default:
-                ShardsContainer.add(1);
+                CoinsContainer.add(1);
                 newLevel=Level.ONE;
                 break;
         }

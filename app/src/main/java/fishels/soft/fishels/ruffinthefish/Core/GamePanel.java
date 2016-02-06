@@ -42,7 +42,7 @@ import fishels.soft.fishels.ruffinthefish.Entity.Bubble;
 import fishels.soft.fishels.ruffinthefish.Entity.Joystick;
 import fishels.soft.fishels.ruffinthefish.Entity.ProgressBar;
 import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
-import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.CoinsContainer;
 import fishels.soft.fishels.ruffinthefish.Factory.BubbleFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EnemyFishFactory;
 import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
@@ -164,8 +164,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                         this.powerUpLabel=null;
                     }
                     else if(GameOver.onTouch(event)==2){
-                        if(ShardsContainer.getShards()>=3) {
-                            ShardsContainer.remove(3);
+                        if(CoinsContainer.getCoins()>=3) {
+                            CoinsContainer.remove(3);
                             this.setGameOver(false);
                             this.player.setDead(false);
                             this.alreadyEnded = false;

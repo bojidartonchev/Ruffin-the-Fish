@@ -22,12 +22,14 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -35,16 +37,19 @@ import com.example.fishels.ruffinthefish.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
 public class Settings extends Activity {
-    RadioButton rbleft;
-    RadioButton rbright;
-    RadioGroup rg;
-    ToggleButton musciTbtn;
-    ToggleButton soundTbtn;
-    ToggleButton joystickTbtn;
-    TextView joyposLbl;
+    private RelativeLayout layout;
+    private RelativeLayout scroll;
+    private RadioButton rbleft;
+    private RadioButton rbright;
+    private RadioGroup rg;
+    private ToggleButton musciTbtn;
+    private ToggleButton soundTbtn;
+    private ToggleButton joystickTbtn;
+    private TextView joyposLbl;
     private AdView mAdView;
 
     @Override
@@ -63,6 +68,11 @@ public class Settings extends Activity {
 
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
+
+        this.layout = (RelativeLayout) findViewById(R.id.layout);
+        this.layout.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MENU_BACKGROUND)));
+        this.scroll = (RelativeLayout) findViewById(R.id.scroll);
+        this.scroll.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.SCROLL)));
 
         this.joyposLbl = (TextView)findViewById(R.id.joypos_lbl);
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);

@@ -51,7 +51,7 @@
             android:text="0 :"
             android:id="@+id/shardText"
             android:layout_marginRight="64dp"
-            android:layout_alignBottom="@+id/imageButton"
+            android:layout_alignBottom="@+id/coinImg"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="64dp" />
@@ -59,7 +59,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/coinImg"
             android:background="@drawable/shard"
             android:layout_alignTop="@+id/multiScore_img"
             android:layout_toLeftOf="@+id/shardText" />
@@ -78,7 +78,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/frenzy_img"
+            android:id="@+id/whirpool_img"
             android:layout_alignTop="@+id/shield_img"
             android:layout_toRightOf="@+id/shield_img"
             android:layout_toEndOf="@+id/shield_img"
@@ -88,9 +88,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/multiScore_img"
-            android:layout_alignTop="@+id/frenzy_img"
-            android:layout_toRightOf="@+id/frenzy_img"
-            android:layout_toEndOf="@+id/frenzy_img"
+            android:layout_alignTop="@+id/whirpool_img"
+            android:layout_toRightOf="@+id/whirpool_img"
+            android:layout_toEndOf="@+id/whirpool_img"
             android:layout_marginLeft="30dp" />
 
         <ImageButton

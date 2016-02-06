@@ -21,8 +21,8 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -38,7 +38,7 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
-import fishels.soft.fishels.ruffinthefish.Entity.ShardsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.CoinsContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.MultiScore;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Whirlpool;
@@ -47,9 +47,10 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.AquaShield;
 
 public class Shop extends Activity {
 
+    private ImageButton coinImg;
     private ImageButton watchAdd;
     private ImageButton shieldBtn;
-    private ImageButton frenzyBtn;
+    private ImageButton whirlpoolBtn;
     private ImageButton multiScoreBtn;
     private ImageButton buyBtn;
     private InterstitialAd mInterstitialAd;
@@ -86,6 +87,9 @@ public class Shop extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_shop);
 
+        this.coinImg = (ImageButton)findViewById(R.id.coinImg);
+        this.coinImg.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.COIN)));
+
         this.infoTxt = (TextView)findViewById(R.id.info_txt);
         this.infoTxt.setTypeface(Data.getTypeFace());
 
@@ -94,7 +98,7 @@ public class Shop extends Activity {
         this.shardText.setTypeface(Data.getTypeFace());
 
         this.shieldBtn = (ImageButton) findViewById(R.id.shield_img);
-        this.shieldBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
+        this.shieldBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.AQUASHIELD)));
         this.shieldBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -112,9 +116,9 @@ public class Shop extends Activity {
             }
         });
 
-        this.frenzyBtn = (ImageButton) findViewById(R.id.frenzy_img);
-        this.frenzyBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.teeth));
-        this.frenzyBtn.setOnTouchListener(new View.OnTouchListener() {
+        this.whirlpoolBtn = (ImageButton) findViewById(R.id.whirpool_img);
+        this.whirlpoolBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.WHIRLPOOL)));
+        this.whirlpoolBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getActionMasked()) {
@@ -132,7 +136,7 @@ public class Shop extends Activity {
         });
 
         this.multiScoreBtn = (ImageButton) findViewById(R.id.multiScore_img);
-        this.multiScoreBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.boots));
+        this.multiScoreBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MULTIPLY_BY_3)));
         this.multiScoreBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -162,7 +166,7 @@ public class Shop extends Activity {
                         break;
                     }
                     case MotionEvent.ACTION_UP:
-                        if(ShardsContainer.getShards()<selected.getCost()){
+                        if(CoinsContainer.getCoins()<selected.getCost()){
                             Toast.makeText(getBaseContext(), "Not enough shards", Toast.LENGTH_LONG).show();
                             break;
                         }
@@ -172,7 +176,7 @@ public class Shop extends Activity {
                         }
                         Player.setPowerUp(selected);
                         Toast.makeText(getBaseContext(), selected.getClass().getSimpleName()+" is successfully added", Toast.LENGTH_LONG).show();
-                        ShardsContainer.remove(selected.getCost());
+                        CoinsContainer.remove(selected.getCost());
                         updateShardText();
 
                     case MotionEvent.ACTION_CANCEL: {
@@ -193,7 +197,7 @@ public class Shop extends Activity {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                ShardsContainer.add(50);
+                CoinsContainer.add(50);
             }
         });
 
@@ -258,14 +262,14 @@ public class Shop extends Activity {
         this.shieldBtn.getBackground().clearColorFilter();
         this.shieldBtn.invalidate();
 
-        this.frenzyBtn.getBackground().clearColorFilter();
-        this.frenzyBtn.invalidate();
+        this.whirlpoolBtn.getBackground().clearColorFilter();
+        this.whirlpoolBtn.invalidate();
 
         this.multiScoreBtn.getBackground().clearColorFilter();
         this.multiScoreBtn.invalidate();
     }
 
     private void updateShardText(){
-        this.shardText.setText(": " + ShardsContainer.getShards());
+        this.shardText.setText(": " + CoinsContainer.getCoins());
     }
 }

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeMap;
 
+import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Enemy;
 
@@ -45,12 +46,12 @@ public class EnemyFishFactory {
     public static final int LEVEL_3 = 2;
     public static final int LEVEL_4 = 3;
 
-    public static void LoadImages(Context context){
+    public static void LoadImages(){
         enemyFish = new ArrayList<>();
-        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level1_enemy));
-        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level2_enemy));
-        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level3_enemy));
-        enemyFish.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.level4_enemy));
+        enemyFish.add(Data.getImage(Data.LEVEL1_ENEMY));
+        enemyFish.add(Data.getImage(Data.LEVEL2_ENEMY));
+        enemyFish.add(Data.getImage(Data.LEVEL3_ENEMY));
+        enemyFish.add(Data.getImage(Data.LEVEL4_ENEMY));
     }
 
     public static Enemy Create() {

@@ -59,13 +59,13 @@ public class Splash extends Activity{
             @Override
             public void onAnimationStart(Animation animation) {
                 Context base = getBaseContext();
-                EnemyFishFactory.LoadImages(base);
+                GamePanel.setProportions(base);
+                Data.loadContent(base);
+                EnemyFishFactory.LoadImages();
                 SoundManager.loadSoundManager();
                 SoundManager.loadSounds(base);
-                EventFactory.loadContent(base);
-                Data.loadContent(base);
+                EventFactory.loadContent();
                 Vibration.loadVibrator(base);
-                GamePanel.setProportions(base);
                 ScoreContainer.loadHighestScore(base);
             }
 

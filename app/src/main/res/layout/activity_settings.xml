@@ -27,7 +27,8 @@
     android:paddingRight="0dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Settings"
-    android:background="@drawable/menubackground">
+    android:background="@drawable/menubackground"
+    android:id="@+id/layout">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,7 +38,8 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="-10dp">
+        android:layout_marginBottom="-10dp"
+        android:id="@+id/scroll">
 
         <ToggleButton
             android:layout_width="wrap_content"
