@@ -58,26 +58,42 @@ public class PowerUp {
         this.setIsLeft(left);
         this.usePowerUpBtn = new GameButton(currentBtnImage,this.x,this.y);
 
-        this.textSize = GamePanel.getWIDTH()/32;
-        this.pattern= Data.getImage(Data.PATTERN);
-        this.fillPnt = this.getFillPaint();
-        this.strokePnt = this.getStrokePaint();
-
-        this.fillPnt.setTypeface(Data.getTypeFace());
-        this.strokePnt.setTypeface(Data.getTypeFace());
-
+        this.textSize = GamePanel.getWIDTH()/20;
+        this.setTextPattern(Data.getImage(Data.PATTERN_GREEN));
     }
 
     public void draw(Canvas canvas)
     {
         this.usePowerUpBtn.draw(canvas);
         if(Player.getPowerUp().getInCooldown()){
-            this.drawStrokedText(Player.getPowerUp().getCurrentTimerSeconds(),canvas);
+            this.drawStrokedText(Player.getPowerUp().getCurrentTimerSeconds(), canvas);
+        }
+
+    }
+
+    public void update(){
+        if(Player.getPowerUp().getInCooldown()){
             this.usePowerUpBtn.setFilter();
+
+            if(Player.getPowerUp().isCurrentTimerIsCooldown()){
+                this.setTextPattern(Data.getImage(Data.PATTERN_YELLOW));
+            }
+            else{
+                this.setTextPattern(Data.getImage(Data.PATTERN_GREEN));
+            }
         }
         else if(!usePowerUpBtnPressed) {
             this.usePowerUpBtn.clearFilter();
         }
+    }
+
+    public void setTextPattern(Bitmap pattern){
+        this.pattern= pattern;
+        this.fillPnt = this.getFillPaint();
+        this.strokePnt = this.getStrokePaint();
+
+        this.fillPnt.setTypeface(Data.getTypeFace());
+        this.strokePnt.setTypeface(Data.getTypeFace());
     }
 
     public int onTouch(MotionEvent event) {
@@ -148,8 +164,8 @@ public class PowerUp {
         this.fillPnt.setTextAlign(Paint.Align.LEFT);
         this.fillPnt.getTextBounds(text, 0, text.length(), r);
         float curx = this.width / 2f - r.width() / 2f - r.left;
-        float cury = this.height / 1.5f + r.height()/2 - r.top;
-        canvas.drawText(text, this.x+curx, this.y + cury, this.strokePnt);
-        canvas.drawText(text, this.x+curx, this.y + cury, this.fillPnt);
+        float cury = this.height / 1.5f  - r.top;
+        canvas.drawText(text, this.x + curx, this.y + cury, this.strokePnt);
+        canvas.drawText(text, this.x + curx, this.y + cury, this.fillPnt);
     }
 }

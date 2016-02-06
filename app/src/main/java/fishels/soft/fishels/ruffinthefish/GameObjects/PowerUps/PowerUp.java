@@ -41,6 +41,7 @@ public abstract class PowerUp {
         this.about = about;
         this.cost=cost;
         this.inCooldown = false;
+        this.timer = new Timer();
     }
 
     public int getCost() {
@@ -49,6 +50,10 @@ public abstract class PowerUp {
 
     public String getAbout() {
         return this.about;
+    }
+
+    public boolean isCurrentTimerIsCooldown() {
+        return currentTimerIsCooldown;
     }
 
     public String getCurrentTimerSeconds(){

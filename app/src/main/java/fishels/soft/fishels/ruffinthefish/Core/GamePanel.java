@@ -212,6 +212,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             this.event=EventFactory.Create();
         }
 
+        if(this.powerUpLabel!=null){
+            this.powerUpLabel.update();
+        }
+
         for (int i = 0; i < this.bubbles.size(); i++) {
             Bubble currentBubble = this.bubbles.get(i);
             if(currentBubble.isOutsideScreen()){

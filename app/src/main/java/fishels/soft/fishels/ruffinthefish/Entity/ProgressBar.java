@@ -101,7 +101,6 @@ public class ProgressBar {
 
 
     private void drawStrokedText(String text, Canvas canvas){
-
         Rect r = new Rect();
         this.strokePnt.setTextAlign(Paint.Align.LEFT);
         this.strokePnt.getTextBounds(text, 0, text.length(), r);
