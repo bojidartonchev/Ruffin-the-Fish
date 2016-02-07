@@ -88,9 +88,6 @@ public class GameButton {
     }
 
     public void clearFilter(){
-        if(Player.getPowerUp().getInCooldown()){
-            return;
-        }
         this.paint = null;
     }
 }

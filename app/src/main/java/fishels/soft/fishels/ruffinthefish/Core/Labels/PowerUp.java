@@ -83,7 +83,9 @@ public class PowerUp {
             }
         }
         else if(!usePowerUpBtnPressed) {
-            this.usePowerUpBtn.clearFilter();
+            if(Player.getPowerUp()!=null&&!Player.getPowerUp().getInCooldown()){
+                this.usePowerUpBtn.clearFilter();
+            }
         }
     }
 
