@@ -31,4 +31,6 @@
     <string name="sound">Sound</string>
     <string name="banner_ad_unit_id">ca-app-pub-7681127266395938/2544574007</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-7681127266395938/5040382006</string>
+    <string name="fda">0 :</string>
+    <string name="quoute">*Click on the coin to watch add and get a free coin.</string>
 </resources>

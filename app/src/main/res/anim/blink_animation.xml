@@ -26,6 +26,6 @@
         android:interpolator="@android:anim/accelerate_interpolator"
         android:duration="600"
         android:repeatMode="reverse"
-        android:repeatCount="3"
+        android:repeatCount="8"
         ></alpha>
 </set>

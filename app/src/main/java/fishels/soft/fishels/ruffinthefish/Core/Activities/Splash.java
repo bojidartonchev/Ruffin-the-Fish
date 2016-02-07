@@ -40,6 +40,7 @@ import fishels.soft.fishels.ruffinthefish.Factory.EventFactory;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Splash extends Activity{
+    private boolean loaded=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -51,7 +52,7 @@ public class Splash extends Activity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash);
 
-        TextView tv = (TextView)findViewById(R.id.textView);
+        final TextView tv = (TextView)findViewById(R.id.textView);
 
         final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.blink_animation);
         tv.startAnimation(an);
@@ -69,6 +70,7 @@ public class Splash extends Activity{
                         EventFactory.loadContent();
                         Vibration.loadVibrator(base);
                         ScoreContainer.loadHighestScore(base);
+                        loaded = true;
                     }
                 };
                 thread.start();
@@ -78,8 +80,14 @@ public class Splash extends Activity{
             @Override
             public void onAnimationEnd(Animation animation) {
                 finish();
-                Intent i = new Intent(getBaseContext(),Menu.class);
-                startActivity(i);
+                while (true){
+                    if(loaded){
+                        Intent i = new Intent(getBaseContext(), Menu.class);
+                        startActivity(i);
+                        break;
+                    }
+                }
+
             }
 
             @Override
