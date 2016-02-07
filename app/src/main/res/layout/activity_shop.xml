@@ -26,7 +26,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fishels.soft.fishels.ruffinthefish.Core.Activities.Shop"
-    android:background="@drawable/menubackground"
+    android:background="@drawable/backgroundshop"
     tools:ignore="MergeRootFrame">
 
     <RelativeLayout
@@ -41,11 +41,10 @@
             android:layout_height="50dp"
             android:id="@+id/watchAdd_btn"
             android:background="#cb1a1a"
-            android:layout_alignBottom="@+id/quoute"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/coinImg"
-            android:layout_alignStart="@+id/coinImg" />
+            android:layout_alignTop="@+id/multiScore_img"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,9 +59,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/coinImg"
             android:background="@drawable/shard"
-            android:layout_above="@+id/watchAdd_btn"
             android:layout_toLeftOf="@+id/shardText"
-            android:layout_toStartOf="@+id/shardText" />
+            android:layout_alignParentBottom="false"
+            android:layout_alignTop="@+id/buy_btn" />
 
         <ImageButton
             android:layout_width="wrap_content"

@@ -232,6 +232,7 @@ public class Shop extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        this.buyBtn.setVisibility(View.INVISIBLE);
         clearMarkEffect();
     }
 

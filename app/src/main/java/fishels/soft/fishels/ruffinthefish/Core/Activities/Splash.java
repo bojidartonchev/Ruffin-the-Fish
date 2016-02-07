@@ -58,15 +58,21 @@ public class Splash extends Activity{
         an.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Context base = getBaseContext();
-                GamePanel.setProportions(base);
-                Data.loadContent(base);
-                EnemyFishFactory.LoadImages();
-                SoundManager.loadSoundManager();
-                SoundManager.loadSounds(base);
-                EventFactory.loadContent();
-                Vibration.loadVibrator(base);
-                ScoreContainer.loadHighestScore(base);
+                Thread thread = new Thread(){
+                    public void run(){
+                        Context base = getBaseContext();
+                        GamePanel.setProportions(base);
+                        Data.loadContent(base);
+                        EnemyFishFactory.LoadImages();
+                        SoundManager.loadSoundManager();
+                        SoundManager.loadSounds(base);
+                        EventFactory.loadContent();
+                        Vibration.loadVibrator(base);
+                        ScoreContainer.loadHighestScore(base);
+                    }
+                };
+                thread.start();
+
             }
 
             @Override
