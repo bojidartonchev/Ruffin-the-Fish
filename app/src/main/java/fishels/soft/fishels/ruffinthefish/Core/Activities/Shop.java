@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -89,7 +90,7 @@ public class Shop extends Activity {
         setContentView(R.layout.activity_shop);
 
         this.coinImg = (ImageView)findViewById(R.id.coinImg);
-        this.coinImg.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.COIN)));
+        this.coinImg.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
 
         this.infoTxt = (TextView)findViewById(R.id.info_txt);
         this.infoTxt.setTypeface(Data.getTypeFace());
@@ -99,7 +100,7 @@ public class Shop extends Activity {
         this.shardText.setTypeface(Data.getTypeFace());
 
         this.shieldBtn = (ImageButton) findViewById(R.id.shield_img);
-        this.shieldBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.AQUASHIELD)));
+        this.shieldBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shield));
         this.shieldBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -118,7 +119,7 @@ public class Shop extends Activity {
         });
 
         this.whirlpoolBtn = (ImageButton) findViewById(R.id.whirpool_img);
-        this.whirlpoolBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.WHIRLPOOL)));
+        this.whirlpoolBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.teeth));
         this.whirlpoolBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -137,7 +138,7 @@ public class Shop extends Activity {
         });
 
         this.multiScoreBtn = (ImageButton) findViewById(R.id.multiScore_img);
-        this.multiScoreBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MULTIPLY_BY_3)));
+        this.multiScoreBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.boots));
         this.multiScoreBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

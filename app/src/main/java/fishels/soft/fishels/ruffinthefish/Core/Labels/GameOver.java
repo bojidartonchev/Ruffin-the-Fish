@@ -19,9 +19,13 @@
 
 package fishels.soft.fishels.ruffinthefish.Core.Labels;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+
+import com.example.fishels.ruffinthefish.R;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
@@ -43,14 +47,14 @@ public class GameOver {
         continueBtn.draw(canvas);
     }
 
-    public static void loadGameOverContent(){
-        gameOverLbl = Data.getImage(Data.GAMEOVER_LABEL);
+    public static void loadGameOverContent(Context ctx){
+        gameOverLbl = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.gameover);
         x = GamePanel.getWIDTH()/2-gameOverLbl.getWidth()/2;
         y = GamePanel.getHEIGHT()/2-gameOverLbl.getHeight();
         int btnY = y+gameOverLbl.getHeight();
-        playAgainBtn = new GameButton(Data.getImage(Data.PLAY_AGAIN_BTN),x,btnY);
+        playAgainBtn = new GameButton(BitmapFactory.decodeResource(ctx.getResources(), R.drawable.againbtn),x,btnY);
         int btnX= (int) (x+playAgainBtn.width);
-        continueBtn = new GameButton(Data.getImage(Data.CONTINUE_BTN),btnX,btnY);
+        continueBtn = new GameButton(BitmapFactory.decodeResource(ctx.getResources(), R.drawable.continuebtn),btnX,btnY);
     }
 
     public static int onTouch(MotionEvent event) {

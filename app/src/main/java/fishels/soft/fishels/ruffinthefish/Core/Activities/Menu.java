@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -74,19 +75,19 @@ public class Menu extends Activity {
         mAdView.loadAd(adRequest);
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
-        this.startBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.PLAY_BTN)));
+        this.startBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel));
         this.settingsBtn = (Button) findViewById(R.id.settings_btn);
-        this.settingsBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.SETTINGS_BTN)));
+        this.settingsBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.settingicon));
         this.layout = (RelativeLayout) findViewById(R.id.layout);
         this.coinBtn =(ImageButton)findViewById(R.id.shardIcon);
-        this.coinBtn.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.COIN)));
+        this.coinBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.shard));
 
         this.shardText = (TextView) findViewById(R.id.shardText);
         this.shardText.setText(": " + CoinsContainer.getCoins());
         this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
         this.shardText.setTypeface(Data.getTypeFace());
 
-        this.layout.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MENU_BACKGROUND)));
+        this.layout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground));
 
         this.startBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override

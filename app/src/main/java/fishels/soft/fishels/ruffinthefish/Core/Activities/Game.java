@@ -72,7 +72,7 @@ public class Game extends Activity {
 
         MusicManager.start(getApplicationContext(), MusicManager.MUSIC_GAME);
         SoundManager.setSoundOn(getBaseContext());
-        GameOver.loadGameOverContent();
+        GameOver.loadGameOverContent(getBaseContext());
     }
 
     @Override

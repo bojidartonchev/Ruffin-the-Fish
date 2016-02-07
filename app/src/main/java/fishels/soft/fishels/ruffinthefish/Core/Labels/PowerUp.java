@@ -76,7 +76,7 @@ public class PowerUp {
             this.usePowerUpBtn.setFilter();
 
             if(Player.getPowerUp().isCurrentTimerIsCooldown()){
-                this.setTextPattern(Data.getImage(Data.PATTERN_YELLOW));
+                this.setTextPattern(Data.getImage(Data.PATTERN));
             }
             else{
                 this.setTextPattern(Data.getImage(Data.PATTERN_GREEN));
@@ -168,4 +168,5 @@ public class PowerUp {
         canvas.drawText(text, this.x + curx, this.y + cury, this.strokePnt);
         canvas.drawText(text, this.x + curx, this.y + cury, this.fillPnt);
     }
+
 }

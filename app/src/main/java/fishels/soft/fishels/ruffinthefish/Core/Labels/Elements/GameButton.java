@@ -21,6 +21,8 @@ package fishels.soft.fishels.ruffinthefish.Core.Labels.Elements;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -76,8 +78,13 @@ public class GameButton {
     }
 
     public void setFilter(){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+
         this.paint = new Paint();
-        paint.setColorFilter(new PorterDuffColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP));
+        paint.setColorFilter(filter);
     }
 
     public void clearFilter(){

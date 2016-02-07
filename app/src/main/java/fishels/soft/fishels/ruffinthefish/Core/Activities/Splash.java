@@ -71,6 +71,7 @@ public class Splash extends Activity{
                         Vibration.loadVibrator(base);
                         ScoreContainer.loadHighestScore(base);
                         loaded = true;
+                        System.out.println("LOADED");
                     }
                 };
                 thread.start();
@@ -79,14 +80,15 @@ public class Splash extends Activity{
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                finish();
                 while (true){
                     if(loaded){
+                        finish();
                         Intent i = new Intent(getBaseContext(), Menu.class);
                         startActivity(i);
                         break;
                     }
                 }
+
 
             }
 

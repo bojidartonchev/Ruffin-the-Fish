@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -70,9 +71,9 @@ public class Settings extends Activity {
         mAdView.loadAd(adRequest);
 
         this.layout = (RelativeLayout) findViewById(R.id.layout);
-        this.layout.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.MENU_BACKGROUND)));
+        this.layout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground));
         this.scroll = (RelativeLayout) findViewById(R.id.scroll);
-        this.scroll.setBackground(new BitmapDrawable(getResources(), Data.getImage(Data.SCROLL)));
+        this.scroll.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.scroll));
 
         this.joyposLbl = (TextView)findViewById(R.id.joypos_lbl);
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);
