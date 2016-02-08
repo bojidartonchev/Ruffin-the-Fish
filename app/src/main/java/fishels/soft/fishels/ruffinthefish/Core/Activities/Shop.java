@@ -94,6 +94,7 @@ public class Shop extends Activity {
 
         this.infoTxt = (TextView)findViewById(R.id.info_txt);
         this.infoTxt.setTypeface(Data.getTypeFace());
+        this.infoTxt.setTextSize(GamePanel.getHEIGHT() / 63);
 
         this.shardText = (TextView) findViewById(R.id.shardText);
         this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
@@ -235,6 +236,7 @@ public class Shop extends Activity {
         super.onPause();
         this.buyBtn.setVisibility(View.INVISIBLE);
         clearMarkEffect();
+        this.infoTxt.setText("");
     }
 
     @Override
