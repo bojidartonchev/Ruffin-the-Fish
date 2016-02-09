@@ -24,6 +24,7 @@ import android.os.SystemClock;
 
 import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Jellyfish extends Event {
     private static final int JELLYFISH_NUMROWS = 1;
@@ -38,6 +39,7 @@ public class Jellyfish extends Event {
         if(player.isStunned()||player.isPowerUpActivated()){
             return;
         }
+        SoundManager.playSound(SoundManager.MEDUSA_HIT);
         ScoreContainer.addGlobalScore(-528);
         player.setStunned(true);
         Thread thr = new Thread(new Runnable() {
