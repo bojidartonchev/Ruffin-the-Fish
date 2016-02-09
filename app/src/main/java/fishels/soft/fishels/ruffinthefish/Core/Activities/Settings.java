@@ -39,6 +39,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
 public class Settings extends Activity {
@@ -51,6 +52,11 @@ public class Settings extends Activity {
     private ToggleButton soundTbtn;
     private ToggleButton joystickTbtn;
     private TextView joyposLbl;
+    private TextView joyLbl;
+    private TextView musicLbl;
+    private TextView soundLbl;
+
+
     private AdView mAdView;
 
     @Override
@@ -75,13 +81,26 @@ public class Settings extends Activity {
         this.scroll = (RelativeLayout) findViewById(R.id.scroll);
         this.scroll.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.scroll));
 
+        float lblTextSize = GamePanel.getHEIGHT() / 46;
         this.joyposLbl = (TextView)findViewById(R.id.joypos_lbl);
+        this.joyposLbl.setTextSize(lblTextSize);
+        this.joyLbl = (TextView)findViewById(R.id.joy_lbl);
+        this.joyLbl.setTextSize(lblTextSize);
+        this.musicLbl = (TextView)findViewById(R.id.music_lbl);
+        this.musicLbl.setTextSize(lblTextSize);
+        this.soundLbl = (TextView)findViewById(R.id.sound_lbl);
+        this.soundLbl.setTextSize(lblTextSize);
+
+        float optTextSize = GamePanel.getHEIGHT() / 60;
+
         this.rg = (RadioGroup) findViewById(R.id.radioGroup);
         this.joystickTbtn = (ToggleButton) findViewById(R.id.joy_tbtn);
         this.musciTbtn = (ToggleButton) findViewById(R.id.music_tbtn);
         this.soundTbtn = (ToggleButton) findViewById(R.id.sound_tbtn);
         this.rbleft = (RadioButton) findViewById(R.id.left);
+        this.rbleft.setTextSize(optTextSize);
         this.rbright = (RadioButton) findViewById(R.id.right);
+        this.rbright.setTextSize(optTextSize);
         this.rbright.setChecked(!this.readSettings("left"));
 
         this.musciTbtn.setChecked(this.readSettings("music"));

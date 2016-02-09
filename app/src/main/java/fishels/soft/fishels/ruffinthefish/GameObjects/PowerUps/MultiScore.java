@@ -24,7 +24,7 @@ import android.os.SystemClock;
 import fishels.soft.fishels.ruffinthefish.GameObjects.Fish.Player;
 
 public class MultiScore extends PowerUp {
-    private static final String MULTISCORE_ABOUT = "Multiplies all the score Ruffing gains for 10 seconds.";
+    private static final String MULTISCORE_ABOUT = "Multiplies all the score Ruffin gains for 10 seconds.";
     private static final int MULTISCORE_COST = 6;
     private static final int MULTISCORE_TIME = 10000;
 
