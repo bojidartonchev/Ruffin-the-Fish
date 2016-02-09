@@ -113,6 +113,9 @@ public class Player extends Fish {
             if(this.intersects(enemy, 150, 70)) {
                 enemy.setIsEating(true);
                 if(this.intersects(enemy,40,50)) {
+                    if(this.getSpeedX()>0 && enemy.getSpeedX()>0 || this.getSpeedX()<0 && enemy.getSpeedX()<0) {
+                        enemy.setSpeedX(-enemy.getSpeedX() / 3);
+                    }
                     this.setDead(true);
                     Vibration.vibrate(200);
                     SoundManager.playSound(SoundManager.EAT_SOUND);
