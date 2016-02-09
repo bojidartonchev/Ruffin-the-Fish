@@ -21,8 +21,9 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapShader;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
@@ -41,6 +42,7 @@ import com.google.android.gms.ads.AdView;
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Entity.CoinsContainer;
+import fishels.soft.fishels.ruffinthefish.Entity.ScoreContainer;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
@@ -51,6 +53,8 @@ public class Menu extends Activity {
     private ImageButton coinBtn;
     private TextView shardText;
     private AdView mAdView;
+    private TextView hsText;
+    private TextView hsLbl;
 
     private boolean continuePlaying;
 
@@ -88,6 +92,18 @@ public class Menu extends Activity {
         this.shardText.setText(": " + CoinsContainer.getCoins());
         this.shardText.setTextSize(GamePanel.getHEIGHT() / 36);
         this.shardText.setTypeface(Data.getTypeFace());
+
+        this.hsText = (TextView) findViewById(R.id.hsText);
+        this.hsText.setTextSize(GamePanel.getHEIGHT() / 52);
+        this.hsText.setTypeface(Data.getTypeFace());
+
+        this.hsLbl = (TextView) findViewById(R.id.hsLbl);
+        Shader shader = new BitmapShader(Data.getImage(Data.PATTERN),
+                Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        this.hsLbl.setText(Integer.toString(ScoreContainer.getHighestScore()));
+        this.hsLbl.setTextSize(GamePanel.getHEIGHT() / 30);
+        this.hsLbl.setTypeface(Data.getTypeFace());
+        this.hsLbl.getPaint().setShader(shader);
 
         this.layout.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.menubackground));
 
@@ -190,6 +206,7 @@ public class Menu extends Activity {
         this.continuePlaying=false;
         MusicManager.start(this, MusicManager.MUSIC_MENU);
         this.shardText.setText(": " + CoinsContainer.getCoins());
+        this.hsLbl.setText(Integer.toString(ScoreContainer.getHighestScore()));
         if (mAdView != null) {
             mAdView.resume();
         }

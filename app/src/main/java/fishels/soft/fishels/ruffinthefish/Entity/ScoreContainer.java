@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 import android.os.SystemClock;
 
 public class ScoreContainer {
+
     private static int highestScore;
     private static int currentScore;
     private static int newScore;
@@ -47,6 +48,10 @@ public class ScoreContainer {
         SharedPreferences.Editor editor = keyValues.edit();
         editor.putInt("highscore", highestScore);
         editor.commit();
+    }
+
+    public static int getHighestScore() {
+        return highestScore;
     }
 
     public static void addGlobalScore(int score){
