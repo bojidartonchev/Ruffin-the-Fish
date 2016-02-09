@@ -39,6 +39,7 @@ import com.google.android.gms.ads.AdView;
 
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Settings extends Activity {
     private RelativeLayout layout;
@@ -114,6 +115,7 @@ public class Settings extends Activity {
                 } else {
                     saveSettings("left", false);
                 }
+                SoundManager.playSound(SoundManager.CLICK);
             }
         });
 
@@ -121,6 +123,7 @@ public class Settings extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSettings("joystick", isChecked);
+                SoundManager.playSound(SoundManager.CLICK);
                 if (isChecked) {
                     rbleft.setEnabled(true);
                     rbright.setEnabled(true);
@@ -137,6 +140,7 @@ public class Settings extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSettings("music", isChecked);
+                SoundManager.playSound(SoundManager.CLICK);
                 if (isChecked) {
                     MusicManager.start(getBaseContext(), MusicManager.MUSIC_MENU);
                 } else {
@@ -149,6 +153,7 @@ public class Settings extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSettings("sound", isChecked);
+                SoundManager.playSound(SoundManager.CLICK);
             }
         });
     }

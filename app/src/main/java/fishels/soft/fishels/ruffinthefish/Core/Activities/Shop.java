@@ -46,6 +46,7 @@ import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.MultiScore;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.Whirlpool;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.PowerUp;
 import fishels.soft.fishels.ruffinthefish.GameObjects.PowerUps.AquaShield;
+import fishels.soft.fishels.ruffinthefish.Music.SoundManager;
 
 public class Shop extends Activity {
 
@@ -163,6 +164,7 @@ public class Shop extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN: {
+                        SoundManager.playSound(SoundManager.CLICK);
                         ImageButton view = (ImageButton) v;
                         view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();

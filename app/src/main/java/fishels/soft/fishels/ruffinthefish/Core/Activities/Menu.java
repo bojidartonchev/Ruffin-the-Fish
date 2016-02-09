@@ -56,6 +56,7 @@ public class Menu extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -73,6 +74,7 @@ public class Menu extends Activity {
 
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
+
 
         this.startBtn = (ImageButton) findViewById(R.id.start_btn);
         this.startBtn.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.woodenlabel));
@@ -94,6 +96,7 @@ public class Menu extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN: {
+                        SoundManager.playSound(SoundManager.CLICK);
                         ImageButton view = (ImageButton) v;
                         view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();
@@ -122,6 +125,7 @@ public class Menu extends Activity {
                         Button view = (Button) v;
                         view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();
+                        SoundManager.playSound(SoundManager.CLICK);
                         break;
                     }
                     case MotionEvent.ACTION_UP:
@@ -148,6 +152,7 @@ public class Menu extends Activity {
                         ImageButton view = (ImageButton) v;
                         view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                         v.invalidate();
+                        SoundManager.playSound(SoundManager.CLICK);
                         break;
                     }
                     case MotionEvent.ACTION_UP:

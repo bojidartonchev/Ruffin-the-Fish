@@ -36,12 +36,12 @@ public class Jellyfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
-        if(player.isStunned()||player.isPowerUpActivated()){
+        if(player.isStunned()|| player.isPowerUpActivated()){
             return;
         }
-        SoundManager.playSound(SoundManager.MEDUSA_HIT);
         ScoreContainer.addGlobalScore(-528);
         player.setStunned(true);
+        SoundManager.playSound(SoundManager.JELLY);
         Thread thr = new Thread(new Runnable() {
         @Override
         public void run() {

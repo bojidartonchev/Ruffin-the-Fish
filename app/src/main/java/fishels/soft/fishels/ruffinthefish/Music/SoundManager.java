@@ -37,7 +37,9 @@ public class SoundManager {
     public static int EAT_GOLD = 1;
     public static int LEVELUP = 2;
     public static int GAME_OVER = 3;
-    public static int MEDUSA_HIT = 4;
+    public static int JELLY = 4;
+    public static int POWERUP = 5;
+    public static int CLICK = 6;
 
     private static boolean soundOn;
     private static ArrayList<Integer> sounds = new ArrayList<>();
@@ -48,7 +50,9 @@ public class SoundManager {
         sounds.add(sp.load(context, R.raw.eatgold, 1));
         sounds.add(sp.load(context, R.raw.levelup, 1));
         sounds.add(sp.load(context, R.raw.gameover, 1));
-        sounds.add(sp.load(context, R.raw.medusahit, 1));
+        sounds.add(sp.load(context, R.raw.jellyhit, 1));
+        sounds.add(sp.load(context, R.raw.powerup, 1));
+        sounds.add(sp.load(context, R.raw.click, 1));
     }
 
     public static void playSound(int sound){
@@ -84,7 +88,7 @@ public class SoundManager {
 
     @SuppressWarnings("deprecation")
     protected static void createOldSoundPool(){
-        sp = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+        sp = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
     }
 
     public static void setSoundOn(Context ctx) {
