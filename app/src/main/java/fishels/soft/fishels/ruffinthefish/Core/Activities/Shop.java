@@ -201,7 +201,7 @@ public class Shop extends Activity {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
-                CoinsContainer.add(50);
+                CoinsContainer.add(1);
             }
         });
 
