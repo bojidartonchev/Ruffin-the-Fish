@@ -36,7 +36,7 @@ public class Goldfish extends Event {
 
     @Override
     public void executeEvent(final Player player) {
-        if(player.isPowerUpActivated()){
+        if(player.isPowerUpActivated()||player.isDead()){
             return;
         }
         player.setIsEating(true);
