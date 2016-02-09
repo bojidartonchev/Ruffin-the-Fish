@@ -178,6 +178,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 else if(this.powerUpLabel!=null){
                     if(this.powerUpLabel.onTouch(event)==1){
                         Player.getPowerUp().applyEffect(this.player);
+                        SoundManager.playSound(SoundManager.POWERUP);
                     }
                 }
                 this.player.setSpeedX(0);
@@ -201,7 +202,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             }
             else {
                 this.event.update();
-                if(this.event.intersects(this.player,60,60)){
+                if(this.event.intersects(this.player,40,50)){
                     this.event.executeEvent(this.player);
                     if(this.event.getClass()== Goldfish.class){
                         this.event=null;
@@ -233,8 +234,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             currentEnemy.update();
 
-            if (this.player.intersects(currentEnemy,Math.abs((currentEnemy.getSpeedX()+this.player.getSpeedX())*10),50)) {
-                System.out.println("edited");
+            if (this.player.intersects(currentEnemy,(Math.abs(currentEnemy.getSpeedX())+Math.abs(this.player.getSpeedX())*10),50)) {
                 this.player.tryEat(currentEnemy);
             }
         }
@@ -244,11 +244,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         if(this.player.isDead()&&!this.alreadyEnded){
+            ScoreContainer.saveNewHighestScore();
             this.alreadyEnded=true;
             Thread thr = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    SystemClock.sleep(2000);
+                    SystemClock.sleep(650);
                     setGameOver(true);
                     SoundManager.playSound(SoundManager.GAME_OVER);
                 }
