@@ -27,7 +27,6 @@ import android.view.MotionEvent;
 
 import com.example.fishels.ruffinthefish.R;
 
-import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Core.Labels.Elements.GameButton;
 

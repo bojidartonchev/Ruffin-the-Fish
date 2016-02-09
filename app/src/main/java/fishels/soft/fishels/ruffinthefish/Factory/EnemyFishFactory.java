@@ -19,16 +19,10 @@
 
 package fishels.soft.fishels.ruffinthefish.Factory;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import com.example.fishels.ruffinthefish.R;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.TreeMap;
 
 import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Enums.Level;

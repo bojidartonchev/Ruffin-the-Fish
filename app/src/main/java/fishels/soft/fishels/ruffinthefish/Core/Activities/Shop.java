@@ -21,7 +21,6 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 
 import android.app.Activity;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
@@ -172,7 +171,7 @@ public class Shop extends Activity {
                     }
                     case MotionEvent.ACTION_UP: {
                         if (CoinsContainer.getCoins() < selected.getCost()) {
-                            Toast.makeText(getBaseContext(), "Not enough shards", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), "Not enough coins", Toast.LENGTH_LONG).show();
                         } else if (Player.getPowerUp() != null) {
                             Toast.makeText(getBaseContext(), "You already have a power up", Toast.LENGTH_LONG).show();
                         } else {
