@@ -71,7 +71,6 @@ public class Splash extends Activity{
                         Vibration.loadVibrator(base);
                         ScoreContainer.loadHighestScore(base);
                         loaded = true;
-                        System.out.println("LOADED");
                     }
                 };
                 thread.start();

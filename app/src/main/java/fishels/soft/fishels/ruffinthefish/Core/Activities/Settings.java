@@ -22,7 +22,6 @@ package fishels.soft.fishels.ruffinthefish.Core.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.Window;
@@ -38,7 +37,6 @@ import com.example.fishels.ruffinthefish.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-import fishels.soft.fishels.ruffinthefish.Core.Data;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 import fishels.soft.fishels.ruffinthefish.Music.MusicManager;
 
@@ -55,8 +53,6 @@ public class Settings extends Activity {
     private TextView joyLbl;
     private TextView musicLbl;
     private TextView soundLbl;
-
-
     private AdView mAdView;
 
     @Override

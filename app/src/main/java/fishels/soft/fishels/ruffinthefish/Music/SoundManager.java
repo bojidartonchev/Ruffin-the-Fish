@@ -37,7 +37,7 @@ public class SoundManager {
     public static int EAT_GOLD = 1;
     public static int LEVELUP = 2;
     public static int GAME_OVER = 3;
-    public static int MEDUSA_HIT = 3;
+    public static int MEDUSA_HIT = 4;
 
     private static boolean soundOn;
     private static ArrayList<Integer> sounds = new ArrayList<>();
