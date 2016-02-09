@@ -19,10 +19,7 @@
 
 package fishels.soft.fishels.ruffinthefish.Factory;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import com.example.fishels.ruffinthefish.R;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -26,6 +26,8 @@ import android.view.MotionEvent;
 import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
 
 public class Joystick {
+    private final int SPEED_RATIO = 7680;
+
     // coordinates
     private int zeroX;
     private int zeroY;
@@ -36,6 +38,7 @@ public class Joystick {
     private float radius;
     private float angle;
     private float distance;
+    private double speedMultiplier;
 
     private boolean isEnabled;
     private boolean isLeft;
@@ -51,6 +54,7 @@ public class Joystick {
         this.setIsLeft(isLeft);
         this.zeroY = GamePanel.getHEIGHT()-this.outerCircle.getHeight()/2-this.outerCircle.getHeight()/5;
         this.radius =outerCircle.getWidth()/2;
+        this.speedMultiplier = (((double)GamePanel.getWIDTH())/this.SPEED_RATIO);
     }
 
     public void draw(Canvas canvas){
@@ -114,11 +118,11 @@ public class Joystick {
     }
 
     public int calculateFishSpeedX(){
-        return (int)(clickedX-zeroX)/5;
+        return (int)((clickedX-zeroX)*this.speedMultiplier);
     }
 
     public int calculateFishSpeedY(){
-        return (int)(clickedY-zeroY)/5;
+        return (int)((clickedY-zeroY)*this.speedMultiplier);
     }
 
     private void setIsLeft(boolean isLeft) {

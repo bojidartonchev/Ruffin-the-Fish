@@ -21,17 +21,21 @@ package fishels.soft.fishels.ruffinthefish.Entity;
 
 import java.util.Random;
 
+import fishels.soft.fishels.ruffinthefish.Core.GamePanel;
+
 public class EnemySpeedGenerator {
+    private int minXspeed;
+    private int maxXspeed;
 
     public EnemySpeedGenerator() {
-
+        this.minXspeed = GamePanel.getWIDTH()/480;
+        this.maxXspeed = GamePanel.getWIDTH()/96;
     }
-    //TODO remove hardcode values (calculate speed for every phone size
 
     public int generateXspeed(){
         Random rand = new Random();
-        int minNumber = 4;
-        int maxNumber = 20;
+        int minNumber = this.minXspeed;
+        int maxNumber = this.maxXspeed;
         int generater = rand.nextInt((maxNumber-minNumber)+minNumber)+minNumber;
         return generater;
     }
