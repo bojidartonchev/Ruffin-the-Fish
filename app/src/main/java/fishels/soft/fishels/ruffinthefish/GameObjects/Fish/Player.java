@@ -93,6 +93,9 @@ public class Player extends Fish {
             return;
         }
         if (this.getCurrentLevel().isBiggerThanOrEqual(enemy.getCurrentLevel())||this.isInWhirlpool()) {
+            if(this.isStunned()){
+                return;
+            }
             this.setIsEating(true);
             if(this.intersects(enemy,40,50)) {
                 enemy.setDead(true);

@@ -36,14 +36,12 @@ public class MultiScore extends PowerUp {
     @Override
     public void applyEffect(final Player player) {
         super.applyEffect(player);
-        player.setPowerUpActivated(true);
         player.setMultiScore(true);
         Thread thr = new Thread(new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(MULTISCORE_TIME);
                 player.setMultiScore(false);
-                player.setPowerUpActivated(false);
                 startTimer(PowerUp.DEFAULT_COOLDOWN_TIME,true);
             }
         });

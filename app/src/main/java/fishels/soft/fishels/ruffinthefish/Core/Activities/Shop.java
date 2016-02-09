@@ -170,19 +170,18 @@ public class Shop extends Activity {
                         v.invalidate();
                         break;
                     }
-                    case MotionEvent.ACTION_UP:
-                        if(CoinsContainer.getCoins()<selected.getCost()){
+                    case MotionEvent.ACTION_UP: {
+                        if (CoinsContainer.getCoins() < selected.getCost()) {
                             Toast.makeText(getBaseContext(), "Not enough shards", Toast.LENGTH_LONG).show();
-                            break;
-                        }
-                        else if(Player.getPowerUp()!=null){
+                        } else if (Player.getPowerUp() != null) {
                             Toast.makeText(getBaseContext(), "You already have a power up", Toast.LENGTH_LONG).show();
-                            break;
+                        } else {
+                            Player.setPowerUp(selected);
+                            Toast.makeText(getBaseContext(), selected.getClass().getSimpleName() + " is successfully added", Toast.LENGTH_LONG).show();
+                            CoinsContainer.remove(selected.getCost());
+                            updateShardText();
                         }
-                        Player.setPowerUp(selected);
-                        Toast.makeText(getBaseContext(), selected.getClass().getSimpleName()+" is successfully added", Toast.LENGTH_LONG).show();
-                        CoinsContainer.remove(selected.getCost());
-                        updateShardText();
+                    }
 
                     case MotionEvent.ACTION_CANCEL: {
                         ImageButton view = (ImageButton) v;

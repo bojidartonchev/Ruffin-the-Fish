@@ -113,7 +113,7 @@ public abstract class Fish extends GameObject {
 
     public void setMultiScore(boolean multiScore) {
         if(multiScore) {
-            this.multiScore = 4;
+            this.multiScore = 3;
             return;
         }
         this.multiScore = 1;
