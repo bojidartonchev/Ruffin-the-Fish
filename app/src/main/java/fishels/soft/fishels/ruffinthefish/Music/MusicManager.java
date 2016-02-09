@@ -33,7 +33,6 @@ public class MusicManager {
     public static final int MUSIC_PREVIOUS = -1;
     public static final int MUSIC_MENU = 0;
     public static final int MUSIC_GAME = 1;
-    public static final int MUSIC_END_GAME = 2;
     static Context ctx;
 
     private static TreeMap<Integer,MediaPlayer> players = new TreeMap<>();
@@ -79,8 +78,6 @@ public class MusicManager {
                 mp = MediaPlayer.create(context, R.raw.menu_music);
             } else if (music == MUSIC_GAME) {
                 mp = MediaPlayer.create(context, R.raw.game_music);
-            } else if (music == MUSIC_END_GAME) {
-                mp = MediaPlayer.create(context, R.raw.end_game_music);
             } else {
                 Log.e(TAG, "unsupported music number - " + music);
                 return;
