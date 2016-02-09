@@ -97,6 +97,10 @@ public abstract class GameObject {
         this.speedX = speedX;
     }
 
+    public int getSpeedX() {
+        return this.speedX;
+    }
+
     public boolean isTurnedRight() {
         return turnedRight;
     }
